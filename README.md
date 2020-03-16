@@ -1,3 +1,3 @@
 # Ohjelmistotekniikka-harjoitustyö
 
-Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustustyön ja laskaritehtävät kansiossa **laskarit**.
+Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön ja laskaritehtävät kansiossa **laskarit**.
