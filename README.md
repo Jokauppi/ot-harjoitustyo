@@ -5,5 +5,6 @@ Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön ja l
 ## Tehtävät
 ### Viikko 1
 
-[gitlog.txt](laskarit/gitlog.txt)\
+[gitlog.txt](laskarit/gitlog.txt)
+
 [komentorivi.txt](laskarit/komentotirvi.txt)
