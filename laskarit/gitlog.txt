@@ -1,0 +1,114 @@
+commit 3b155efbfdad593901b47801f716538b632bc579
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:59:39 2020 +0200
+
+    muutoksia
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 21f7de2a8b31ac7fc086ba9ca3eca596dc2cf06d
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:55:24 2020 +0200
+
+    uusi hakemisto
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 57f892ebe3528662e050749b4d3d519097f5d319
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:20:56 2020 +0200
+
+    muutoksia
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit fc9aa433b23ed0dc28e457befef0380ea1c2170c
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:18:55 2020 +0200
+
+    uudelleennimetty tiedosto.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0058ef40eb16340b656a46c98f31e9675a70ceed
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:17:34 2020 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 673ed109e5c7c910f3bc4012fc142c6e3076f32c
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:07:37 2020 +0200
+
+    poistettu ja lisätty tekstiä
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit efd25252012cf37cde9ebf55cd63f0d3df99878f
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 03:06:13 2020 +0200
+
+    lisätty paljon tekstiä
+
+ tiedosto.txt | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 9297292c46ccd70b9c0c479147fc3d8de7512266
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 02:57:55 2020 +0200
+
+    hakemiston stuff lisäys
+
+ stuff/placeholder.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 46fdc33c3f8b313011d3a61648913e5c6a8209c9
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 02:56:09 2020 +0200
+
+    muot toiseen ja kolmanteen
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 1661440f3a92fc38ffd9bbe760dad908b20f19f2
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 02:54:57 2020 +0200
+
+    kolmas.txt luotu
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit fec6de0d1b2f11df08d1e0b3d557945c9ddb1a2e
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 02:26:47 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 1ba1c94573f096d5784c2ce7282b7b0c72ad0e39
+Author: Joona Kauppila <kauppjo@gmail.com>
+Date:   Mon Mar 16 01:07:45 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
