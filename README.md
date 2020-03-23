@@ -6,4 +6,4 @@ Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön kans
 
 [Vaatimusmäärittely](ProductiveTime/dokumentointi/vaatimusmäärittely.md)
 
-[Työaikakirjanpito](tuntikirjanpito.md)
+[Työaikakirjanpito](ProductiveTime/dokumentointi/työaikakirjanpito.md)
