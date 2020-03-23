@@ -1,9 +1,9 @@
 # Ohjelmistotekniikka-harjoitustyö
 
-Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön ja laskaritehtävät kansiossa **laskarit**.
+Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön kansiossa [**ProductiveTime**](ProductiveTime) ja laskaritehtävät kansiossa [**laskarit**](laskarit).
 
-## Tehtävät
-### Viikko 1
+## Dokumentaatio
 
-[gitlog.txt](laskarit/gitlog.txt)\
-[komentorivi.txt](laskarit/komentotirvi.txt)
+[Vaatimusmäärittely](ProductiveTime/dokumentointi/vaatimusmäärittely.md)
+
+[Työaikakirjanpito](tuntikirjanpito.md)
