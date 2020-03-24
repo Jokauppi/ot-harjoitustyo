@@ -27,6 +27,10 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 - Kolmannessa näkymässä on mahdollista nähdä kaavioita ajankäytöstä
     - Yhtenä kaaviotyyppinä voisi olla eri aktiviteetteihin käytetty aika yhtenä tämänhetkisenä päivänä tai valitun aikavälin päivinä pylväsdiagrammina. 
     - Toisena kaaviotyyppinä voisi olla valittuihin aktiviteetteihin päivässä käytetty aika ajan saatossa viivadiagrammina.
+    
+## Käyttöliittymä
+
+Konsepti käyttöliittymästä löytyy ![täältä](ProductiveTime/Images/prodtime.png)
   
 ## Jatkokehitysideoita
 
