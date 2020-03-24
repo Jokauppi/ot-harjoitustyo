@@ -30,7 +30,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
     
 ## Käyttöliittymä
 
-Konsepti käyttöliittymästä löytyy ![täältä](ProductiveTime/Images/prodtime.png)
+Konsepti käyttöliittymästä löytyy ![täältä](https://github.com/Jokauppi/ot-harjoitustyo/blob/master/ProductiveTime/Images/prodtime.png?raw=true)
   
 ## Jatkokehitysideoita
 
