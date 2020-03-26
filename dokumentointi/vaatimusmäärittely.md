@@ -32,7 +32,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 
 Konsepti käyttöliittymästä:
 
-![Konsepti](https://github.com/Jokauppi/ot-harjoitustyo/blob/master/ProductiveTime/Images/prodtime.png?raw=true)
+![Konsepti](https://github.com/Jokauppi/ot-harjoitustyo/blob/master/Images/prodtime.png?raw=true)
   
 ## Jatkokehitysideoita
 
