@@ -20,6 +20,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         startConnection();
         stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS Activities (id INTEGER PRIMARY KEY, type TEXT, start INTEGER, duration INTEGER)");
         stmt.executeUpdate();
+        closeConnection();
     }
 
     private void startConnection() throws SQLException {
@@ -32,9 +33,11 @@ public class ActivityDao implements Dao<Activity, Integer> {
 
     @Override
     public void create(Activity object) throws SQLException {
+        startConnection();
         stmt = connection.prepareStatement("INSERT INTO Activities (type, start) VALUES (?,(SELECT strftime('%s','now')))");
         stmt.setString(1, object.getType());
         stmt.executeUpdate();
+        closeConnection();
     }
 
     @Override
