@@ -1,5 +1,7 @@
 package productivetime.domain;
 
+import java.util.Objects;
+
 public class Activity {
     Integer id;
     String type;
@@ -8,13 +10,6 @@ public class Activity {
 
     public Activity(String type) {
         this.type = type;
-    }
-
-    public Activity(Integer id, String type, int start) {
-        this.id = id;
-        this.type = type;
-        this.start = start;
-        this.duration = null;
     }
 
     public Activity(Integer id, String type, int start, int duration) {
@@ -45,9 +40,21 @@ public class Activity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return type.equals(activity.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type);
+    }
+
+    @Override
     public String toString() {
         return "Activity{" +
-                "id=" + id +
                 ", type='" + type + '\'' +
                 ", start=" + start +
                 ", duration=" + duration +

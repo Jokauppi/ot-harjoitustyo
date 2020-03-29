@@ -1,26 +1,28 @@
 package productivetime;
 
-import productivetime.dao.ActivityDao;
-import productivetime.domain.Activity;
+import productivetime.domain.ActivityControl;
 
-import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("test");
-        try {
-            ActivityDao db = new ActivityDao();
-            Activity a = new Activity("testi");
-            db.create(a);
-            TimeUnit.SECONDS.sleep(5);
-            Activity last = db.readLast();
-            System.out.println(last);
-            System.out.println(db.update(last));
-            Activity b = new Activity("sleep");
-            db.create(b);
-        } catch (SQLException | InterruptedException e){
-            System.out.println(e);
+
+        ActivityControl control = new ActivityControl();
+        Scanner reader = new Scanner(System.in);
+
+        String input = "";
+
+        while (true){
+            System.out.println("Insert activity:\t(stop end program, list shows activities)");
+            input = reader.nextLine();
+            if (input.equals("stop")){
+                break;
+            } else if (input.equals("list")){
+                control.listActivities();
+            } else {
+                control.addActivity(input);
+            }
         }
 
     }

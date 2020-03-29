@@ -19,7 +19,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     public ActivityDao() throws SQLException {
         startConnection();
         s = connection.createStatement();
-        s.execute("CREATE TABLE IF NOT EXISTS Activities (id INTEGER PRIMARY KEY, type TEXT, start INTEGER, duration INTEGER);");
+        s.execute("CREATE TABLE IF NOT EXISTS Activities (id INTEGER PRIMARY KEY, type TEXT NOT NULL, start INTEGER, duration INTEGER);");
     }
 
     private void startConnection() throws SQLException {
