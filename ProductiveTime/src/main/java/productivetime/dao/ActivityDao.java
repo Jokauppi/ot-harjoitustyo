@@ -73,12 +73,10 @@ public class ActivityDao implements Dao<Activity, Integer> {
     @Override
     public List<Activity> list() throws SQLException {
         List<Activity> activityList = new ArrayList<>();
-        startConnection();
         ResultSet rs = s.executeQuery("SELECT * FROM Activities;");
         while (rs.next()){
             activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
         }
-        closeConnection();
         return activityList;
     }
 
