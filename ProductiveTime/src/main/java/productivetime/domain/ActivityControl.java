@@ -1,8 +1,12 @@
 package productivetime.domain;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import productivetime.dao.ActivityDao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ActivityControl {
@@ -30,12 +34,16 @@ public class ActivityControl {
         }
     }
 
-    public List<Activity> listActivities(){
+    public ObservableList<Activity> getActivities(){
+        ObservableList<Activity> activitiesOList = FXCollections.observableArrayList();
+        List<Activity> activitiesList = new ArrayList<>();
         try {
-            List<Activity> allActivities = activityDB.list();
-            return allActivities;
+            activitiesList = activityDB.list();
         } catch (SQLException e){
-            return null;
+            System.out.println(e);
         }
+        Collections.sort(activitiesList);
+        activitiesOList.addAll(activitiesList);
+        return activitiesOList;
     }
 }

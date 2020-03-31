@@ -1,12 +1,15 @@
 package productivetime.domain;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.Objects;
 
-public class Activity {
-    Integer id;
-    String type;
-    int start;
-    Integer duration;
+public class Activity implements Comparable<Activity>{
+    private Integer id;
+    private String type;
+    private Integer start;
+    private Integer duration;
 
     public Activity(String type) {
         this.type = type;
@@ -59,5 +62,15 @@ public class Activity {
                 ", start=" + start +
                 ", duration=" + duration +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Activity activity) {
+        if (this.getStart()>activity.getStart()){
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }
