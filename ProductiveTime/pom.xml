@@ -38,7 +38,15 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.0</version>
+                <version>0.8.3</version>
+                <configuration>
+                    <excludes>
+                        <exclude>productivetime/ui/*</exclude>
+                        <exclude>productivetime/ui/activityinsertionview</exclude>
+                        <exclude>productivetime/ui/activitylistview</exclude>
+                        <exclude>productivetime/ui/activitystatsview</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>

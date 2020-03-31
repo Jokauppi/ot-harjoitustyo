@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
+import productivetime.ui.activitylistview.ActivityListLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +38,8 @@ public class ViewSelector implements UIElement<HBox> {
         Button activityButton = new Button("Activities");
 
         activityButton.setOnAction((actionEvent -> {
-            mainLayout.setCenter(new Label("Here are your activities"));
+            ActivityListLayout activityListLayout = new ActivityListLayout();
+            mainLayout.setCenter(activityListLayout.getLayout());
         }));
 
         Button homeButton = new Button("Home");

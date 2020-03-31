@@ -3,15 +3,15 @@ package productivetime.domain;
 import productivetime.dao.ActivityDao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityControl {
     private ActivityDao activityDB;
 
-    public ActivityControl() {
+    public ActivityControl(ActivityDao activityDB) {
         try {
-            activityDB = new ActivityDao();
+            this.activityDB = activityDB;
+            this.activityDB.initializeDB();
         } catch (SQLException e) {
             System.out.println("database creation unsuccessful");
         }
@@ -30,14 +30,12 @@ public class ActivityControl {
         }
     }
 
-    public void listActivities(){
+    public List<Activity> listActivities(){
         try {
             List<Activity> allActivities = activityDB.list();
-            for (Activity activity : allActivities){
-                System.out.println(activity);
-            }
+            return allActivities;
         } catch (SQLException e){
-            System.out.println(e);
+            return null;
         }
     }
 }

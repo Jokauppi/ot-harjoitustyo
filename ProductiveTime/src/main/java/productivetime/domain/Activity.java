@@ -31,7 +31,7 @@ public class Activity {
         return start;
     }
 
-    public Integer getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -55,7 +55,7 @@ public class Activity {
     @Override
     public String toString() {
         return "Activity{" +
-                ", type='" + type + '\'' +
+                "type='" + type + '\'' +
                 ", start=" + start +
                 ", duration=" + duration +
                 '}';

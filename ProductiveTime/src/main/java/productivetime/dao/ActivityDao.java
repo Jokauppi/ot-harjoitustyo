@@ -17,6 +17,10 @@ public class ActivityDao implements Dao<Activity, Integer> {
     private Statement s;
 
     public ActivityDao() throws SQLException {
+        initializeDB();
+    }
+
+    public void initializeDB() throws SQLException {
         startConnection();
         s.execute("CREATE TABLE IF NOT EXISTS Activities (id INTEGER PRIMARY KEY, type TEXT NOT NULL, start INTEGER, duration INTEGER);");
         closeConnection();
@@ -44,16 +48,31 @@ public class ActivityDao implements Dao<Activity, Integer> {
 
     @Override
     public Activity read(Integer key) throws SQLException {
-        return null;
+        startConnection();
+        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE id = ?;");
+        stmt.setInt(1, key);
+        ResultSet activity = stmt.executeQuery();
+        if (activity.next()){
+            Activity lastActivity = new Activity(activity.getInt("id"), activity.getString("type"), activity.getInt("start"), activity.getInt("duration"));
+            stmt.close();
+            closeConnection();
+            return lastActivity;
+        } else {
+            stmt.close();
+            closeConnection();
+            return null;
+        }
     }
 
     public Activity readLast() throws SQLException {
         startConnection();
-        ResultSet rs = s.executeQuery("SELECT * FROM Activities ORDER BY id DESC LIMIT 1;");
-        closeConnection();
-        if (rs.next()){
-            return new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration"));
+        ResultSet lastItem = s.executeQuery("SELECT * FROM Activities ORDER BY id DESC LIMIT 1;");
+        if (lastItem.next()){
+            Activity lastActivity = new Activity(lastItem.getInt("id"), lastItem.getString("type"), lastItem.getInt("start"), lastItem.getInt("duration"));
+            closeConnection();
+            return lastActivity;
         } else {
+            closeConnection();
             return null;
         }
     }
@@ -76,7 +95,26 @@ public class ActivityDao implements Dao<Activity, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
+        startConnection();
+        stmt = connection.prepareStatement("DELETE FROM Activities WHERE id = ?;");
+        stmt.setInt(1, key);
+        stmt.executeUpdate();
+        stmt.close();
+        closeConnection();
+    }
 
+    public boolean deleteLast() throws SQLException {
+        Activity lastItem = readLast();
+        startConnection();
+        if (lastItem != null){
+            stmt = connection.prepareStatement("DELETE FROM Activities WHERE id = ?;");
+            stmt.setInt(1, lastItem.getId());
+            stmt.executeUpdate();
+            stmt.close();
+            return true;
+        }
+        closeConnection();
+        return false;
     }
 
     @Override
@@ -84,12 +122,18 @@ public class ActivityDao implements Dao<Activity, Integer> {
         startConnection();
         List<Activity> activityList = new ArrayList<>();
         ResultSet rs = s.executeQuery("SELECT * FROM Activities;");
-        closeConnection();
         while (rs.next()){
             activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
         }
+        closeConnection();
         return activityList;
     }
 
+    public void clear() throws SQLException {
+        startConnection();
+        s.execute("DROP TABLE IF EXISTS Activities;");
+        closeConnection();
+        initializeDB();
+    }
 
 }
