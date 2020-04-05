@@ -1,11 +1,8 @@
 package productivetime.domain;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-
 import java.util.Objects;
 
-public class Activity implements Comparable<Activity>{
+public class Activity implements Comparable<Activity> {
     private Integer id;
     private String type;
     private Integer start;
@@ -39,13 +36,17 @@ public class Activity implements Comparable<Activity>{
     }
 
     public int getEnd() {
-        return start+duration;
+        return start + duration;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Activity activity = (Activity) o;
         return type.equals(activity.type);
     }
@@ -67,7 +68,7 @@ public class Activity implements Comparable<Activity>{
 
     @Override
     public int compareTo(Activity activity) {
-        if (this.getStart()>activity.getStart()){
+        if (this.getStart() > activity.getStart()) {
             return -1;
         } else {
             return 1;

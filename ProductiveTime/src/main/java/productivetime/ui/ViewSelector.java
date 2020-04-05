@@ -21,10 +21,10 @@ import java.util.List;
 
 public class ViewSelector implements UIElement<HBox> {
 
-        private HBox viewSelector;
-        private BorderPane mainLayout;
-        private ActivityControl activityControl;
-        private boolean dBCreationSuccesful;
+    private HBox viewSelector;
+    private BorderPane mainLayout;
+    private ActivityControl activityControl;
+    private boolean dBCreationSuccesful;
 
     public ViewSelector(BorderPane mainLayout) {
 
@@ -34,7 +34,7 @@ public class ViewSelector implements UIElement<HBox> {
             ActivityDao activityDB = new ActivityDao();
             this.activityControl = new ActivityControl(activityDB);
             dBCreationSuccesful = true;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             dBCreationSuccesful = false;
             mainLayout.setCenter(new Label("DATABASE\nCONNECTION\nUNSUCCESFUL"));
         }
@@ -43,28 +43,28 @@ public class ViewSelector implements UIElement<HBox> {
 
         viewSelector.setSpacing(50);
         viewSelector.setAlignment(Pos.CENTER);
-        viewSelector.setPadding(new Insets(20,20,20,20));
-        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245,245,245), null, null)));
+        viewSelector.setPadding(new Insets(20, 20, 20, 20));
+        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
 
         viewSelector.getChildren().addAll(createButtons());
 
-        if (dBCreationSuccesful){
+        if (dBCreationSuccesful) {
             ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityControl);
             mainLayout.setCenter(insertionLayout.getLayout());
         }
     }
 
-    private List<Button> createButtons(){
+    private List<Button> createButtons() {
         Button activityButton = createActivityButton();
         Button homeButton = createHomeButton();
         Button statsButton = createStatisticsButton();
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton));
     }
 
-    private Button createActivityButton(){
+    private Button createActivityButton() {
         Button activityButton = new Button("Activities");
 
-        if (dBCreationSuccesful){
+        if (dBCreationSuccesful) {
             activityButton.setOnAction((actionEvent -> {
                 ActivityListLayout activityListLayout = new ActivityListLayout(activityControl);
                 mainLayout.setCenter(activityListLayout.getLayout());
@@ -74,10 +74,10 @@ public class ViewSelector implements UIElement<HBox> {
         return activityButton;
     }
 
-    private Button createHomeButton(){
+    private Button createHomeButton() {
         Button homeButton = new Button("Home");
 
-        if (dBCreationSuccesful){
+        if (dBCreationSuccesful) {
             homeButton.setOnAction((actionEvent -> {
                 ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityControl);
                 mainLayout.setCenter(insertionLayout.getLayout());
@@ -87,10 +87,10 @@ public class ViewSelector implements UIElement<HBox> {
         return homeButton;
     }
 
-    private Button createStatisticsButton(){
+    private Button createStatisticsButton() {
         Button statsButton = new Button("Statistics");
 
-        if (dBCreationSuccesful){
+        if (dBCreationSuccesful) {
             statsButton.setOnAction((actionEvent -> {
                 mainLayout.setCenter(new Label("Statistics view\nnot yet implemented"));
             }));

@@ -21,25 +21,25 @@ public class ActivityControl {
         }
     }
 
-    public void addActivity(String type){
+    public void addActivity(String type) {
         try {
             Activity last = activityDB.readLast();
-            if (last != null){
+            if (last != null) {
                 activityDB.update(last);
             }
             Activity next = new Activity(type);
             activityDB.create(next);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    public ObservableList<Activity> getActivities(){
+    public ObservableList<Activity> getActivities() {
         ObservableList<Activity> activitiesOList = FXCollections.observableArrayList();
         List<Activity> activitiesList = new ArrayList<>();
         try {
             activitiesList = activityDB.list();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
         Collections.sort(activitiesList);

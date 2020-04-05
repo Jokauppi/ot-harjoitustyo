@@ -24,7 +24,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         insertionLayout = new VBox();
         insertionLayout.setSpacing(20);
         insertionLayout.setAlignment(Pos.CENTER);
-        insertionLayout.setPadding(new Insets(20,20,20,20));
+        insertionLayout.setPadding(new Insets(20, 20, 20, 20));
 
         TextField activityField = createActivityField();
 
@@ -33,23 +33,23 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         insertionLayout.getChildren().add(createActivityInsertButton(activityField));
     }
 
-    private Label createLogo(){
+    private Label createLogo() {
         Label logo = new Label("ProductiveTime");
 
-        logo.setPadding(new Insets(0,0,20,0));
+        logo.setPadding(new Insets(0, 0, 20, 0));
         logo.setFont(new Font(20));
 
         return logo;
     }
 
-    private TextField createActivityField(){
+    private TextField createActivityField() {
         TextField activityField = new TextField("");
 
         activityField.setPrefWidth(150);
         activityField.setMaxWidth(200);
 
         activityField.setOnMouseClicked(mouseEvent -> {
-            if (activityField.getText().equals("Activity added")){
+            if (activityField.getText().equals("Activity added")) {
                 activityField.setText("");
             }
         });
@@ -57,11 +57,11 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         return activityField;
     }
 
-    private Button createActivityInsertButton(TextField relatedField){
+    private Button createActivityInsertButton(TextField relatedField) {
         Button activityInsertionButton = new Button("Add");
 
         activityInsertionButton.setOnAction((actionEvent -> {
-            if (!(relatedField.getText().equals("") || relatedField.getText().equals("Activity added"))){
+            if (!(relatedField.getText().equals("") || relatedField.getText().equals("Activity added"))) {
                 activityControl.addActivity(relatedField.getText());
                 relatedField.setText("Activity added");
             }

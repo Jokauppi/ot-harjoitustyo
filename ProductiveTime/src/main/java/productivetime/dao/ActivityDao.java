@@ -27,7 +27,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     }
 
     private void startConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:activity.db" );
+        connection = DriverManager.getConnection("jdbc:sqlite:activity.db");
         s = connection.createStatement();
     }
 
@@ -52,7 +52,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         stmt = connection.prepareStatement("SELECT * FROM Activities WHERE id = ?;");
         stmt.setInt(1, key);
         ResultSet activity = stmt.executeQuery();
-        if (activity.next()){
+        if (activity.next()) {
             Activity lastActivity = new Activity(activity.getInt("id"), activity.getString("type"), activity.getInt("start"), activity.getInt("duration"));
             stmt.close();
             closeConnection();
@@ -67,7 +67,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     public Activity readLast() throws SQLException {
         startConnection();
         ResultSet lastItem = s.executeQuery("SELECT * FROM Activities ORDER BY id DESC LIMIT 1;");
-        if (lastItem.next()){
+        if (lastItem.next()) {
             Activity lastActivity = new Activity(lastItem.getInt("id"), lastItem.getString("type"), lastItem.getInt("start"), lastItem.getInt("duration"));
             closeConnection();
             return lastActivity;
@@ -80,7 +80,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     @Override
     public Activity update(Activity activity) throws SQLException {
         startConnection();
-        if (activity != null){
+        if (activity != null) {
             stmt = connection.prepareStatement("UPDATE Activities SET duration = (SELECT strftime('%s','now')-?) WHERE id = ?;");
             stmt.setInt(1, activity.getStart());
             stmt.setInt(2, activity.getId());
@@ -106,7 +106,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     public boolean deleteLast() throws SQLException {
         Activity lastItem = readLast();
         startConnection();
-        if (lastItem != null){
+        if (lastItem != null) {
             stmt = connection.prepareStatement("DELETE FROM Activities WHERE id = ?;");
             stmt.setInt(1, lastItem.getId());
             stmt.executeUpdate();
@@ -122,7 +122,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         startConnection();
         List<Activity> activityList = new ArrayList<>();
         ResultSet rs = s.executeQuery("SELECT * FROM Activities;");
-        while (rs.next()){
+        while (rs.next()) {
             activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
         }
         closeConnection();

@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 
 public class MainView extends Application {
 
@@ -19,9 +18,9 @@ public class MainView extends Application {
         primaryStage.setTitle("Productivetime");
 
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,255), null, null)));
-        mainLayout.setPrefSize(500,400);
-        mainLayout.setMaxSize(800,800);
+        mainLayout.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), null, null)));
+        mainLayout.setPrefSize(500, 400);
+        mainLayout.setMaxSize(800, 800);
 
         ViewSelector viewSelector = new ViewSelector(mainLayout);
         mainLayout.setBottom(viewSelector.getLayout());
