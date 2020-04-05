@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Activity implements Comparable<Activity> {
     private Integer id;
     private String type;
-    private Integer start;
+    private Long start;
     private Integer duration;
 
     public Activity(String type) {
         this.type = type;
     }
 
-    public Activity(Integer id, String type, int start, int duration) {
+    public Activity(Integer id, String type, long start, int duration) {
         this.id = id;
         this.type = type;
         this.start = start;
@@ -27,7 +27,7 @@ public class Activity implements Comparable<Activity> {
         return type;
     }
 
-    public int getStart() {
+    public long getStart() {
         return start;
     }
 
@@ -35,7 +35,7 @@ public class Activity implements Comparable<Activity> {
         return duration;
     }
 
-    public int getEnd() {
+    public long getEnd() {
         return start + duration;
     }
 
@@ -49,11 +49,6 @@ public class Activity implements Comparable<Activity> {
         }
         Activity activity = (Activity) o;
         return type.equals(activity.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type);
     }
 
     @Override

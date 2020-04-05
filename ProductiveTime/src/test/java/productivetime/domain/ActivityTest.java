@@ -41,10 +41,10 @@ public class ActivityTest {
         Activity a1 = new Activity(1, "first", 100, 2);
         Activity a2 = new Activity(2, "second", 102, 2);
         ArrayList<Activity> activities = new ArrayList<>();
-        activities.add(a2);
         activities.add(a1);
+        activities.add(a2);
         Collections.sort(activities);
-        assertTrue(activities.get(1).equals(a1));
+        assertEquals(activities.get(0), a2);
     }
 
 }

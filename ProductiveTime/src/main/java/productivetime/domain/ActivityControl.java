@@ -34,16 +34,25 @@ public class ActivityControl {
         }
     }
 
-    public ObservableList<Activity> getActivities() {
-        ObservableList<Activity> activitiesOList = FXCollections.observableArrayList();
+    public List<Activity> getActivities() {
         List<Activity> activitiesList = new ArrayList<>();
         try {
             activitiesList = activityDB.list();
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return activitiesList;
+    }
+
+    public List<Activity> getActivitiesReversed() {
+        List<Activity> activitiesList = getActivities();
         Collections.sort(activitiesList);
-        activitiesOList.addAll(activitiesList);
+        return activitiesList;
+    }
+
+    public ObservableList<Activity> getActivitiesObservable() {
+        ObservableList<Activity> activitiesOList = FXCollections.observableArrayList();
+        activitiesOList.addAll(getActivitiesReversed());
         return activitiesOList;
     }
 }
