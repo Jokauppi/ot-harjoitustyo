@@ -31,3 +31,11 @@ ja testikattavuusraportin luominen komennolla
 Raportti luodaan kansioon
 
 ```target/site/jacoco/index.html```
+
+Checkstyle-raportin voi luoda komennolla
+
+```mvn jxr:jxr checkstyle:checkstyle```
+
+ja se luodaan kansioon
+
+```target/site/checkstyle.html```
