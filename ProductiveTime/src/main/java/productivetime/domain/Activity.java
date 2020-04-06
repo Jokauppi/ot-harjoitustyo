@@ -1,6 +1,10 @@
 package productivetime.domain;
 
-import java.util.Objects;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Activity implements Comparable<Activity> {
     private Integer id;
@@ -31,8 +35,42 @@ public class Activity implements Comparable<Activity> {
         return start;
     }
 
+    public String getStartDate() {
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Helsinki"));
+        Instant startInstant = Instant.ofEpochSecond(start);
+        ZonedDateTime activityDate = ZonedDateTime.ofInstant(startInstant, ZoneId.of("Europe/Helsinki"));
+        if (now.getYear() == activityDate.getYear()) {
+            if (now.getDayOfYear() == activityDate.getDayOfYear()) {
+                String datePattern = "HH:mm";
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
+                return dateFormatter.format(activityDate);
+            } else {
+                String datePattern = "dd LLL HH:mm";
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
+                return dateFormatter.format(activityDate);
+            }
+        } else {
+            String datePattern = "dd LLL uuuu HH:mm";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
+            return dateFormatter.format(activityDate);
+        }
+    }
+
     public int getDuration() {
         return duration;
+    }
+
+    public String getDurationFormatted() {
+        if (duration == 0) {
+            return "Ongoing";
+        }
+        if (duration < 60) {
+            return 0 + " min";
+        }
+        if (duration < 3600) {
+            return duration / 60 + " min";
+        }
+        return String.format("%d h %d min", duration / 3600, (duration % 3600) / 60);
     }
 
     public long getEnd() {

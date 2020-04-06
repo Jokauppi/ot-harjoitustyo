@@ -2,6 +2,9 @@ package productivetime.domain;
 
 import org.junit.Test;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -47,4 +50,12 @@ public class ActivityTest {
         assertEquals(activities.get(0), a2);
     }
 
+    @Test
+    public void getDateSameYearSameDay() {
+        Instant now = Instant.now();
+        Activity activity = new Activity(1, "test", now.toEpochMilli()/1000, 120);
+        ZonedDateTime nowDate = ZonedDateTime.ofInstant(now, ZoneId.of("Europe/Helsinki"));
+        String expected = String.format("%02d:%02d", nowDate.getHour(), nowDate.getMinute());
+        assertEquals(expected, activity.getStartDate());
+    }
 }

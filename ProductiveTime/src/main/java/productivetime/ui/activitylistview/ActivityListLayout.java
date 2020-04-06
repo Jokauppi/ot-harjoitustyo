@@ -1,5 +1,6 @@
 package productivetime.ui.activitylistview;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,14 +23,14 @@ public class ActivityListLayout implements UIElement<TableView<Activity>> {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         //create table start column
-        TableColumn<Activity, String> startColumn = new TableColumn<>("Start time (s since 1/1/1970)");
+        TableColumn<Activity, String> startColumn = new TableColumn<>("Start time");
         startColumn.setMinWidth(249);
-        startColumn.setCellValueFactory(new PropertyValueFactory<>("start"));
+        startColumn.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getStartDate()));
 
         //create table duration column
-        TableColumn<Activity, String> durationColumn = new TableColumn<>("Duration (s)");
+        TableColumn<Activity, String> durationColumn = new TableColumn<>("Duration");
         durationColumn.setMinWidth(100);
-        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        durationColumn.setCellValueFactory(p -> new  ReadOnlyStringWrapper(p.getValue().getDurationFormatted()));
 
         activityTable.setItems(activityControl.getActivitiesObservable());
         activityTable.getColumns().addAll(typeColumn, startColumn, durationColumn);

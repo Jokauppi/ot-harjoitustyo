@@ -82,7 +82,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         startConnection();
         if (activity != null) {
             stmt = connection.prepareStatement("UPDATE Activities SET duration = (SELECT strftime('%s','now')-?) WHERE id = ?;");
-            stmt.setInt(1, activity.getStart());
+            stmt.setLong(1, activity.getStart());
             stmt.setInt(2, activity.getId());
             stmt.executeUpdate();
             stmt.close();
