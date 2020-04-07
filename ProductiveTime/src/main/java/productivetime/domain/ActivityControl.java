@@ -72,24 +72,24 @@ public class ActivityControl {
             System.out.println(e);
         }
 
-        return truncateFirstAndLastActivity(activitiesList, beginning,end);
+        return truncateFirstAndLastActivity(activitiesList, beginning, end);
     }
 
     private List<Activity> truncateFirstAndLastActivity(List<Activity> activitiesList, long beginning, long end) {
 
         if (!activitiesList.isEmpty()) {
 
-            Activity last = activitiesList.get(activitiesList.size()-1);
+            Activity last = activitiesList.get(activitiesList.size() - 1);
 
             int duration = last.getDuration();
 
             if (duration == 0) {
-                duration = (int) (ZonedDateTime.now(ZoneId.of("Europe/Helsinki")).toEpochSecond()-last.getStart());
+                duration = (int) (ZonedDateTime.now(ZoneId.of("Europe/Helsinki")).toEpochSecond() - last.getStart());
             }
-            if (last.getStart()+duration > end) {
+            if (last.getStart() + duration > end) {
                 duration = (int) (end-last.getStart());
             }
-            activitiesList.set(activitiesList.size()-1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
+            activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
 
             Activity first = activitiesList.get(0);
 
