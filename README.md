@@ -4,9 +4,11 @@ Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön kans
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](dokumentointi/vaatimusmäärittely.md)
+[Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
-[Työaikakirjanpito](dokumentointi/työaikakirjanpito.md)
+[Työaikakirjanpito](dokumentaatio/työaikakirjanpito.md)
+
+[Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
 ## Komentorivin toiminnot
 
