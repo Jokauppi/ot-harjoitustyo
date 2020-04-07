@@ -13,6 +13,7 @@ import productivetime.dao.ActivityDao;
 import productivetime.domain.ActivityControl;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 import productivetime.ui.activitylistview.ActivityListLayout;
+import productivetime.ui.activitystatsview.ActivityStatsLayout;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -92,7 +93,8 @@ public class ViewSelector implements UIElement<HBox> {
 
         if (dBCreationSuccesful) {
             statsButton.setOnAction((actionEvent -> {
-                mainLayout.setCenter(new Label("Statistics view\nnot yet implemented"));
+                ActivityStatsLayout activityStatsLayout = new ActivityStatsLayout(activityControl);
+                mainLayout.setCenter(activityStatsLayout.getLayout());
             }));
         }
 

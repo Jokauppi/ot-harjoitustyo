@@ -64,6 +64,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         }
     }
 
+    @Override
     public Activity readLast() throws SQLException {
         startConnection();
         ResultSet lastItem = s.executeQuery("SELECT * FROM Activities ORDER BY id DESC LIMIT 1;");
@@ -103,6 +104,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
         closeConnection();
     }
 
+    @Override
     public boolean deleteLast() throws SQLException {
         Activity lastItem = readLast();
         startConnection();
@@ -129,6 +131,25 @@ public class ActivityDao implements Dao<Activity, Integer> {
         return activityList;
     }
 
+    @Override
+    public List<Activity> list(long beginning, long end) throws SQLException {
+        startConnection();
+        List<Activity> activityList = new ArrayList<>();
+        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE start+duration > ? OR start < ? OR (start < ? AND start+duration > ?);");
+        stmt.setLong(1, beginning);
+        stmt.setLong(2, end);
+        stmt.setLong(3, beginning);
+        stmt.setLong(4, end);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
+        }
+        stmt.close();
+        closeConnection();
+        return activityList;
+    }
+
+    @Override
     public void clear() throws SQLException {
         startConnection();
         s.execute("DROP TABLE IF EXISTS Activities;");
