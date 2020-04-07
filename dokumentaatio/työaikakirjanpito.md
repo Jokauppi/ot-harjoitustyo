@@ -14,4 +14,5 @@
 |5.4.|Testien kirjoittaminen, pieni refaktorointi|1|
 |6.4.|Aikojen näyttäminen järjevässä muodossa|5|
 |6.4.|Testien kirjoittaminen|1|
-| |*Yhteensä*|35,5|
+|7.4.|Luokkakaavion luominen|2|
+| |**Yhteensä**|37,5|
