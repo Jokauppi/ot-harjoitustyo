@@ -135,11 +135,13 @@ public class ActivityDao implements Dao<Activity, Integer> {
     public List<Activity> list(long beginning, long end) throws SQLException {
         startConnection();
         List<Activity> activityList = new ArrayList<>();
-        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE start+duration > ? OR start < ? OR (start < ? AND start+duration > ?);");
-        stmt.setLong(1, beginning);
-        stmt.setLong(2, end);
-        stmt.setLong(3, beginning);
+        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE (start+duration < ? AND start > ?) OR (start+duration > ? AND start < ?) OR (start < ? AND start+duration > ?) OR duration = 0;");
+        stmt.setLong(1, end);
+        stmt.setLong(2, beginning);
+        stmt.setLong(3, end);
         stmt.setLong(4, end);
+        stmt.setLong(5, beginning);
+        stmt.setLong(6, beginning);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));

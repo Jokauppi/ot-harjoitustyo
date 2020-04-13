@@ -19,8 +19,8 @@ public class MainView extends Application {
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), null, null)));
-        mainLayout.setPrefSize(500, 400);
-        mainLayout.setMaxSize(800, 800);
+        mainLayout.setPrefSize(800, 600);
+        mainLayout.setMaxSize(1000, 800);
 
         ViewSelector viewSelector = new ViewSelector(mainLayout);
         mainLayout.setBottom(viewSelector.getLayout());

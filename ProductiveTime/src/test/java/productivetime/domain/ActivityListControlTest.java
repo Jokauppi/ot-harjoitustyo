@@ -11,19 +11,21 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-public class ActivityControlListTest {
+public class ActivityListControlTest {
 
     private static ActivityDao activityDao;
-    private static ActivityControl activityControl;
+    private static ActivityInsertControl activityInsertControl;
+    private static ActivityListControl activityListControl;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         activityDao = new ActivityDao();
         activityDao.clear();
-        activityControl = new ActivityControl(activityDao);
-        activityControl.addActivity("activity 1");
+        activityInsertControl = new ActivityInsertControl(activityDao);
+        activityListControl = new ActivityListControl(activityDao);
+        activityInsertControl.addActivity("activity 1");
         TimeUnit.SECONDS.sleep(2);
-        activityControl.addActivity("activity 2");
+        activityInsertControl.addActivity("activity 2");
     }
 
     @AfterClass
@@ -33,19 +35,19 @@ public class ActivityControlListTest {
 
     @Test
     public void getActivityList() {
-        List<Activity> activities = activityControl.getActivities();
+        List<Activity> activities = activityListControl.getActivities();
         assertEquals(new Activity("activity 1"), activities.get(0));
     }
 
     @Test
     public void getActivityListReversed() {
-        List<Activity> activities = activityControl.getActivitiesReversed();
+        List<Activity> activities = activityListControl.getActivitiesReversed();
         assertEquals(new Activity("activity 2"), activities.get(0));
     }
 
     @Test
     public void getActivityListAsObservableList() {
-        ObservableList<Activity> activities = activityControl.getActivitiesObservable();
+        ObservableList<Activity> activities = activityListControl.getActivitiesObservable();
         assertEquals(new Activity("activity 2"), activities.get(0));
     }
 

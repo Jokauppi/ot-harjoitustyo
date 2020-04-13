@@ -11,29 +11,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ActivityControl {
+public class ActivityListControl {
+
     private ActivityDao activityDB;
 
-    public ActivityControl(ActivityDao activityDB) {
-        try {
-            this.activityDB = activityDB;
-            this.activityDB.initializeDB();
-        } catch (SQLException e) {
-            System.out.println("database creation unsuccessful");
-        }
-    }
-
-    public void addActivity(String type) {
-        try {
-            Activity last = activityDB.readLast();
-            if (last != null) {
-                activityDB.update(last);
-            }
-            Activity next = new Activity(type);
-            activityDB.create(next);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+    public ActivityListControl(ActivityDao activityDB) {
+        this.activityDB = activityDB;
     }
 
     public List<Activity> getActivities() {
@@ -100,4 +83,5 @@ public class ActivityControl {
 
         return activitiesList;
     }
+
 }

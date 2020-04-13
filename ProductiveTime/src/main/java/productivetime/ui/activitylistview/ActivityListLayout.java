@@ -5,14 +5,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import productivetime.domain.Activity;
-import productivetime.domain.ActivityControl;
+import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
 
 public class ActivityListLayout implements UIElement<TableView<Activity>> {
 
     private TableView<Activity> activityTable;
 
-    public ActivityListLayout(ActivityControl activityControl) {
+    public ActivityListLayout(ActivityListControl activityListControl) {
 
         activityTable = new TableView<>();
         activityTable.setMaxWidth(500);
@@ -32,7 +32,7 @@ public class ActivityListLayout implements UIElement<TableView<Activity>> {
         durationColumn.setMinWidth(100);
         durationColumn.setCellValueFactory(p -> new  ReadOnlyStringWrapper(p.getValue().getDurationFormatted()));
 
-        activityTable.setItems(activityControl.getActivitiesObservable());
+        activityTable.setItems(activityListControl.getActivitiesObservable());
         activityTable.getColumns().addAll(typeColumn, startColumn, durationColumn);
     }
 

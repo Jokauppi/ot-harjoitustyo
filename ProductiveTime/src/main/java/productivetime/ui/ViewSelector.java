@@ -10,7 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import productivetime.dao.ActivityDao;
-import productivetime.domain.ActivityControl;
+import productivetime.domain.ActivityInsertControl;
+import productivetime.domain.ActivityListControl;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 import productivetime.ui.activitylistview.ActivityListLayout;
 import productivetime.ui.activitystatsview.ActivityStatsLayout;
@@ -24,21 +25,25 @@ public class ViewSelector implements UIElement<HBox> {
 
     private HBox viewSelector;
     private BorderPane mainLayout;
-    private ActivityControl activityControl;
+    private ActivityInsertControl activityInsertControl;
+    private ActivityListControl activityListControl;
     private boolean dBCreationSuccesful;
+    private ActivityDao activityDB;
 
     public ViewSelector(BorderPane mainLayout) {
 
         this.mainLayout = mainLayout;
 
         try {
-            ActivityDao activityDB = new ActivityDao();
-            this.activityControl = new ActivityControl(activityDB);
+            this.activityDB = new ActivityDao();
+            this.activityInsertControl = new ActivityInsertControl(activityDB);
             dBCreationSuccesful = true;
         } catch (SQLException e) {
             dBCreationSuccesful = false;
             mainLayout.setCenter(new Label("DATABASE\nCONNECTION\nUNSUCCESFUL"));
         }
+
+        this.activityListControl = new ActivityListControl(activityDB);
 
         viewSelector = new HBox();
 
@@ -50,7 +55,7 @@ public class ViewSelector implements UIElement<HBox> {
         viewSelector.getChildren().addAll(createButtons());
 
         if (dBCreationSuccesful) {
-            ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityControl);
+            ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
             mainLayout.setCenter(insertionLayout.getLayout());
         }
     }
@@ -67,7 +72,7 @@ public class ViewSelector implements UIElement<HBox> {
 
         if (dBCreationSuccesful) {
             activityButton.setOnAction((actionEvent -> {
-                ActivityListLayout activityListLayout = new ActivityListLayout(activityControl);
+                ActivityListLayout activityListLayout = new ActivityListLayout(activityListControl);
                 mainLayout.setCenter(activityListLayout.getLayout());
             }));
         }
@@ -80,7 +85,7 @@ public class ViewSelector implements UIElement<HBox> {
 
         if (dBCreationSuccesful) {
             homeButton.setOnAction((actionEvent -> {
-                ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityControl);
+                ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
                 mainLayout.setCenter(insertionLayout.getLayout());
             }));
         }
@@ -93,7 +98,7 @@ public class ViewSelector implements UIElement<HBox> {
 
         if (dBCreationSuccesful) {
             statsButton.setOnAction((actionEvent -> {
-                ActivityStatsLayout activityStatsLayout = new ActivityStatsLayout(activityControl);
+                ActivityStatsLayout activityStatsLayout = new ActivityStatsLayout(activityListControl);
                 mainLayout.setCenter(activityStatsLayout.getLayout());
             }));
         }

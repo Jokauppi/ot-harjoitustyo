@@ -6,21 +6,20 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.Activity;
-import productivetime.domain.ActivityControl;
+import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ActivityStatsLayout implements UIElement<BorderPane> {
 
     private BorderPane statsViewLayout;
-    private ActivityControl activityControl;
+    private ActivityListControl activityListControl;
 
-    public ActivityStatsLayout(ActivityControl activityControl) {
-        this.activityControl = activityControl;
+    public ActivityStatsLayout(ActivityListControl activityListControl) {
+        this.activityListControl = activityListControl;
 
         statsViewLayout = new BorderPane();
 
@@ -30,7 +29,7 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
     private BarChart<String, Number> getChartToday() {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
-        BarChart<String, Number> todayChart = new BarChart<String, Number>(xAxis, yAxis);
+        BarChart<String, Number> todayChart = new BarChart<>(xAxis, yAxis);
         todayChart.setTitle("Activities today");
         xAxis.setLabel("Activity types");
         yAxis.setLabel("Duration today");
@@ -40,7 +39,7 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
 
         ZonedDateTime todayStart = ZonedDateTime.now().withHour(0).withMinute(0).withSecond(0);
 
-        List<Activity> activityToday = activityControl.getActivitiesDay(todayStart);
+        List<Activity> activityToday = activityListControl.getActivitiesDay(todayStart);
 
         HashMap<String, Integer> activityMap = new HashMap<>();
         for (Activity activity : activityToday) {

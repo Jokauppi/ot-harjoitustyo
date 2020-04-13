@@ -7,19 +7,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import productivetime.domain.ActivityControl;
+import productivetime.domain.ActivityInsertControl;
 import productivetime.ui.UIElement;
-
-import java.util.concurrent.TimeUnit;
 
 public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private VBox insertionLayout;
-    private ActivityControl activityControl;
+    private ActivityInsertControl activityInsertControl;
 
-    public ActivityInsertionLayout(ActivityControl activityControl) {
+    public ActivityInsertionLayout(ActivityInsertControl activityInsertControl) {
 
-        this.activityControl = activityControl;
+        this.activityInsertControl = activityInsertControl;
 
         insertionLayout = new VBox();
         insertionLayout.setSpacing(20);
@@ -62,7 +60,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
         activityInsertionButton.setOnAction((actionEvent -> {
             if (!(relatedField.getText().equals("") || relatedField.getText().equals("Activity added"))) {
-                activityControl.addActivity(relatedField.getText());
+                activityInsertControl.addActivity(relatedField.getText());
                 relatedField.setText("Activity added");
             }
         }));
