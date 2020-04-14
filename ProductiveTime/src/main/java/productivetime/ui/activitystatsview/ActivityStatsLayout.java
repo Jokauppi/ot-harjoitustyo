@@ -7,6 +7,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
+import productivetime.domain.Settings;
+import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
 
 import java.time.ZonedDateTime;
@@ -37,16 +39,14 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
         XYChart.Series<String, Number> durations = new XYChart.Series<>();
         durations.setName("Duration");
 
-        ZonedDateTime todayStart = ZonedDateTime.now().withHour(0).withMinute(0).withSecond(0);
-
-        List<Activity> activityToday = activityListControl.getActivitiesDay(todayStart);
+        List<Activity> activityToday = activityListControl.getActivitiesDay(TimeService.todayStartAsZoned());
 
         HashMap<String, Integer> activityMap = new HashMap<>();
         for (Activity activity : activityToday) {
-            activityMap.put(activity.getType(), activityMap.getOrDefault(activity.getType(), 0) + activity.getDuration()/60);
+            activityMap.put(activity.getType(), activityMap.getOrDefault(activity.getType(), 0) + activity.getDuration() / 60);
         }
 
-        for (String type : activityMap.keySet()){
+        for (String type : activityMap.keySet()) {
             durations.getData().add(new XYChart.Data<>(type, activityMap.get(type)));
         }
 

@@ -10,13 +10,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityDao implements Dao<Activity, Integer> {
+public class ActivityDao implements Dao<Activity> {
 
+    private final String dbName;
     private Connection connection;
     private PreparedStatement stmt;
     private Statement s;
 
-    public ActivityDao() throws SQLException {
+    public ActivityDao(String dbName) throws SQLException {
+        this.dbName = dbName;
         initializeDB();
     }
 
@@ -27,7 +29,7 @@ public class ActivityDao implements Dao<Activity, Integer> {
     }
 
     private void startConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:activity.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);
         s = connection.createStatement();
     }
 
@@ -37,10 +39,11 @@ public class ActivityDao implements Dao<Activity, Integer> {
     }
 
     @Override
-    public void create(Activity object) throws SQLException {
+    public void create(Activity activity, long start) throws SQLException {
         startConnection();
-        stmt = connection.prepareStatement("INSERT INTO Activities (type, start) VALUES (?,(SELECT strftime('%s','now')));");
-        stmt.setString(1, object.getType());
+        stmt = connection.prepareStatement("INSERT INTO Activities (type, start) VALUES (?,?);");
+        stmt.setString(1, activity.getType());
+        stmt.setLong(2, start);
         stmt.executeUpdate();
         stmt.close();
         closeConnection();
@@ -79,11 +82,11 @@ public class ActivityDao implements Dao<Activity, Integer> {
     }
 
     @Override
-    public Activity update(Activity activity) throws SQLException {
+    public Activity update(Activity activity, long end) throws SQLException {
         startConnection();
         if (activity != null) {
-            stmt = connection.prepareStatement("UPDATE Activities SET duration = (SELECT strftime('%s','now')-?) WHERE id = ?;");
-            stmt.setLong(1, activity.getStart());
+            stmt = connection.prepareStatement("UPDATE Activities SET duration = ? WHERE id = ?;");
+            stmt.setLong(1, end - activity.getStart());
             stmt.setInt(2, activity.getId());
             stmt.executeUpdate();
             stmt.close();

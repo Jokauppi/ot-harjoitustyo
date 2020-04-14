@@ -35,7 +35,7 @@ public class ViewSelector implements UIElement<HBox> {
         this.mainLayout = mainLayout;
 
         try {
-            this.activityDB = new ActivityDao();
+            this.activityDB = new ActivityDao("activity.db");
             this.activityInsertControl = new ActivityInsertControl(activityDB);
             dBCreationSuccesful = true;
         } catch (SQLException e) {

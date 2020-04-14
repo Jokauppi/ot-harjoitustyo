@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import productivetime.dao.ActivityDao;
 
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,10 +66,10 @@ public class ActivityListControl {
             int duration = last.getDuration();
 
             if (duration == 0) {
-                duration = (int) (ZonedDateTime.now(ZoneId.of("Europe/Helsinki")).toEpochSecond() - last.getStart());
+                duration = (int) (TimeService.nowSeconds() - last.getStart());
             }
             if (last.getStart() + duration > end) {
-                duration = (int) (end-last.getStart());
+                duration = (int) (end - last.getStart());
             }
             activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
 

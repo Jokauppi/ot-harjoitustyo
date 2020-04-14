@@ -1,8 +1,5 @@
 package productivetime.domain;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -36,9 +33,8 @@ public class Activity implements Comparable<Activity> {
     }
 
     public String getStartDate() {
-        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Europe/Helsinki"));
-        Instant startInstant = Instant.ofEpochSecond(start);
-        ZonedDateTime activityDate = ZonedDateTime.ofInstant(startInstant, ZoneId.of("Europe/Helsinki"));
+        ZonedDateTime now = TimeService.nowZoned();
+        ZonedDateTime activityDate = TimeService.zonedOfSeconds(this.start);
         if (now.getYear() == activityDate.getYear()) {
             if (now.getDayOfYear() == activityDate.getDayOfYear()) {
                 String datePattern = "HH:mm";

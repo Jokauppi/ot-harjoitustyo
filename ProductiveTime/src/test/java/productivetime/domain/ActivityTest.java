@@ -53,7 +53,7 @@ public class ActivityTest {
     @Test
     public void getDateSameYearSameDay() {
         Instant now = Instant.now();
-        Activity activity = new Activity(1, "test", now.toEpochMilli()/1000, 120);
+        Activity activity = new Activity(1, "test", now.getEpochSecond(), 120);
         ZonedDateTime nowDate = ZonedDateTime.ofInstant(now, ZoneId.of("Europe/Helsinki"));
         String expected = String.format("%02d:%02d", nowDate.getHour(), nowDate.getMinute());
         assertEquals(expected, activity.getStartDate());

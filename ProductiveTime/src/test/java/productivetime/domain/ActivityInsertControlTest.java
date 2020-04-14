@@ -17,7 +17,7 @@ public class ActivityInsertControlTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        activityDao = new ActivityDao();
+        activityDao = new ActivityDao("test.db");
         activityDao.clear();
         activityInsertControl = new ActivityInsertControl(activityDao);
     }
