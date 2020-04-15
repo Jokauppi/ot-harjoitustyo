@@ -8,6 +8,8 @@ import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
 
+import java.util.List;
+
 public class ActivityListLayout implements UIElement<TableView<Activity>> {
 
     private TableView<Activity> activityTable;
@@ -40,4 +42,5 @@ public class ActivityListLayout implements UIElement<TableView<Activity>> {
     public TableView getLayout() {
         return activityTable;
     }
+
 }

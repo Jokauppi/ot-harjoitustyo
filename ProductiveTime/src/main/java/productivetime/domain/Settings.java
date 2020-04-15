@@ -9,7 +9,7 @@ public class Settings {
 
     private Settings() {
         System.out.println("timezone init");
-        timeZone = ZoneId.systemDefault();
+        timeZone = ZoneId.of("Europe/Helsinki");
     }
 
     public static void initSettings() {

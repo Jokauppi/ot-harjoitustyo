@@ -7,11 +7,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
-import productivetime.domain.Settings;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
-
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,17 +26,25 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
     }
 
     private BarChart<String, Number> getChartToday() {
+
+        List<Activity> activityToday = activityListControl.getActivitiesDay(TimeService.todayStartAsZoned());
+
         CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        BarChart<String, Number> todayChart = new BarChart<>(xAxis, yAxis);
-        todayChart.setTitle("Activities today");
+
+        int upperbound = ActivityListControl.getLongestDurationInMinutes(activityToday) + 30;
+
+        NumberAxis yAxis = new NumberAxis(0, upperbound, 30);
+
         xAxis.setLabel("Activity types");
-        yAxis.setLabel("Duration today");
+        yAxis.setLabel("Duration (min)");
+
+        BarChart<String, Number> todayChart = new BarChart<>(xAxis, yAxis);
+
+        todayChart.setTitle("Activities today");
+        todayChart.setLegendVisible(false);
 
         XYChart.Series<String, Number> durations = new XYChart.Series<>();
         durations.setName("Duration");
-
-        List<Activity> activityToday = activityListControl.getActivitiesDay(TimeService.todayStartAsZoned());
 
         HashMap<String, Integer> activityMap = new HashMap<>();
         for (Activity activity : activityToday) {
