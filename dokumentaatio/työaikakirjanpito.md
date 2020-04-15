@@ -16,4 +16,10 @@
 |6.4.|Testien kirjoittaminen|1|
 |7.4.|Luokkakaavion luominen|2|
 |7.4.|Statistiikkanäkymän luominen|5|
-| |**Yhteensä**|42,5|
+|13.4.|Listausmetodien eriyttäminen omaan luokkaansa|1|
+|14.4.|Muutoksia ajan käsittelyyn, ajankäsittelyluokan luonti|2|
+|14.4.|Koodin siistimistä, bugien korjaamista|2|
+|14.4.|Asetusluokan pohjan luonti|1|
+|15.4.|Bugien korjaamista, pientä refaktorointia|2|
+|15.4.|Diagrammityypin vaihtaminen|1|
+| |**Yhteensä**|51,5|
