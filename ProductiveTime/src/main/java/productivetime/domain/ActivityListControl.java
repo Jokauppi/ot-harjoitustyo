@@ -83,14 +83,4 @@ public class ActivityListControl {
         return activitiesList;
     }
 
-    public static int getLongestDurationInMinutes(List<Activity> activities) {
-        int longest = 0;
-        for (Activity activity : activities) {
-            if (activity.getDuration()/60 > longest) {
-                longest = activity.getDuration()/60;
-            }
-        }
-        return longest;
-    }
-
 }

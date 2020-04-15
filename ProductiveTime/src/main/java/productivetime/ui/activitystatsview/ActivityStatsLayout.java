@@ -1,15 +1,11 @@
 package productivetime.ui.activitystatsview;
 
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
-import java.util.HashMap;
 import java.util.List;
 
 public class ActivityStatsLayout implements UIElement<BorderPane> {
@@ -25,37 +21,28 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
         statsViewLayout.setCenter(getChartToday());
     }
 
-    private BarChart<String, Number> getChartToday() {
+    private StackedBarChart<Number, String> getChartToday() {
 
         List<Activity> activityToday = activityListControl.getActivitiesDay(TimeService.todayStartAsZoned());
 
-        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis xAxis = new NumberAxis(0, 24, 1);
+        xAxis.setLabel("Time (h)");
 
-        int upperbound = ActivityListControl.getLongestDurationInMinutes(activityToday) + 30;
+        CategoryAxis yAxis = new CategoryAxis();
 
-        NumberAxis yAxis = new NumberAxis(0, upperbound, 30);
-
-        xAxis.setLabel("Activity types");
-        yAxis.setLabel("Duration (min)");
-
-        BarChart<String, Number> todayChart = new BarChart<>(xAxis, yAxis);
+        StackedBarChart<Number, String> todayChart = new StackedBarChart<>(xAxis, yAxis);
 
         todayChart.setTitle("Activities today");
-        todayChart.setLegendVisible(false);
+        todayChart.setLegendVisible(true);
 
-        XYChart.Series<String, Number> durations = new XYChart.Series<>();
-        durations.setName("Duration");
-
-        HashMap<String, Integer> activityMap = new HashMap<>();
         for (Activity activity : activityToday) {
-            activityMap.put(activity.getType(), activityMap.getOrDefault(activity.getType(), 0) + activity.getDuration() / 60);
+            XYChart.Series<Number, String> activityBlock = new XYChart.Series<>();
+            activityBlock.setName(activity.getType());
+            activityBlock.getData().add(new XYChart.Data<>(((double) activity.getDuration())/3600,  "today"));
+            todayChart.getData().add(activityBlock);
         }
 
-        for (String type : activityMap.keySet()) {
-            durations.getData().add(new XYChart.Data<>(type, activityMap.get(type)));
-        }
-
-        todayChart.getData().add(durations);
+        todayChart.setMaxHeight(250);
 
         return todayChart;
     }
