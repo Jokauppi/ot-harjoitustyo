@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 
 public class TimeService {
 
-    private static final ZoneId TIMEZONE = Settings.getTimeZone();
+    private static ZoneId TIMEZONE = Settings.getTimeZone();
 
     public static long nowSeconds() {
         return Instant.now().getEpochSecond();
@@ -21,7 +21,7 @@ public class TimeService {
     }
 
     public static ZonedDateTime todayStartAsZoned() {
-        return ZonedDateTime.now(TIMEZONE).withHour(0).withMinute(0).withSecond(0).withNano(0);
+        return ZonedDateTime.now(TIMEZONE).toLocalDate().atStartOfDay(TIMEZONE);
     }
     
 }

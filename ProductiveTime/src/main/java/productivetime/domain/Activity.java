@@ -63,9 +63,6 @@ public class Activity implements Comparable<Activity> {
         if (duration == 0) {
             return "Ongoing";
         }
-        if (duration < 60) {
-            return 0 + " min";
-        }
         if (duration < 3600) {
             return duration / 60 + " min";
         }
