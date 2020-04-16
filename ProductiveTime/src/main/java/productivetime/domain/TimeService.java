@@ -6,22 +6,21 @@ import java.time.ZonedDateTime;
 
 public class TimeService {
 
-    private static ZoneId TIMEZONE = Settings.getTimeZone();
+    private static ZoneId timeZone = Settings.getTimeZone();
 
     public static long nowSeconds() {
         return Instant.now().getEpochSecond();
     }
 
     public static ZonedDateTime nowZoned() {
-        return ZonedDateTime.ofInstant(Instant.now(), TIMEZONE);
+        return ZonedDateTime.ofInstant(Instant.now(), timeZone);
     }
 
     public static ZonedDateTime zonedOfSeconds(long time) {
-        return ZonedDateTime.ofInstant(Instant.ofEpochSecond(time), TIMEZONE);
+        return ZonedDateTime.ofInstant(Instant.ofEpochSecond(time), timeZone);
     }
 
-    public static ZonedDateTime todayStartAsZoned() {
-        return ZonedDateTime.now(TIMEZONE).toLocalDate().atStartOfDay(TIMEZONE);
+    public static ZonedDateTime startOfZoned(ZonedDateTime dateTime) {
+        return dateTime.toLocalDate().atStartOfDay(timeZone);
     }
-    
 }

@@ -6,7 +6,6 @@ import org.junit.Test;
 import productivetime.dao.ActivityDao;
 
 import java.sql.SQLException;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -36,11 +35,21 @@ public class ActivityInsertControlTest {
     @Test
     public void addActivityWhenNotEmpty() throws SQLException, InterruptedException {
         activityInsertControl.addActivity("activity 1");
-        TimeUnit.SECONDS.sleep(2);
         activityInsertControl.addActivity("activity 2");
-        assertEquals(new Activity("activity 1"), activityDao.read(1));
         assertEquals(new Activity("activity 2"), activityDao.read(2));
-        assertEquals(0, activityDao.read(2).getDuration());
-        assertTrue(activityDao.read(1).getDuration() != 0);
+    }
+
+    @Test
+    public void addActivityUpdatesPrevious() throws SQLException, InterruptedException {
+        activityInsertControl.addActivity("activity 1");
+        activityInsertControl.addActivity("activity 2");
+        assertFalse(activityDao.read(1).isOngoing());
+    }
+
+    @Test
+    public void addActivityNewIsOngoing() throws SQLException, InterruptedException {
+        activityInsertControl.addActivity("activity 1");
+        activityInsertControl.addActivity("activity 2");
+        assertTrue(activityDao.read(2).isOngoing());
     }
 }

@@ -8,13 +8,11 @@ public class Settings {
     private static ZoneId timeZone;
 
     private Settings() {
-        System.out.println("timezone init");
         timeZone = ZoneId.of("Europe/Helsinki");
     }
 
     public static void initSettings() {
         if (settings == null) {
-            System.out.println("settings init");
             synchronized (Settings.class) {
                 if (settings == null) {
                     settings = new Settings();

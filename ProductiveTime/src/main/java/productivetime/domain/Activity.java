@@ -8,16 +8,22 @@ public class Activity implements Comparable<Activity> {
     private String type;
     private Long start;
     private Integer duration;
+    private boolean ongoing = false;
 
     public Activity(String type) {
         this.type = type;
     }
 
-    public Activity(Integer id, String type, long start, int duration) {
+    public Activity(Integer id, String type, long start, Integer duration) {
         this.id = id;
         this.type = type;
         this.start = start;
-        this.duration = duration;
+        if (duration == null) {
+            this.duration = 0;
+            ongoing = true;
+        } else {
+            this.duration = duration;
+        }
     }
 
     public Integer getId() {
@@ -30,6 +36,10 @@ public class Activity implements Comparable<Activity> {
 
     public long getStart() {
         return start;
+    }
+
+    public boolean isOngoing() {
+        return ongoing;
     }
 
     public String getStartFormatted(ZonedDateTime now) {

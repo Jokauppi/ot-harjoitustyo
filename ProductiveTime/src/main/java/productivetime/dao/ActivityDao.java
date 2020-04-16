@@ -56,7 +56,11 @@ public class ActivityDao implements Dao<Activity> {
         stmt.setInt(1, key);
         ResultSet activity = stmt.executeQuery();
         if (activity.next()) {
-            Activity lastActivity = new Activity(activity.getInt("id"), activity.getString("type"), activity.getInt("start"), activity.getInt("duration"));
+            Integer duration = activity.getInt("duration");
+            if (activity.wasNull()) {
+                duration = null;
+            }
+            Activity lastActivity = new Activity(activity.getInt("id"), activity.getString("type"), activity.getInt("start"), duration);
             stmt.close();
             closeConnection();
             return lastActivity;
@@ -72,7 +76,11 @@ public class ActivityDao implements Dao<Activity> {
         startConnection();
         ResultSet lastItem = s.executeQuery("SELECT * FROM Activities ORDER BY id DESC LIMIT 1;");
         if (lastItem.next()) {
-            Activity lastActivity = new Activity(lastItem.getInt("id"), lastItem.getString("type"), lastItem.getInt("start"), lastItem.getInt("duration"));
+            Integer duration = lastItem.getInt("duration");
+            if (lastItem.wasNull()) {
+                duration = null;
+            }
+            Activity lastActivity = new Activity(lastItem.getInt("id"), lastItem.getString("type"), lastItem.getInt("start"), duration);
             closeConnection();
             return lastActivity;
         } else {
@@ -125,11 +133,8 @@ public class ActivityDao implements Dao<Activity> {
     @Override
     public List<Activity> list() throws SQLException {
         startConnection();
-        List<Activity> activityList = new ArrayList<>();
         ResultSet rs = s.executeQuery("SELECT * FROM Activities;");
-        while (rs.next()) {
-            activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
-        }
+        List<Activity> activityList = listFromResultSet(rs);
         closeConnection();
         return activityList;
     }
@@ -137,11 +142,8 @@ public class ActivityDao implements Dao<Activity> {
     @Override
     public List<Activity> list(long beginning, long end) throws SQLException {
         startConnection();
-        List<Activity> activityList = new ArrayList<>();
-        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE (start+duration >= ? AND start <= ?)" +
-                " OR (start+duration > ? AND start+duration <= ?)" +
-                " OR (start >= ? AND start < ?)" +
-                " OR (duration IS NULL AND start <= ?);");
+        stmt = connection.prepareStatement("SELECT * FROM Activities WHERE (start+duration >= ? AND start <= ?) OR (start+duration > ? AND start+duration <= ?)" +
+                " OR (start >= ? AND start < ?) OR (duration IS NULL AND start <= ?);");
         stmt.setLong(1, end);
         stmt.setLong(2, beginning);
         stmt.setLong(3, beginning);
@@ -150,11 +152,21 @@ public class ActivityDao implements Dao<Activity> {
         stmt.setLong(6, end);
         stmt.setLong(7, end);
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), rs.getInt("duration")));
-        }
+        List<Activity> activityList = listFromResultSet(rs);
         stmt.close();
         closeConnection();
+        return activityList;
+    }
+
+    private List<Activity> listFromResultSet(ResultSet rs) throws SQLException {
+        List<Activity> activityList = new ArrayList<>();
+        while (rs.next()) {
+            Integer duration = rs.getInt("duration");
+            if (rs.wasNull()) {
+                duration = null;
+            }
+            activityList.add(new Activity(rs.getInt("id"), rs.getString("type"), rs.getInt("start"), duration));
+        }
         return activityList;
     }
 

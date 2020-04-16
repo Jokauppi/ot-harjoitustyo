@@ -40,12 +40,14 @@ public class ActivityListControl {
         return activitiesOList;
     }
 
-    public List<Activity> getActivitiesDay(ZonedDateTime date) {
+    public List<Activity> getActivitiesOnDayOf(ZonedDateTime date) {
         List<Activity> activitiesList = new ArrayList<>();
 
-        ZonedDateTime dateEnd = date.plusDays(1);
+        ZonedDateTime startOfDate = TimeService.startOfZoned(date);
 
-        long beginning = date.toEpochSecond();
+        ZonedDateTime dateEnd = startOfDate.plusDays(1);
+
+        long beginning = startOfDate.toEpochSecond();
         long end = dateEnd.toEpochSecond();
 
         // List of activities partly or entirely in the range is fetched

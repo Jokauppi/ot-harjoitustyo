@@ -6,6 +6,8 @@ import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
+
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class ActivityStatsLayout implements UIElement<BorderPane> {
@@ -23,7 +25,7 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
 
     private StackedBarChart<Number, String> getChartToday() {
 
-        List<Activity> activityToday = activityListControl.getActivitiesDay(TimeService.todayStartAsZoned());
+        List<Activity> activityToday = activityListControl.getActivitiesOnDayOf(ZonedDateTime.now());
 
         NumberAxis xAxis = new NumberAxis(0, 24, 1);
         xAxis.setLabel("Time (h)");
@@ -38,7 +40,7 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
         for (Activity activity : activityToday) {
             XYChart.Series<Number, String> activityBlock = new XYChart.Series<>();
             activityBlock.setName(activity.getType());
-            activityBlock.getData().add(new XYChart.Data<>(((double) activity.getDuration())/3600,  "today"));
+            activityBlock.getData().add(new XYChart.Data<>(((double) activity.getDuration()) / 3600,  "today"));
             todayChart.getData().add(activityBlock);
         }
 
