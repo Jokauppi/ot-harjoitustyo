@@ -94,12 +94,12 @@ public class ActivityDaoTest {
 
     @Test
     public void listWhenDBNotEmpty() throws SQLException {
-        activityDao.create(new Activity("activity 1"), 10000);
-        activityDao.update(activityDao.readLast(), 12000);
-        activityDao.create(new Activity("activity 2"), 12000);
+        activityDao.create(new Activity("activity 1"), 100);
+        activityDao.update(activityDao.readLast(), 120);
+        activityDao.create(new Activity("activity 2"), 120);
         List<Activity> activities = activityDao.list();
         assertEquals(new Activity("activity 1"),activities.get(0));
         assertEquals(new Activity("activity 2"),activities.get(1));
-
     }
+
 }

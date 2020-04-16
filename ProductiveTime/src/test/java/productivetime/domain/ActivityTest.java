@@ -2,7 +2,7 @@ package productivetime.domain;
 
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -52,10 +52,22 @@ public class ActivityTest {
 
     @Test
     public void getDateSameYearSameDay() {
-        Instant now = Instant.now();
-        Activity activity = new Activity(1, "test", now.getEpochSecond(), 120);
-        ZonedDateTime nowDate = ZonedDateTime.ofInstant(now, ZoneId.of("Europe/Helsinki"));
-        String expected = String.format("%02d:%02d", nowDate.getHour(), nowDate.getMinute());
-        assertEquals(expected, activity.getStartDate());
+        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), ZoneId.of("Europe/Helsinki"));
+        Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
+        assertEquals("02:02", activity.getStartFormatted(day));
+    }
+
+    @Test
+    public void getDateSameYearDifferentDay() {
+        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), ZoneId.of("Europe/Helsinki"));
+        Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
+        assertEquals("02 Feb 02:02", activity.getStartFormatted(day.plusDays(1)));
+    }
+
+    @Test
+    public void getDateDifferentYear() {
+        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), ZoneId.of("Europe/Helsinki"));
+        Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
+        assertEquals("02 Feb 2000 02:02", activity.getStartFormatted(day.plusDays(400)));
     }
 }

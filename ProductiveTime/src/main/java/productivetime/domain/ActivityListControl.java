@@ -48,12 +48,14 @@ public class ActivityListControl {
         long beginning = date.toEpochSecond();
         long end = dateEnd.toEpochSecond();
 
+        // List of activities partly or entirely in the range is fetched
         try {
             activitiesList = activityDB.list(beginning, end);
         } catch (SQLException e) {
             System.out.println(e);
         }
 
+        // The first and last activities of the list are resized to include only the parts that are inside the range
         return truncateFirstAndLastActivity(activitiesList, beginning, end);
     }
 
@@ -65,16 +67,25 @@ public class ActivityListControl {
 
             int duration = last.getDuration();
 
+            // If the last activity on the list is still ongoing, its duration set so that the activity ends at the current time
             if (duration == 0) {
                 duration = (int) (TimeService.nowSeconds() - last.getStart());
             }
+            // If the last activity ends before the beginning of the range, an empty list is returned
+            // This should happen when the method is called with a beginning that is later than the current moment
+            if (last.getStart() + duration < beginning) {
+                return new ArrayList<>();
+            }
+            // If the last activity goes partly above the range, the duration is shortened so that the activity ends at the end of the range
             if (last.getStart() + duration > end) {
                 duration = (int) (end - last.getStart());
             }
+
             activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
 
             Activity first = activitiesList.get(0);
 
+            // If the first activity goes partly below the range, the start time is moved and the duration is shortened so that the activity starts at the beginning of the range and ends at the same time as before
             if (first.getStart() < beginning) {
                 activitiesList.set(0, new Activity(first.getId(), first.getType(), beginning, first.getDuration() - (int) (beginning - first.getStart())));
             }

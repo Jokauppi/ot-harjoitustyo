@@ -32,8 +32,7 @@ public class Activity implements Comparable<Activity> {
         return start;
     }
 
-    public String getStartDate() {
-        ZonedDateTime now = TimeService.nowZoned();
+    public String getStartFormatted(ZonedDateTime now) {
         ZonedDateTime activityDate = TimeService.zonedOfSeconds(this.start);
         if (now.getYear() == activityDate.getYear()) {
             if (now.getDayOfYear() == activityDate.getDayOfYear()) {
@@ -50,6 +49,10 @@ public class Activity implements Comparable<Activity> {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
             return dateFormatter.format(activityDate);
         }
+    }
+
+    public String getStartFormatted() {
+        return getStartFormatted(TimeService.nowZoned());
     }
 
     public int getDuration() {
