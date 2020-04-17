@@ -57,6 +57,14 @@ public class ActivityListControl {
             System.out.println(e);
         }
 
+        //if the first activity doesn't start at the start of the given day an empty "No Data" activity is added at the start to fill the chart properly;
+        if (!activitiesList.isEmpty() && activitiesList.get(0).getStart() > beginning) {
+            ArrayList<Activity> replacingList = new ArrayList<>();
+            replacingList.add(new Activity(0, "No Data", beginning, (int) (activitiesList.get(0).getStart() - beginning)));
+            replacingList.addAll(activitiesList);
+            activitiesList = replacingList;
+        }
+
         // The first and last activities of the list are resized to include only the parts that are inside the range
         return truncateFirstAndLastActivity(activitiesList, beginning, end);
     }

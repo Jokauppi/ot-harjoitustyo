@@ -23,6 +23,7 @@ public class ActivityListControlRangedTest {
         activityDao.clear();
 
         ZonedDateTime itime = time;
+        activityDao.create(new Activity("test0"), TimeService.startOfZoned(itime).toEpochSecond()-3600);
         for (int i = 1; i < 4; i++) {
             activityDao.update(activityDao.readLast(), itime.toEpochSecond());
             activityDao.create(new Activity("test" + i), itime.toEpochSecond());
@@ -41,9 +42,16 @@ public class ActivityListControlRangedTest {
     }
 
     @Test
-    public void getActivitiesOfDayWithThreeActivities() {
+    public void getActivitiesOfDayWithFourActivities() {
         List<Activity> activities = activityListControl.getActivitiesOnDayOf(time);
-        assertEquals(3, activities.size());
+        assertEquals(4, activities.size());
+    }
+
+    @Test
+    public void getActivitiesOfDayWithOneActivityStartingInMiddleOfDay() {
+        List<Activity> activities = activityListControl.getActivitiesOnDayOf(time.plusDays(-1));
+        assertEquals(2, activities.size());
+        assertEquals("No Data", activities.get(0).getType());
     }
 
     @Test
@@ -54,7 +62,7 @@ public class ActivityListControlRangedTest {
 
     @Test
     public void getActivitiesOfDayWithNoActivitiesNoOngoing() {
-        List<Activity> activities = activityListControl.getActivitiesOnDayOf(time.plusDays(-1));
+        List<Activity> activities = activityListControl.getActivitiesOnDayOf(time.plusDays(-2));
         assertEquals(0, activities.size());
     }
 

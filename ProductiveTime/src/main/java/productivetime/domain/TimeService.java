@@ -1,8 +1,6 @@
 package productivetime.domain;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 public class TimeService {
 
@@ -18,6 +16,10 @@ public class TimeService {
 
     public static ZonedDateTime zonedOfSeconds(long time) {
         return ZonedDateTime.ofInstant(Instant.ofEpochSecond(time), timeZone);
+    }
+
+    public static ZonedDateTime zonedOfLocalDate(LocalDate localDate) {
+        return ZonedDateTime.of(localDate, LocalTime.MIDNIGHT, timeZone);
     }
 
     public static ZonedDateTime startOfZoned(ZonedDateTime dateTime) {

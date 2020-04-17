@@ -2,12 +2,10 @@ package productivetime.ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import productivetime.dao.ActivityDao;
 import productivetime.domain.ActivityInsertControl;
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ViewSelector implements UIElement<HBox> {
+public class ViewSelector implements UISelectorElement<HBox> {
 
     private HBox viewSelector;
     private BorderPane mainLayout;
@@ -50,7 +48,7 @@ public class ViewSelector implements UIElement<HBox> {
         viewSelector.setSpacing(50);
         viewSelector.setAlignment(Pos.CENTER);
         viewSelector.setPadding(new Insets(20, 20, 20, 20));
-        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
+        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), null, null)));
 
         viewSelector.getChildren().addAll(createButtons());
 
@@ -70,12 +68,8 @@ public class ViewSelector implements UIElement<HBox> {
     private Button createActivityButton() {
         Button activityButton = new Button("Activities");
 
-        if (dBCreationSuccesful) {
-            activityButton.setOnAction((actionEvent -> {
-                ActivityListLayout activityListLayout = new ActivityListLayout(activityListControl);
-                mainLayout.setCenter(activityListLayout.getLayout());
-            }));
-        }
+        activityButton.setOnAction(actionEvent ->
+                setView(new ActivityListLayout(activityListControl).getLayout()));
 
         return activityButton;
     }
@@ -83,25 +77,18 @@ public class ViewSelector implements UIElement<HBox> {
     private Button createHomeButton() {
         Button homeButton = new Button("Home");
 
-        if (dBCreationSuccesful) {
-            homeButton.setOnAction((actionEvent -> {
-                ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
-                mainLayout.setCenter(insertionLayout.getLayout());
-            }));
-        }
+        homeButton.setOnAction(actionEvent ->
+                setView(new ActivityInsertionLayout(activityInsertControl).getLayout()));
 
         return homeButton;
     }
 
+
     private Button createStatisticsButton() {
         Button statsButton = new Button("Statistics");
 
-        if (dBCreationSuccesful) {
-            statsButton.setOnAction((actionEvent -> {
-                ActivityStatsLayout activityStatsLayout = new ActivityStatsLayout(activityListControl);
-                mainLayout.setCenter(activityStatsLayout.getLayout());
-            }));
-        }
+        statsButton.setOnAction(actionEvent ->
+                setView(new ActivityStatsLayout(activityListControl).getLayout()));
 
         return statsButton;
     }
@@ -110,4 +97,13 @@ public class ViewSelector implements UIElement<HBox> {
     public HBox getLayout() {
         return viewSelector;
     }
+
+    @Override
+    public void setView(Node node) {
+        if (dBCreationSuccesful) {
+            mainLayout.setCenter(node);
+        }
+    }
+
+
 }

@@ -20,11 +20,10 @@ public class ActivityListControlTest {
     public static void beforeClass() throws Exception {
         activityDao = new ActivityDao("test.db");
         activityDao.clear();
-        ActivityInsertControl activityInsertControl = new ActivityInsertControl(activityDao);
         activityListControl = new ActivityListControl(activityDao);
-        activityInsertControl.addActivity("activity 1");
-        TimeUnit.SECONDS.sleep(2);
-        activityInsertControl.addActivity("activity 2");
+        activityDao.create(new Activity("activity 1"), 100);
+        activityDao.update(activityDao.readLast(), 200);
+        activityDao.create(new Activity("activity 2"), 200);
     }
 
     @AfterClass
@@ -35,13 +34,13 @@ public class ActivityListControlTest {
     @Test
     public void getActivityList() {
         List<Activity> activities = activityListControl.getActivities();
-        assertEquals(new Activity("activity 1"), activities.get(0));
+        assertEquals(new Activity("activity 2"), activities.get(1));
     }
 
     @Test
     public void getActivityListReversed() {
         List<Activity> activities = activityListControl.getActivitiesReversed();
-        assertEquals(new Activity("activity 2"), activities.get(0));
+        assertEquals(new Activity("activity 1"), activities.get(1));
     }
 
     @Test
