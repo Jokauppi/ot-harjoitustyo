@@ -15,7 +15,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 - Sovelluksen päänäkymässä ainoana pääasiallisena toimintona on kirjata uusi aktiviteetti **TEHTY**
     - Aktiviteetin alkamishetkeksi asetetaan aika kirjaushetkellä
     - Samalla edellinen aktiviteetti "lopetetaan" kirjaamalla sen kesto nykyiseen hetkeen
-- Käyttäjä voi myös lisätä usein käytettyjä aktiviteetteja muistiin, jotta niitä ei aina tarvitse kirjoittaa uusiksi
+- Käyttäjä näytetään pikavalintoina kymmmenen käytetyintä aktiviteettia, jotta niitä ei aina tarvitse kirjoittaa uusiksi
 
 ### Aktiviteettinäkymä
 
@@ -24,8 +24,8 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
   
 ### Tilastonäkymä
 
-- Kolmannessa näkymässä on mahdollista nähdä kaavioita ajankäytöstä **OSITTAIN TEHTY** (Toistaiseksi vain tämänhetkisen päivän pylväskaavio)
-    - Yhtenä kaaviotyyppinä voisi olla eri aktiviteetteihin käytetty aika yhtenä tämänhetkisenä päivänä tai valitun aikavälin päivinä pylväsdiagrammina. 
+- Kolmannessa näkymässä on mahdollista nähdä kaavioita ajankäytöstä
+    - Yhtenä kaaviotyyppinä voisi olla eri aktiviteetteihin käytetty aika yhtenä tämänhetkisenä päivänä tai valitun aikavälin päivinä pylväsdiagrammina. **TEHTY**
     - Toisena kaaviotyyppinä voisi olla valittuihin aktiviteetteihin päivässä käytetty aika ajan saatossa viivadiagrammina.
     
 ### Asetukset
@@ -33,9 +33,9 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 - Ohjelmistossa olisi myös mahdollista muuttaa joitain asetuksia kuten
     - aikavyöhyke
     - listanäkymässä näytettävien sarakkeiden näyttäminen (kesto ja alku- sekä loppumisaika)
-    - clearing the database
-    - possibly also
-        - changing the time format
+    - tietokannan tyhjentäminen
+    - aikaformaatin muuttaminen
+    - aikaseurannan väliaikainen kekeyttäminen
     
 ## Käyttöliittymä
 
@@ -47,7 +47,7 @@ Konsepti käyttöliittymästä:
 
 Perustoiminnallisuuksien lisäksi voitaisiin ajan salliessa lisätä mahdollisuus
 
-- ~~jakaa aktiviteetti kahteen eri tyyppiä olevaan  osaan, mikäli aktiviteetin aikana onkin tehty myös jotain muuta.~~ Hankala toteuttaa tämänhetkiseen tietokantaan, vaatisi tietokantaluokan uudelleenkirjoittamista
+- ~~jakaa aktiviteetti kahteen eri tyyppiä olevaan  osaan, mikäli aktiviteetin aikana onkin tehty myös jotain muuta.~~ Mahdollista toteuttaa, ei kuitenkaan sovi kunnolla käyttöliittymään 
 - kirjoittaa aktiviteeteille lisätietoja ja antaa niille omat väritunnisteet.
 - viedä kerätty data esimerkiksi .csv-tiedostona
 - liittää aktiviteetteihin tunnisteita eli tageja
