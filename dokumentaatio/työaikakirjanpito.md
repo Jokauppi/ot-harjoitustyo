@@ -22,4 +22,6 @@
 |14.4.|Asetusluokan pohjan luonti|1|
 |15.4.|Bugien korjaamista, pientä refaktorointia|2|
 |15.4.|Diagrammityypin vaihtaminen|1|
-| |**Yhteensä**|51,5|
+|16.4.|Testien kirjoittamista|6|
+|17.4.|Päivävalitsimen luonti, tilastonäkymän refaktorointi|5|
+| |**Yhteensä**|62,5|
