@@ -1,9 +1,12 @@
-package productivetime.ui.activitystatsview;
+package productivetime.ui.activitystatsview.chartLayout;
 
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.ActivityListControl;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
+import productivetime.ui.activitystatsview.selector.ChartType;
+import productivetime.ui.activitystatsview.selector.DaySelector;
+import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
 public class ActivityBarChartLayout implements UIElement<BorderPane> {
 

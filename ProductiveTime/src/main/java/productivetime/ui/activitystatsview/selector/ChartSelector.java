@@ -1,4 +1,4 @@
-package productivetime.ui.activitystatsview;
+package productivetime.ui.activitystatsview.selector;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.UISelectorElement;
+import productivetime.ui.activitystatsview.chartLayout.ActivityBarChartLayout;
 
 public class ChartSelector implements UISelectorElement<HBox> {
 

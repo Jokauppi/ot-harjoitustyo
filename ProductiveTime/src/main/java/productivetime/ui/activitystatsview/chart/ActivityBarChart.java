@@ -1,4 +1,4 @@
-package productivetime.ui.activitystatsview;
+package productivetime.ui.activitystatsview.chart;
 
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;

@@ -1,4 +1,4 @@
-package productivetime.ui.activitystatsview;
+package productivetime.ui.activitystatsview.selector;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import productivetime.domain.ActivityListControl;
 import productivetime.domain.TimeService;
 import productivetime.ui.UISelectorElement;
+import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
 public class DaySelector implements UISelectorElement<HBox> {
 

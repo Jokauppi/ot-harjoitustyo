@@ -3,6 +3,8 @@ package productivetime.ui.activitystatsview;
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
+import productivetime.ui.activitystatsview.chartLayout.ActivityBarChartLayout;
+import productivetime.ui.activitystatsview.selector.ChartSelector;
 
 public class ActivityStatsLayout implements UIElement<BorderPane> {
 
