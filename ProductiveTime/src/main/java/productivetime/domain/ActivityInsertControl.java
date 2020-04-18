@@ -5,10 +5,8 @@ import java.sql.SQLException;
 
 public class ActivityInsertControl {
     private ActivityDao activityDB;
-    private TimeService timeService;
 
     public ActivityInsertControl(ActivityDao activityDB) {
-        this.timeService = new TimeService();
         try {
             this.activityDB = activityDB;
             this.activityDB.initializeDB();
@@ -29,6 +27,10 @@ public class ActivityInsertControl {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public Activity retypeActivity(Activity activity, String newType) throws SQLException {
+        return activityDB.retype(activity, newType);
     }
 
 }

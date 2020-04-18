@@ -11,6 +11,7 @@ public interface Dao<T> {
     T read(Integer key) throws SQLException;
     T readLast() throws SQLException;
     T update(T object, long time) throws SQLException;
+    T retype(T object, String newType) throws SQLException;
 
     void delete(Integer key) throws SQLException;
     boolean deleteLast() throws SQLException;

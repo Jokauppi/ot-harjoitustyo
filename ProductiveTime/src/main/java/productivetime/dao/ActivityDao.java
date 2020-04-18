@@ -91,18 +91,40 @@ public class ActivityDao implements Dao<Activity> {
 
     @Override
     public Activity update(Activity activity, long end) throws SQLException {
-        startConnection();
+
+        Activity newActivity = null;
+
         if (activity != null) {
+            startConnection();
             stmt = connection.prepareStatement("UPDATE Activities SET duration = ? WHERE id = ?;");
             stmt.setLong(1, end - activity.getStart());
             stmt.setInt(2, activity.getId());
             stmt.executeUpdate();
             stmt.close();
             closeConnection();
-            return readLast();
+            newActivity = read(activity.getId());
         }
-        closeConnection();
-        return null;
+
+        return newActivity;
+    }
+
+    @Override
+    public Activity retype(Activity activity, String newType) throws SQLException {
+
+        Activity newActivity = null;
+
+        if (activity != null) {
+            startConnection();
+            stmt = connection.prepareStatement("UPDATE Activities SET type = ? WHERE id = ?;");
+            stmt.setString(1, newType);
+            stmt.setInt(2, activity.getId());
+            stmt.executeUpdate();
+            stmt.close();
+            closeConnection();
+            newActivity = read(activity.getId());
+        }
+
+        return newActivity;
     }
 
     @Override

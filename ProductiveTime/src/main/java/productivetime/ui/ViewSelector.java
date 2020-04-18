@@ -69,7 +69,7 @@ public class ViewSelector implements UISelectorElement<HBox> {
         Button activityButton = new Button("Activities");
 
         activityButton.setOnAction(actionEvent ->
-                setView(new ActivityListLayout(activityListControl).getLayout()));
+                setView(new ActivityListLayout(activityListControl, activityInsertControl).getLayout()));
 
         return activityButton;
     }
