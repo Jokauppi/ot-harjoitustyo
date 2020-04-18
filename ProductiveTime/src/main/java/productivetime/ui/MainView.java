@@ -16,11 +16,11 @@ public class MainView extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("Productivetime");
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), null, null)));
-        mainLayout.setPrefSize(800, 600);
-        mainLayout.setMaxSize(1000, 800);
 
         ViewSelector viewSelector = new ViewSelector(mainLayout);
         mainLayout.setBottom(viewSelector.getLayout());

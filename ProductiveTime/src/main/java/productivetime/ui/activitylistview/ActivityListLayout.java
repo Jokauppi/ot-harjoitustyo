@@ -1,42 +1,45 @@
 package productivetime.ui.activitylistview;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
 
-import java.util.Arrays;
+import java.util.List;
 
-public class ActivityListLayout implements UIElement<TableView<Activity>> {
 
-    private TableView<Activity> activityTable;
+public class ActivityListLayout implements UIElement<ScrollPane> {
+
+    private ScrollPane scrollPane;
 
     public ActivityListLayout(ActivityListControl activityListControl) {
 
-        activityTable = new TableView<>();
+        VBox list = new VBox();
+        list.setSpacing(10);
+        list.setPadding(new Insets(10));
+        list.setAlignment(Pos.CENTER);
 
-        //create table type column
-        TableColumn<Activity, String> typeColumn = new TableColumn<>("Type");
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        list.getChildren().add(new ListBox("Type", "Start", "Duration").getLayout());
 
-        //create table start column
-        TableColumn<Activity, String> startColumn = new TableColumn<>("Start time");
-        startColumn.setCellValueFactory(p -> new ReadOnlyStringWrapper(p.getValue().getStartFormatted()));
+        List<Activity> activities = activityListControl.getActivitiesReversed();
 
-        //create table duration column
-        TableColumn<Activity, String> durationColumn = new TableColumn<>("Duration");
-        durationColumn.setCellValueFactory(p -> new  ReadOnlyStringWrapper(p.getValue().getDurationFormatted()));
+        for (Activity activity : activities) {
+            list.getChildren().add(new ListBox(activity).getLayout());
+        }
 
-        activityTable.setItems(activityListControl.getActivitiesObservable());
-        activityTable.getColumns().addAll(Arrays.asList(typeColumn, startColumn, durationColumn));
+        scrollPane = new ScrollPane();
+        scrollPane.fitToWidthProperty().set(true);
+        scrollPane.setPannable(true);
+        scrollPane.setContent(list);
+
     }
 
     @Override
-    public TableView getLayout() {
-        return activityTable;
+    public ScrollPane getLayout() {
+        return scrollPane;
     }
 
 }

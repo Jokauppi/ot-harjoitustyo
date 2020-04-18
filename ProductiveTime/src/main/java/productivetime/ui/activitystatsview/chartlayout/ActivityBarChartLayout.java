@@ -1,4 +1,4 @@
-package productivetime.ui.activitystatsview.chartLayout;
+package productivetime.ui.activitystatsview.chartlayout;
 
 import javafx.scene.layout.BorderPane;
 import productivetime.domain.ActivityListControl;

@@ -9,6 +9,7 @@ import productivetime.domain.ActivityListControl;
 import productivetime.ui.UIElement;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ActivityBarChart implements UIElement<StackedBarChart<Number, String>> {
@@ -28,7 +29,7 @@ public class ActivityBarChart implements UIElement<StackedBarChart<Number, Strin
 
             chart = new StackedBarChart<>(xAxis, yAxis);
 
-            chart.setTitle("Activities today");
+            chart.setTitle("Activities on " + date.toLocalDate().format(DateTimeFormatter.ofPattern("dd LLL uuuu")));
             chart.setLegendVisible(true);
 
             for (Activity activity : activityToday) {

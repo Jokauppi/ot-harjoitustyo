@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.UISelectorElement;
-import productivetime.ui.activitystatsview.chartLayout.ActivityBarChartLayout;
+import productivetime.ui.activitystatsview.chartlayout.ActivityBarChartLayout;
 
 public class ChartSelector implements UISelectorElement<HBox> {
 
