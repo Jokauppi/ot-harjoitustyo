@@ -19,7 +19,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 
 ### Aktiviteettinäkymä
 
-- Aktiviteettinäkymässä aiempia aktiviteetteja voi selata ja niiden tyyppiä voi muuttaa. **SELAAMINEN TEHTY**
+- Aktiviteettinäkymässä aiempia aktiviteetteja voi selata ja niiden tyyppiä voi muuttaa. **TEHTY**
     - Aktiviteettien aikoja ei kuitenkaan voi muuttaa.
   
 ### Tilastonäkymä
