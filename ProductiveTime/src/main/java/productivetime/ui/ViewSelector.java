@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import productivetime.domain.ActivityInsertControl;
@@ -11,6 +12,7 @@ import productivetime.domain.ActivityListControl;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 import productivetime.ui.activitylistview.ActivityListLayout;
 import productivetime.ui.activitystatsview.ActivityStatsLayout;
+import productivetime.ui.settingsview.SettingsListLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +47,8 @@ public class ViewSelector implements UISelectorElement<HBox> {
         Button activityButton = createButton("Activities", new ActivityListLayout(activityListControl, activityInsertControl).getLayout());
         Button homeButton = createButton("Home", new ActivityInsertionLayout(activityInsertControl).getLayout());
         Button statsButton = createButton("Statistics", new ActivityStatsLayout(activityListControl).getLayout());
-        return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton));
+        Button settingsButton = createButton("Settings", new SettingsListLayout().getLayout());
+        return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton, settingsButton));
     }
 
     private Button createButton(String label, Node view) {

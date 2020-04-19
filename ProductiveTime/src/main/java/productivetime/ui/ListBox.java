@@ -3,8 +3,8 @@ package productivetime.ui;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class ListBox implements UIElement<GridPane> {
 
@@ -14,6 +14,7 @@ public class ListBox implements UIElement<GridPane> {
         box = new GridPane();
         box.setPadding(new Insets(10));
         box.setMaxWidth(700);
+        box.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
     }
 
     public void setBox(Node l1) {
