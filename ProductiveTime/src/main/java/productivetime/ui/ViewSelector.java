@@ -14,7 +14,6 @@ import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 import productivetime.ui.activitylistview.ActivityListLayout;
 import productivetime.ui.activitystatsview.ActivityStatsLayout;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,23 +24,12 @@ public class ViewSelector implements UISelectorElement<HBox> {
     private BorderPane mainLayout;
     private ActivityInsertControl activityInsertControl;
     private ActivityListControl activityListControl;
-    private boolean dBCreationSuccesful;
-    private ActivityDao activityDB;
 
-    public ViewSelector(BorderPane mainLayout) {
+    public ViewSelector(BorderPane mainLayout, ActivityInsertControl activityInsertControl, ActivityListControl activityListControl) {
 
         this.mainLayout = mainLayout;
-
-        try {
-            this.activityDB = new ActivityDao("activity.db");
-            this.activityInsertControl = new ActivityInsertControl(activityDB);
-            dBCreationSuccesful = true;
-        } catch (SQLException e) {
-            dBCreationSuccesful = false;
-            mainLayout.setCenter(new Label("DATABASE\nCONNECTION\nUNSUCCESFUL"));
-        }
-
-        this.activityListControl = new ActivityListControl(activityDB);
+        this.activityInsertControl = activityInsertControl;
+        this.activityListControl = activityListControl;
 
         viewSelector = new HBox();
 
@@ -52,10 +40,8 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
         viewSelector.getChildren().addAll(createButtons());
 
-        if (dBCreationSuccesful) {
-            ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
-            mainLayout.setCenter(insertionLayout.getLayout());
-        }
+        ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
+        mainLayout.setCenter(insertionLayout.getLayout());
     }
 
     private List<Button> createButtons() {
@@ -100,9 +86,7 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
     @Override
     public void setView(Node node) {
-        if (dBCreationSuccesful) {
-            mainLayout.setCenter(node);
-        }
+        mainLayout.setCenter(node);
     }
 
 

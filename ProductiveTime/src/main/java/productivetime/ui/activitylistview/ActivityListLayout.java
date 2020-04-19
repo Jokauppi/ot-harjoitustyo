@@ -1,46 +1,29 @@
 package productivetime.ui.activitylistview;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityInsertControl;
 import productivetime.domain.ActivityListControl;
+import productivetime.ui.ListLayout;
 import productivetime.ui.UIElement;
 
 import java.util.List;
 
 
-public class ActivityListLayout implements UIElement<ScrollPane> {
-
-    private ScrollPane scrollPane;
+public class ActivityListLayout extends ListLayout implements UIElement<ScrollPane> {
 
     public ActivityListLayout(ActivityListControl activityListControl, ActivityInsertControl activityInsertControl) {
 
-        VBox list = new VBox();
-        list.setSpacing(10);
-        list.setPadding(new Insets(10));
-        list.setAlignment(Pos.CENTER);
+        super();
 
-        list.getChildren().add(new ActivityBox("Type", "Start", "Duration").getLayout());
+        addBox(new ActivityBox("Type", "Start", "Duration"));
 
         List<Activity> activities = activityListControl.getActivitiesReversed();
 
         for (Activity activity : activities) {
-            list.getChildren().add(new ActivityBox(activity, activityInsertControl).getLayout());
+            addBox(new ActivityBox(activity, activityInsertControl));
         }
 
-        scrollPane = new ScrollPane();
-        scrollPane.fitToWidthProperty().set(true);
-        scrollPane.setPannable(true);
-        scrollPane.setContent(list);
-
-    }
-
-    @Override
-    public ScrollPane getLayout() {
-        return scrollPane;
     }
 
 }
