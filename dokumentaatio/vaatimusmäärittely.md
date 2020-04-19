@@ -31,7 +31,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 ### Asetukset
 
 - Ohjelmistossa olisi myös mahdollista muuttaa joitain asetuksia kuten
-    - aikavyöhyke
+    - aikavyöhyke **TEHTY**
     - listanäkymässä näytettävien sarakkeiden näyttäminen (kesto ja alku- sekä loppumisaika)
     - tietokannan tyhjentäminen
     - aikaformaatin muuttaminen
