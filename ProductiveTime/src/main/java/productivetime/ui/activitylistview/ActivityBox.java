@@ -67,10 +67,14 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
             setTypeLabel();
         });
 
+        renameField.focusedProperty().addListener((oValue, oldValue, newValue) -> {
+            if (!newValue) {
+                setTypeLabel();
+            }
+        });
+
         Label start = new Label(activity.getStartFormatted());
-        start.setOnMouseClicked(mouseEvent -> setTypeLabel());
         Label duration = new Label(activity.getDurationFormatted());
-        duration.setOnMouseClicked(mouseEvent -> setTypeLabel());
 
         setBox(renameField, start, duration);
 

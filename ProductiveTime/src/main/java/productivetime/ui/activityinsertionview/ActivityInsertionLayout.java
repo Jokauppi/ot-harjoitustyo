@@ -24,7 +24,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         this.activityInsertControl = activityInsertControl;
 
         insertionLayout = new VBox();
-        insertionLayout.setSpacing(20);
+        insertionLayout.setSpacing(40);
         insertionLayout.setAlignment(Pos.CENTER);
         insertionLayout.setPadding(new Insets(20, 20, 20, 20));
 
@@ -40,24 +40,25 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
         logo.setPadding(new Insets(0, 0, 20, 0));
         logo.setFont(new Font(20));
+        logo.setScaleX(1.5);
+        logo.setScaleY(1.5);
 
         return logo;
     }
 
     private TextField createActivityField() {
-        TextField activityField = new TextField("");
+        TextField activityField = new TextField();
 
+        activityField.setPromptText("Add activity");
+        insertionLayout.requestFocus();
         activityField.setPrefWidth(150);
         activityField.setMaxWidth(200);
+        activityField.setScaleX(1.5);
+        activityField.setScaleY(1.5);
         activityField.setBackground(new Background(new BackgroundFill(Color.rgb(240, 240, 240), new CornerRadii(30), null)));
 
-        activityField.setOnMouseClicked(mouseEvent -> {
-            if (activityField.getText().equals("Activity added")) {
-                activityField.setText("");
-            }
-        });
-
         activityField.setOnAction(actionEvent -> insertActivity(activityField));
+        activityField.setOnMouseClicked(mouseEvent -> activityField.setPromptText("Add activity"));
 
         return activityField;
     }
@@ -67,6 +68,8 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
         activityInsertionButton.setBackground(new Background(new BackgroundFill(Color.rgb(66,133,255), new CornerRadii(30), null)));
         activityInsertionButton.setTextFill(Color.WHITE);
+        activityInsertionButton.setScaleX(1.5);
+        activityInsertionButton.setScaleY(1.5);
 
         activityInsertionButton.setOnAction((actionEvent -> insertActivity(relatedField)));
 
@@ -76,7 +79,9 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
     private void insertActivity(TextField insertionField) {
         if (!(insertionField.getText().equals("") || insertionField.getText().equals("Activity added"))) {
             activityInsertControl.addActivity(insertionField.getText());
-            insertionField.setText("Activity added");
+            insertionField.setPromptText("Activity added");
+            insertionField.setText("");
+            insertionLayout.requestFocus();
         }
     }
 
