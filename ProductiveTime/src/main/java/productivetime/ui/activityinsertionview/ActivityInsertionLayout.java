@@ -52,20 +52,24 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
             }
         });
 
+        activityField.setOnAction(actionEvent -> insertActivity(activityField));
+
         return activityField;
     }
 
     private Button createActivityInsertButton(TextField relatedField) {
         Button activityInsertionButton = new Button("Add");
 
-        activityInsertionButton.setOnAction((actionEvent -> {
-            if (!(relatedField.getText().equals("") || relatedField.getText().equals("Activity added"))) {
-                activityInsertControl.addActivity(relatedField.getText());
-                relatedField.setText("Activity added");
-            }
-        }));
+        activityInsertionButton.setOnAction((actionEvent -> insertActivity(relatedField)));
 
         return activityInsertionButton;
+    }
+
+    private void insertActivity(TextField insertionField) {
+        if (!(insertionField.getText().equals("") || insertionField.getText().equals("Activity added"))) {
+            activityInsertControl.addActivity(insertionField.getText());
+            insertionField.setText("Activity added");
+        }
     }
 
     @Override

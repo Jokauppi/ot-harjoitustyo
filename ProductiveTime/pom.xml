@@ -45,6 +45,8 @@
                         <exclude>productivetime/ui/activityinsertionview/*</exclude>
                         <exclude>productivetime/ui/activitylistview/*</exclude>
                         <exclude>productivetime/ui/activitystatsview/*</exclude>
+                        <exclude>productivetime/ui/activitystatsview/selector/*</exclude>
+                        <exclude>productivetime/ui/activitystatsview/chart/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

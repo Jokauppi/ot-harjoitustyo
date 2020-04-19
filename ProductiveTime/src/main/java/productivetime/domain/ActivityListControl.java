@@ -43,12 +43,8 @@ public class ActivityListControl {
     public List<Activity> getActivitiesOnDayOf(ZonedDateTime date) {
         List<Activity> activitiesList = new ArrayList<>();
 
-        ZonedDateTime startOfDate = TimeService.startOfZoned(date);
-
-        ZonedDateTime dateEnd = startOfDate.plusDays(1);
-
-        long beginning = startOfDate.toEpochSecond();
-        long end = dateEnd.toEpochSecond();
+        long beginning = TimeService.startOfZoned(date).toEpochSecond();
+        long end = TimeService.startOfZoned(date).plusDays(1).toEpochSecond();
 
         // List of activities partly or entirely in the range is fetched
         try {
@@ -66,39 +62,39 @@ public class ActivityListControl {
         }
 
         // The first and last activities of the list are resized to include only the parts that are inside the range
-        return truncateFirstAndLastActivity(activitiesList, beginning, end);
+        if (!activitiesList.isEmpty()) {
+            return truncateFirstAndLastActivity(activitiesList, beginning, end);
+        }
+        return activitiesList;
     }
 
     private List<Activity> truncateFirstAndLastActivity(List<Activity> activitiesList, long beginning, long end) {
 
-        if (!activitiesList.isEmpty()) {
+        Activity last = activitiesList.get(activitiesList.size() - 1);
 
-            Activity last = activitiesList.get(activitiesList.size() - 1);
+        int duration = last.getDuration();
 
-            int duration = last.getDuration();
+        // If the last activity on the list is still ongoing, its duration set so that the activity ends at the current time
+        if (duration == 0) {
+            duration = (int) (TimeService.nowSeconds() - last.getStart());
+        }
+        // If the last activity ends before the beginning of the range, an empty list is returned
+        // This should happen when the method is called with a beginning that is later than the current moment
+        if (last.getStart() + duration < beginning) {
+            return new ArrayList<>();
+        }
+        // If the last activity goes partly above the range, the duration is shortened so that the activity ends at the end of the range
+        if (last.getStart() + duration > end) {
+            duration = (int) (end - last.getStart());
+        }
 
-            // If the last activity on the list is still ongoing, its duration set so that the activity ends at the current time
-            if (duration == 0) {
-                duration = (int) (TimeService.nowSeconds() - last.getStart());
-            }
-            // If the last activity ends before the beginning of the range, an empty list is returned
-            // This should happen when the method is called with a beginning that is later than the current moment
-            if (last.getStart() + duration < beginning) {
-                return new ArrayList<>();
-            }
-            // If the last activity goes partly above the range, the duration is shortened so that the activity ends at the end of the range
-            if (last.getStart() + duration > end) {
-                duration = (int) (end - last.getStart());
-            }
+        activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
 
-            activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
+        Activity first = activitiesList.get(0);
 
-            Activity first = activitiesList.get(0);
-
-            // If the first activity goes partly below the range, the start time is moved and the duration is shortened so that the activity starts at the beginning of the range and ends at the same time as before
-            if (first.getStart() < beginning) {
-                activitiesList.set(0, new Activity(first.getId(), first.getType(), beginning, first.getDuration() - (int) (beginning - first.getStart())));
-            }
+        // If the first activity goes partly below the range, the start time is moved and the duration is shortened so that the activity starts at the beginning of the range and ends at the same time as before
+        if (first.getStart() < beginning) {
+            activitiesList.set(0, new Activity(first.getId(), first.getType(), beginning, first.getDuration() - (int) (beginning - first.getStart())));
         }
 
         return activitiesList;

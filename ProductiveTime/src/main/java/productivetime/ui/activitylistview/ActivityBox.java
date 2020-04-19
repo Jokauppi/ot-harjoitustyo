@@ -1,10 +1,13 @@
 package productivetime.ui.activitylistview;
 
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import productivetime.domain.Activity;
@@ -19,45 +22,53 @@ public class ActivityBox implements UIElement<GridPane> {
     private GridPane box;
     private ActivityInsertControl activityInsertControl;
 
+    public ActivityBox() {
+        box = new GridPane();
+        box.setPadding(new Insets(10));
+        box.setMaxWidth(700);
+    }
+
     public ActivityBox(Activity activity, ActivityInsertControl activityInsertControl) {
+
+        this();
 
         this.activityInsertControl = activityInsertControl;
         this.activity = activity;
 
-        Label start = new Label(activity.getStartFormatted());
-        Label duration = new Label(activity.getDurationFormatted());
-        Label type = getTypeLabel();
-
-        setBox(type, start, duration);
+        setTypeLabel();
 
     }
 
     public ActivityBox(String f1, String f2, String f3) {
 
+        this();
+
+        box.setBackground(new Background(new BackgroundFill(Color.rgb(210, 210, 210), new CornerRadii(30), null)));
+
         setBox(new Label(f1), new Label(f2), new Label(f3));
 
     }
 
-    private Label getTypeLabel() {
-
-        System.out.println("setting label");
+    private void setTypeLabel() {
 
         Label typeLabel = new Label(activity.getType());
 
         typeLabel.setOnMouseClicked(mouseEvent -> {
-            Label start = new Label(activity.getStartFormatted());
-            Label duration = new Label(activity.getDurationFormatted());
-            setBox(getTypeField(), start, duration);
+            setTypeField();
         });
 
-        return typeLabel;
+        box.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
+
+        Label start = new Label(activity.getStartFormatted());
+        Label duration = new Label(activity.getDurationFormatted());
+
+        setBox(typeLabel, start, duration);
     }
 
-    private TextField getTypeField() {
-
-        System.out.println("setting field");
+    private void setTypeField() {
 
         TextField renameField = new TextField(activity.getType());
+        renameField.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
 
         renameField.setOnAction(actionEvent -> {
             try {
@@ -65,20 +76,26 @@ public class ActivityBox implements UIElement<GridPane> {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Label start = new Label(activity.getStartFormatted());
-            Label duration = new Label(activity.getDurationFormatted());
-            setBox(getTypeLabel(), start, duration);
+            setTypeLabel();
         });
 
-        return renameField;
+        Label start = new Label(activity.getStartFormatted());
+        start.setOnMouseClicked(mouseEvent -> setTypeLabel());
+        Label duration = new Label(activity.getDurationFormatted());
+        start.setOnMouseClicked(mouseEvent -> setTypeLabel());
+
+        setBox(renameField, start, duration);
+
+        renameField.requestFocus();
+
+        box.setBackground(new Background(new BackgroundFill(Color.rgb(210, 210, 210), new CornerRadii(30), null)));
+
     }
 
     private void setBox(Node l1, Node l2, Node l3) {
 
-        box = new GridPane();
-        box.setPadding(new Insets(10));
-        box.setMaxWidth(700);
-        box.setBackground(new Background(new BackgroundFill(Color.rgb(220, 220, 220), new CornerRadii(30), null)));
+        box.getChildren().clear();
+        box.getColumnConstraints().clear();
 
         GridPane.setHalignment(l1, HPos.LEFT);
         GridPane.setHalignment(l2, HPos.CENTER);
