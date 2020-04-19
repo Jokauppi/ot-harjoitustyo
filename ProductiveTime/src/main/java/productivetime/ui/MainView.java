@@ -47,7 +47,7 @@ public class MainView extends Application {
         } else {
             mainLayout.setCenter(new Label("DATABASE\nCONNECTION\nUNSUCCESFUL"));
         }
-        
+
         Scene mainView = new Scene(mainLayout);
 
         primaryStage.setScene(mainView);

@@ -5,7 +5,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import productivetime.domain.ActivityInsertControl;
 import productivetime.ui.UIElement;
@@ -45,6 +49,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
         activityField.setPrefWidth(150);
         activityField.setMaxWidth(200);
+        activityField.setBackground(new Background(new BackgroundFill(Color.rgb(240, 240, 240), new CornerRadii(30), null)));
 
         activityField.setOnMouseClicked(mouseEvent -> {
             if (activityField.getText().equals("Activity added")) {
@@ -59,6 +64,9 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private Button createActivityInsertButton(TextField relatedField) {
         Button activityInsertionButton = new Button("Add");
+
+        activityInsertionButton.setBackground(new Background(new BackgroundFill(Color.rgb(66,133,255), new CornerRadii(30), null)));
+        activityInsertionButton.setTextFill(Color.WHITE);
 
         activityInsertionButton.setOnAction((actionEvent -> insertActivity(relatedField)));
 

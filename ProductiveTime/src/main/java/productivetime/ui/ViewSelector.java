@@ -4,10 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import productivetime.dao.ActivityDao;
 import productivetime.domain.ActivityInsertControl;
 import productivetime.domain.ActivityListControl;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
@@ -36,47 +34,29 @@ public class ViewSelector implements UISelectorElement<HBox> {
         viewSelector.setSpacing(50);
         viewSelector.setAlignment(Pos.CENTER);
         viewSelector.setPadding(new Insets(20, 20, 20, 20));
-        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), null, null)));
+        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
 
         viewSelector.getChildren().addAll(createButtons());
 
-        ActivityInsertionLayout insertionLayout = new ActivityInsertionLayout(activityInsertControl);
-        mainLayout.setCenter(insertionLayout.getLayout());
+        setView(new ActivityInsertionLayout(activityInsertControl).getLayout());
     }
 
     private List<Button> createButtons() {
-        Button activityButton = createActivityButton();
-        Button homeButton = createHomeButton();
-        Button statsButton = createStatisticsButton();
+        Button activityButton = createButton("Activities", new ActivityListLayout(activityListControl, activityInsertControl).getLayout());
+        Button homeButton = createButton("Home", new ActivityInsertionLayout(activityInsertControl).getLayout());
+        Button statsButton = createButton("Statistics", new ActivityStatsLayout(activityListControl).getLayout());
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton));
     }
 
-    private Button createActivityButton() {
-        Button activityButton = new Button("Activities");
+    private Button createButton(String label, Node view) {
+        Button button = new Button(label);
 
-        activityButton.setOnAction(actionEvent ->
-                setView(new ActivityListLayout(activityListControl, activityInsertControl).getLayout()));
+        button.setBackground(new Background(new BackgroundFill(Color.rgb(66,133,255), new CornerRadii(30), null)));
+        button.setTextFill(Color.WHITE);
 
-        return activityButton;
-    }
+        button.setOnAction(actionEvent -> setView(view));
 
-    private Button createHomeButton() {
-        Button homeButton = new Button("Home");
-
-        homeButton.setOnAction(actionEvent ->
-                setView(new ActivityInsertionLayout(activityInsertControl).getLayout()));
-
-        return homeButton;
-    }
-
-
-    private Button createStatisticsButton() {
-        Button statsButton = new Button("Statistics");
-
-        statsButton.setOnAction(actionEvent ->
-                setView(new ActivityStatsLayout(activityListControl).getLayout()));
-
-        return statsButton;
+        return button;
     }
 
     @Override

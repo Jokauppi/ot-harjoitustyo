@@ -16,7 +16,7 @@ public class ActivityListLayout extends ListLayout implements UIElement<ScrollPa
 
         super();
 
-        addBox(new ActivityBox("Type", "Start", "Duration"));
+        addBox(new ActivityBox("Type (Click to rename)", "Start", "Duration"));
 
         List<Activity> activities = activityListControl.getActivitiesReversed();
 
