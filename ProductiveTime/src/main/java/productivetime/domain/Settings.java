@@ -28,7 +28,6 @@ public class Settings {
                 }
             }
         }
-        loadProperties();
     }
 
     private static void loadProperties() {

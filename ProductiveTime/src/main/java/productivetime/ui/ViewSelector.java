@@ -56,8 +56,8 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
         button.setBackground(new Background(new BackgroundFill(Color.rgb(220,220,220), new CornerRadii(30), null)));
         button.setTextFill(Color.BLACK);
-        button.setScaleX(1.5);
-        button.setScaleY(1.5);
+        button.setScaleX(1.3);
+        button.setScaleY(1.3);
 
         button.setOnAction(actionEvent -> setView(view));
 
