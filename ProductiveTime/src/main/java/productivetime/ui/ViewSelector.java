@@ -44,22 +44,24 @@ public class ViewSelector implements UISelectorElement<HBox> {
     }
 
     private List<Button> createButtons() {
-        Button activityButton = createButton("Activities", new ActivityListLayout(activityListControl, activityInsertControl).getLayout());
-        Button homeButton = createButton("Home", new ActivityInsertionLayout(activityInsertControl).getLayout());
-        Button statsButton = createButton("Statistics", new ActivityStatsLayout(activityListControl).getLayout());
-        Button settingsButton = createButton("Settings", new SettingsListLayout().getLayout());
+        Button activityButton = createButton("Activities");
+        activityButton.setOnAction(actionEvent -> setView(new ActivityListLayout(activityListControl, activityInsertControl).getLayout()));
+        Button homeButton = createButton("Home");
+        homeButton.setOnAction(actionEvent -> setView(new ActivityInsertionLayout(activityInsertControl).getLayout()));
+        Button statsButton = createButton("Statistics");
+        statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListControl).getLayout()));
+        Button settingsButton = createButton("Settings");
+        settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout().getLayout()));
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton, settingsButton));
     }
 
-    private Button createButton(String label, Node view) {
+    private Button createButton(String label) {
         Button button = new Button(label);
 
         button.setBackground(new Background(new BackgroundFill(Color.rgb(220,220,220), new CornerRadii(30), null)));
         button.setTextFill(Color.BLACK);
         button.setScaleX(1.3);
         button.setScaleY(1.3);
-
-        button.setOnAction(actionEvent -> setView(view));
 
         return button;
     }
