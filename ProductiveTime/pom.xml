@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>ProductiveTime</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -47,6 +47,9 @@
                         <exclude>productivetime/ui/activitystatsview/*</exclude>
                         <exclude>productivetime/ui/activitystatsview/selector/*</exclude>
                         <exclude>productivetime/ui/activitystatsview/chart/*</exclude>
+                        <exclude>productivetime/ui/settingsview/*</exclude>
+                        <exclude>productivetime/ui/activitystatsview/chartlayout/*</exclude>
+                        <exclude>productivetime/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

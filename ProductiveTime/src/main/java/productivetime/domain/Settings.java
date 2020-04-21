@@ -75,6 +75,6 @@ public class Settings {
 
     public static ZoneId getTimeZone() {
         initSettings();
-        return ZoneId.of("Europe/Helsinki");
+        return ZoneId.of(properties.getProperty("timezone"));
     }
 }
