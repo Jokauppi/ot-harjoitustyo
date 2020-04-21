@@ -24,4 +24,9 @@
 |15.4.|Diagrammityypin vaihtaminen|1|
 |16.4.|Testien kirjoittamista|6|
 |17.4.|Päivävalitsimen luonti, tilastonäkymän refaktorointi|5|
-| |**Yhteensä**|62,5|
+|18.4.|Listanäkymän uudelleenkirjoittaminen|3|
+|19.4.|Uudelleennimeämistoiminnon luonti|3|
+|19.4.|Listanäkymän refaktorointia|1,5|
+|19.4.|Asetusnäkymän luonti|2|
+|20.4.|Parin bugin korjaaminen|0|
+| |**Yhteensä**|72|
