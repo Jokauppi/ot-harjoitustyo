@@ -50,7 +50,6 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         TextField activityField = new TextField();
 
         activityField.setPromptText("Add activity");
-        insertionLayout.requestFocus();
         activityField.setPrefWidth(150);
         activityField.setMaxWidth(200);
         activityField.setScaleX(1.5);

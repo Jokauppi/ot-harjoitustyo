@@ -49,7 +49,6 @@
                         <exclude>productivetime/ui/activitystatsview/chart/*</exclude>
                         <exclude>productivetime/ui/settingsview/*</exclude>
                         <exclude>productivetime/ui/activitystatsview/chartlayout/*</exclude>
-                        <exclude>productivetime/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
