@@ -6,25 +6,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import productivetime.dao.ActivityDao;
-import productivetime.domain.ActivityInsertControl;
-import productivetime.domain.ActivityListControl;
+import productivetime.dao.SQLActivityDao;
+import productivetime.domain.ActivityInsertService;
+import productivetime.domain.ActivityListService;
 
 import java.sql.SQLException;
 
 public class MainView extends Application {
 
-    private ActivityInsertControl activityInsertControl;
-    private ActivityListControl activityListControl;
+    private ActivityInsertService activityInsertService;
+    private ActivityListService activityListService;
     private boolean dBCreationSuccessful = false;
 
     @Override
     public void init() {
 
         try {
-            ActivityDao activityDB = new ActivityDao("activity.db");
-            this.activityInsertControl = new ActivityInsertControl(activityDB);
-            this.activityListControl = new ActivityListControl(activityDB);
+            SQLActivityDao activityDB = new SQLActivityDao("activity.db");
+            this.activityInsertService = new ActivityInsertService(activityDB);
+            this.activityListService = new ActivityListService(activityDB);
             dBCreationSuccessful = true;
         } catch (SQLException ignored) {
         }
@@ -42,7 +42,7 @@ public class MainView extends Application {
         mainLayout.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255), null, null)));
 
         if (dBCreationSuccessful) {
-            ViewSelector viewSelector = new ViewSelector(mainLayout, activityInsertControl, activityListControl);
+            ViewSelector viewSelector = new ViewSelector(mainLayout, activityInsertService, activityListService);
             mainLayout.setBottom(viewSelector.getLayout());
         } else {
             mainLayout.setCenter(new Label("DATABASE\nCONNECTION\nUNSUCCESFUL"));

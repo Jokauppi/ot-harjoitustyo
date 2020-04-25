@@ -9,38 +9,38 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ActivityDaoRangedListTest {
+public class SQLActivityDaoRangedListTest {
 
-    private static ActivityDao activityDao;
+    private static SQLActivityDao SQLActivityDao;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
 
-        activityDao = new ActivityDao("test.db");
+        SQLActivityDao = new SQLActivityDao("test.db");
     }
 
     @Before
     public void setUp() throws Exception {
 
-        activityDao.clear();
-        activityDao.create(new Activity("activity 1"), 100);
-        activityDao.update(activityDao.readLast(), 120);
-        activityDao.create(new Activity("activity 2"), 120);
-        activityDao.update(activityDao.readLast(), 140);
-        activityDao.create(new Activity("activity 3"), 140);
+        SQLActivityDao.clear();
+        SQLActivityDao.create(new Activity("activity 1"), 100);
+        SQLActivityDao.update(SQLActivityDao.readLast(), 120);
+        SQLActivityDao.create(new Activity("activity 2"), 120);
+        SQLActivityDao.update(SQLActivityDao.readLast(), 140);
+        SQLActivityDao.create(new Activity("activity 3"), 140);
     }
 
     @AfterClass
     public static void afterClass() throws Exception {
 
-        activityDao.clear();
+        SQLActivityDao.clear();
     }
 
     // Tests whether ranged listing includes an activity that has been completed and is fully in the range
     @Test
     public void listActivityIncludesFullyInRange() throws SQLException {
 
-        List<Activity> activities = activityDao.list(90, 150);
+        List<Activity> activities = SQLActivityDao.list(90, 150);
         assertEquals(new Activity("activity 2"),activities.get(1));
     }
 
@@ -48,7 +48,7 @@ public class ActivityDaoRangedListTest {
     @Test
     public void listActivityIncludesCompletedPartlyInRangeAtStart() throws SQLException {
 
-        List<Activity> activities = activityDao.list(110, 150);
+        List<Activity> activities = SQLActivityDao.list(110, 150);
         assertEquals(new Activity("activity 1"),activities.get(0));
     }
 
@@ -56,7 +56,7 @@ public class ActivityDaoRangedListTest {
     @Test
     public void listActivityIncludesCompletedPartlyInRangeAtEnd() throws SQLException {
 
-        List<Activity> activities = activityDao.list(90, 130);
+        List<Activity> activities = SQLActivityDao.list(90, 130);
         assertEquals(new Activity("activity 2"),activities.get(1));
     }
 
@@ -65,21 +65,21 @@ public class ActivityDaoRangedListTest {
     @Test
     public void listActivityIncludesOngoingWithStartBelowRangeEnd() throws SQLException {
 
-        List<Activity> activities = activityDao.list(150, 160);
+        List<Activity> activities = SQLActivityDao.list(150, 160);
         assertEquals(new Activity("activity 3"),activities.get(0));
     }
 
     // Test that ranged listing doesn't include an activity that ends exactly at the beginning of the range
     @Test
     public void listActivityDoesntIncludeIfEndExactlyAtRangeBeginning() throws SQLException {
-        List<Activity> activities = activityDao.list(120, 130);
+        List<Activity> activities = SQLActivityDao.list(120, 130);
         assertEquals(new Activity("activity 2"),activities.get(0));
     }
 
     // Tests that ranged listing doesn't include an activity that starts exactly at the end of the range
     @Test
     public void listActivityDoesntIncludeIfStartExactlyAtRangeEnd() throws SQLException {
-        List<Activity> activities = activityDao.list(100, 120);
+        List<Activity> activities = SQLActivityDao.list(100, 120);
         assertEquals(1, activities.size());
         assertEquals(new Activity("activity 1"), activities.get(0));
     }
@@ -87,7 +87,7 @@ public class ActivityDaoRangedListTest {
     // Tests that ranged listing includes an activity that starts before the range beginning and end after the range end (the range is entirely inside the activity)
     @Test
     public void listActivityIncludesStartBelowRangeAndEndAboveRange() throws SQLException {
-        List<Activity> activities = activityDao.list(122, 138);
+        List<Activity> activities = SQLActivityDao.list(122, 138);
         assertEquals(1, activities.size());
         assertEquals(new Activity("activity 2"), activities.get(0));
     }

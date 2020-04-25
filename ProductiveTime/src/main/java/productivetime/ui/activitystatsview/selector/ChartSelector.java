@@ -10,19 +10,19 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import productivetime.domain.ActivityListControl;
+import productivetime.domain.ActivityListService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chartlayout.ActivityBarChartLayout;
 
 public class ChartSelector implements UISelectorElement<HBox> {
 
-    private ActivityListControl activityListControl;
+    private ActivityListService activityListService;
     private BorderPane statsViewLayout;
     private HBox chartSelector;
 
-    public ChartSelector(BorderPane statsViewLayout, ActivityListControl activityListControl) {
+    public ChartSelector(BorderPane statsViewLayout, ActivityListService activityListService) {
         this.statsViewLayout = statsViewLayout;
-        this.activityListControl = activityListControl;
+        this.activityListService = activityListService;
 
         chartSelector = new HBox();
 
@@ -39,7 +39,7 @@ public class ChartSelector implements UISelectorElement<HBox> {
         Button button = new Button("Day view");
 
         button.setOnAction(actionEvent ->
-                setView(new ActivityBarChartLayout(activityListControl).getLayout()));
+                setView(new ActivityBarChartLayout(activityListService).getLayout()));
 
         return button;
     }

@@ -88,7 +88,7 @@ public class ActivityTest {
 
     @Test
     public void GetDurationForOngoing() {
-        Activity activity = new Activity(1, "test", 100, 0);
+        Activity activity = new Activity(1, "test", 100, null);
         assertEquals("Ongoing", activity.getDurationFormatted());
     }
 

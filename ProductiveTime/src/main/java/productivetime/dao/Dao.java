@@ -1,7 +1,5 @@
 package productivetime.dao;
 
-import productivetime.domain.Activity;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +12,7 @@ public interface Dao<T> {
     T retype(T object, String newType) throws SQLException;
 
     void delete(Integer key) throws SQLException;
-    boolean deleteLast() throws SQLException;
+    void deleteLast() throws SQLException;
 
     List<T> list() throws SQLException;
     List<T> list(long beginning, long end) throws SQLException;

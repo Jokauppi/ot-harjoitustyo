@@ -11,17 +11,17 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import productivetime.domain.ActivityInsertControl;
+import productivetime.domain.ActivityInsertService;
 import productivetime.ui.UIElement;
 
 public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private VBox insertionLayout;
-    private ActivityInsertControl activityInsertControl;
+    private ActivityInsertService activityInsertService;
 
-    public ActivityInsertionLayout(ActivityInsertControl activityInsertControl) {
+    public ActivityInsertionLayout(ActivityInsertService activityInsertService) {
 
-        this.activityInsertControl = activityInsertControl;
+        this.activityInsertService = activityInsertService;
 
         insertionLayout = new VBox();
         insertionLayout.setSpacing(40);
@@ -77,7 +77,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private void insertActivity(TextField insertionField) {
         if (!(insertionField.getText().equals("") || insertionField.getText().equals("Activity added"))) {
-            activityInsertControl.addActivity(insertionField.getText());
+            activityInsertService.addActivity(insertionField.getText());
             insertionField.setPromptText("Activity added");
             insertionField.setText("");
             insertionLayout.requestFocus();

@@ -2,7 +2,7 @@ package productivetime.domain;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import productivetime.dao.ActivityDao;
+import productivetime.dao.SQLActivityDao;
 
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ActivityListControl {
+public class ActivityListService {
 
-    private ActivityDao activityDB;
+    private SQLActivityDao activityDB;
 
-    public ActivityListControl(ActivityDao activityDB) {
+    public ActivityListService(SQLActivityDao activityDB) {
         this.activityDB = activityDB;
     }
 
@@ -72,23 +72,22 @@ public class ActivityListControl {
 
         Activity last = activitiesList.get(activitiesList.size() - 1);
 
-        int duration = last.getDuration();
-
         // If the last activity on the list is still ongoing, its duration set so that the activity ends at the current time
-        if (duration == 0) {
-            duration = (int) (TimeService.nowSeconds() - last.getStart());
+        if (last.isOngoing()) {
+            last.setDuration((int) (TimeService.nowSeconds() - last.getStart()));
         }
+
         // If the last activity ends before the beginning of the range, an empty list is returned
         // This should happen when the method is called with a beginning that is later than the current moment
-        if (last.getStart() + duration < beginning) {
+        if (last.getStart() + last.getDuration() < beginning) {
             return new ArrayList<>();
         }
         // If the last activity goes partly above the range, the duration is shortened so that the activity ends at the end of the range
-        if (last.getStart() + duration > end) {
-            duration = (int) (end - last.getStart());
+        if (last.getStart() + last.getDuration() > end) {
+            last.setDuration((int) (end - last.getStart()));
         }
 
-        activitiesList.set(activitiesList.size() - 1, new Activity(last.getId(), last.getType(), last.getStart(), duration));
+        activitiesList.set(activitiesList.size() - 1, last);
 
         Activity first = activitiesList.get(0);
 

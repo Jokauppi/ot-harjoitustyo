@@ -3,26 +3,36 @@ package productivetime.dao;
 import productivetime.domain.Activity;
 
 import java.sql.*;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityDao implements Dao<Activity> {
+/**
+ * Class offers various methods to store activities into an SQLite database and list the stored activities.
+ *
+ * @see Activity
+ */
+public class SQLActivityDao implements Dao<Activity> {
 
     private final String dbName;
     private Connection connection;
     private PreparedStatement stmt;
     private Statement s;
 
-    public ActivityDao(String dbName) throws SQLException {
+    /**
+     * Creates new database and initializes the database table to be used.
+     *
+     * @param dbName Name of database to be used
+     * @throws SQLException if database table creation is unsuccessful.
+     */
+    public SQLActivityDao(String dbName) throws SQLException {
         this.dbName = dbName;
         initializeDB();
     }
 
-    public void initializeDB() throws SQLException {
+    private void initializeDB() throws SQLException {
         startConnection();
         s.execute("CREATE TABLE IF NOT EXISTS Activities (id INTEGER PRIMARY KEY, type TEXT NOT NULL, start INTEGER, duration INTEGER);");
         closeConnection();
@@ -38,6 +48,12 @@ public class ActivityDao implements Dao<Activity> {
         connection.close();
     }
 
+    /**
+     * Inserts a new activity into the database.
+     * @param activity Activity to be added
+     * @param start Start time associated with the activity in seconds since Unix epoch
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public void create(Activity activity, long start) throws SQLException {
         startConnection();
@@ -49,6 +65,13 @@ public class ActivityDao implements Dao<Activity> {
         closeConnection();
     }
 
+    /**
+     * Gives an activity with the corresponding key.
+     *
+     * @param key key to be searched for
+     * @return activity associated with the given key, null if no such activity exists.
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public Activity read(Integer key) throws SQLException {
         startConnection();
@@ -71,6 +94,12 @@ public class ActivityDao implements Dao<Activity> {
         }
     }
 
+    /**
+     * Gives latest activity in the database.
+     *
+     * @return the newest activity in the database, null if database is empty
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public Activity readLast() throws SQLException {
         startConnection();
@@ -89,6 +118,13 @@ public class ActivityDao implements Dao<Activity> {
         }
     }
 
+    /**
+     * Assigns a duration to the given activity.
+     * @param activity The activity to be updated.
+     * @param end The end time that is used to calculate the duration in seconds since Unix epoch
+     * @return the updated activity.
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public Activity update(Activity activity, long end) throws SQLException {
 
@@ -108,6 +144,14 @@ public class ActivityDao implements Dao<Activity> {
         return newActivity;
     }
 
+    /**
+     * Changes the type of an activity in the database.
+     *
+     * @param activity Activity to be changed.
+     * @param newType New type to be given to the activity
+     * @return the updated activity.
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public Activity retype(Activity activity, String newType) throws SQLException {
 
@@ -127,6 +171,12 @@ public class ActivityDao implements Dao<Activity> {
         return newActivity;
     }
 
+    /**
+     * Deletes the activity associated with the given key.
+     *
+     * @param key Key of the activity to be deleted.
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public void delete(Integer key) throws SQLException {
         startConnection();
@@ -137,21 +187,25 @@ public class ActivityDao implements Dao<Activity> {
         closeConnection();
     }
 
+    /**
+     * Deletes the latest activity in the database.
+     *
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
-    public boolean deleteLast() throws SQLException {
+    public void deleteLast() throws SQLException {
         Activity lastItem = readLast();
-        startConnection();
         if (lastItem != null) {
-            stmt = connection.prepareStatement("DELETE FROM Activities WHERE id = ?;");
-            stmt.setInt(1, lastItem.getId());
-            stmt.executeUpdate();
-            stmt.close();
-            return true;
+            delete(lastItem.getId());
         }
-        closeConnection();
-        return false;
     }
 
+    /**
+     * Gives a list of all activities stored in the database.
+     *
+     * @return list of activities
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public List<Activity> list() throws SQLException {
         startConnection();
@@ -161,6 +215,14 @@ public class ActivityDao implements Dao<Activity> {
         return activityList;
     }
 
+    /**
+     * Gives a list of activities stored in the database that are entirely or partly in the given time frame.
+     * Also ongoing activities that have started before the end of the given time frame are included.
+     * @param beginning Start of the time frame in seconds since Unix epoch.
+     * @param end Start of the time frame in seconds since Unix epoch.
+     * @return list of activities
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
     @Override
     public List<Activity> list(long beginning, long end) throws SQLException {
         startConnection();
@@ -192,6 +254,10 @@ public class ActivityDao implements Dao<Activity> {
         return activityList;
     }
 
+    /**
+     * Clears the database and initializes the needed tables again.
+     * @throws SQLException
+     */
     @Override
     public void clear() throws SQLException {
         startConnection();

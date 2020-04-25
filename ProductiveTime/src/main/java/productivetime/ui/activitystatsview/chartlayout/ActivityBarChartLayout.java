@@ -1,7 +1,7 @@
 package productivetime.ui.activitystatsview.chartlayout;
 
 import javafx.scene.layout.BorderPane;
-import productivetime.domain.ActivityListControl;
+import productivetime.domain.ActivityListService;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
 import productivetime.ui.activitystatsview.selector.ChartType;
@@ -12,13 +12,13 @@ public class ActivityBarChartLayout implements UIElement<BorderPane> {
 
     private BorderPane chartLayout;
 
-    public ActivityBarChartLayout(ActivityListControl activityListControl) {
+    public ActivityBarChartLayout(ActivityListService activityListService) {
 
         chartLayout = new BorderPane();
 
-        DaySelector daySelector = new DaySelector(chartLayout, activityListControl, ChartType.BAR);
+        DaySelector daySelector = new DaySelector(chartLayout, activityListService, ChartType.BAR);
 
-        daySelector.setView(new ActivityBarChart(activityListControl, TimeService.nowZoned()).getLayout());
+        daySelector.setView(new ActivityBarChart(activityListService, TimeService.nowZoned()).getLayout());
 
         chartLayout.setBottom(daySelector.getLayout());
 

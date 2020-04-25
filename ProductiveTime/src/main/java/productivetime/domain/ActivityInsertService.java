@@ -1,18 +1,13 @@
 package productivetime.domain;
 
-import productivetime.dao.ActivityDao;
+import productivetime.dao.SQLActivityDao;
 import java.sql.SQLException;
 
-public class ActivityInsertControl {
-    private ActivityDao activityDB;
+public class ActivityInsertService {
+    private SQLActivityDao activityDB;
 
-    public ActivityInsertControl(ActivityDao activityDB) {
-        try {
-            this.activityDB = activityDB;
-            this.activityDB.initializeDB();
-        } catch (SQLException e) {
-            System.out.println("database creation unsuccessful");
-        }
+    public ActivityInsertService(SQLActivityDao activityDB) {
+        this.activityDB = activityDB;
     }
 
     public void addActivity(String type) {

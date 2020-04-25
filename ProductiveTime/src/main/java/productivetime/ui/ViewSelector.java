@@ -4,11 +4,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import productivetime.domain.ActivityInsertControl;
-import productivetime.domain.ActivityListControl;
+import productivetime.domain.ActivityInsertService;
+import productivetime.domain.ActivityListService;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
 import productivetime.ui.activitylistview.ActivityListLayout;
 import productivetime.ui.activitystatsview.ActivityStatsLayout;
@@ -22,14 +21,14 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
     private HBox viewSelector;
     private BorderPane mainLayout;
-    private ActivityInsertControl activityInsertControl;
-    private ActivityListControl activityListControl;
+    private ActivityInsertService activityInsertService;
+    private ActivityListService activityListService;
 
-    public ViewSelector(BorderPane mainLayout, ActivityInsertControl activityInsertControl, ActivityListControl activityListControl) {
+    public ViewSelector(BorderPane mainLayout, ActivityInsertService activityInsertService, ActivityListService activityListService) {
 
         this.mainLayout = mainLayout;
-        this.activityInsertControl = activityInsertControl;
-        this.activityListControl = activityListControl;
+        this.activityInsertService = activityInsertService;
+        this.activityListService = activityListService;
 
         viewSelector = new HBox();
 
@@ -40,16 +39,16 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
         viewSelector.getChildren().addAll(createButtons());
 
-        setView(new ActivityInsertionLayout(activityInsertControl).getLayout());
+        setView(new ActivityInsertionLayout(activityInsertService).getLayout());
     }
 
     private List<Button> createButtons() {
         Button activityButton = createButton("Activities");
-        activityButton.setOnAction(actionEvent -> setView(new ActivityListLayout(activityListControl, activityInsertControl).getLayout()));
+        activityButton.setOnAction(actionEvent -> setView(new ActivityListLayout(activityListService, activityInsertService).getLayout()));
         Button homeButton = createButton("Home");
-        homeButton.setOnAction(actionEvent -> setView(new ActivityInsertionLayout(activityInsertControl).getLayout()));
+        homeButton.setOnAction(actionEvent -> setView(new ActivityInsertionLayout(activityInsertService).getLayout()));
         Button statsButton = createButton("Statistics");
-        statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListControl).getLayout()));
+        statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListService).getLayout()));
         Button settingsButton = createButton("Settings");
         settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout().getLayout()));
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton, settingsButton));

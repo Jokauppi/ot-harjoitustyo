@@ -5,7 +5,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import productivetime.domain.Activity;
-import productivetime.domain.ActivityListControl;
+import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
 
 import java.time.ZonedDateTime;
@@ -16,9 +16,9 @@ public class ActivityBarChart implements UIElement<StackedBarChart<Number, Strin
 
     private StackedBarChart<Number, String> chart;
 
-    public ActivityBarChart(ActivityListControl activityListControl, ZonedDateTime date) {
+    public ActivityBarChart(ActivityListService activityListService, ZonedDateTime date) {
 
-        List<Activity> activityToday = activityListControl.getActivitiesOnDayOf(date);
+        List<Activity> activityToday = activityListService.getActivitiesOnDayOf(date);
 
         if (!activityToday.isEmpty()) {
 

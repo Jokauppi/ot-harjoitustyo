@@ -11,21 +11,21 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import productivetime.domain.ActivityListControl;
+import productivetime.domain.ActivityListService;
 import productivetime.domain.TimeService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
 public class DaySelector implements UISelectorElement<HBox> {
 
-    private ActivityListControl activityListControl;
+    private ActivityListService activityListService;
     private BorderPane chartLayout;
     private HBox daySelector;
     private ChartType type;
 
-    public DaySelector(BorderPane chartLayout, ActivityListControl activityListControl, ChartType type) {
+    public DaySelector(BorderPane chartLayout, ActivityListService activityListService, ChartType type) {
 
-        this.activityListControl = activityListControl;
+        this.activityListService = activityListService;
         this.chartLayout = chartLayout;
         this.type = type;
 
@@ -49,14 +49,14 @@ public class DaySelector implements UISelectorElement<HBox> {
         daySelect.setShowWeekNumbers(false);
 
         daySelect.setOnAction(actionEvent ->
-                setView(new ActivityBarChart(activityListControl, TimeService.zonedOfLocalDate(daySelect.getValue())).getLayout()));
+                setView(new ActivityBarChart(activityListService, TimeService.zonedOfLocalDate(daySelect.getValue())).getLayout()));
 
         daySelector.getChildren().add(daySelect);
 
         Button todayButton = new Button("Today");
 
         todayButton.setOnAction(actionEvent ->
-                setView(new ActivityBarChart(activityListControl, TimeService.nowZoned()).getLayout()));
+                setView(new ActivityBarChart(activityListService, TimeService.nowZoned()).getLayout()));
 
         daySelector.getChildren().add(todayButton);
     }

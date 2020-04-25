@@ -5,7 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import productivetime.domain.Activity;
-import productivetime.domain.ActivityInsertControl;
+import productivetime.domain.ActivityInsertService;
 import productivetime.ui.ListBox;
 import productivetime.ui.UIElement;
 
@@ -14,13 +14,13 @@ import java.sql.SQLException;
 public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
     private Activity activity;
-    private ActivityInsertControl activityInsertControl;
+    private ActivityInsertService activityInsertService;
 
-    public ActivityBox(Activity activity, ActivityInsertControl activityInsertControl) {
+    public ActivityBox(Activity activity, ActivityInsertService activityInsertService) {
 
         super();
 
-        this.activityInsertControl = activityInsertControl;
+        this.activityInsertService = activityInsertService;
         this.activity = activity;
 
         setTypeLabel();
@@ -60,7 +60,7 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
         renameField.setOnAction(actionEvent -> {
             try {
-                activity = activityInsertControl.retypeActivity(activity, renameField.getText());
+                activity = activityInsertService.retypeActivity(activity, renameField.getText());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
