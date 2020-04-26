@@ -3,21 +3,31 @@ package productivetime.domain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import productivetime.dao.SQLActivityDao;
-
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Offers methods to get different lists of activities from the given database object.
+ */
 public class ActivityListService {
 
     private SQLActivityDao activityDB;
 
+    /**
+     * Sets the database object to be used by other methods.
+     * @param activityDB the database object.
+     */
     public ActivityListService(SQLActivityDao activityDB) {
         this.activityDB = activityDB;
     }
 
+    /**
+     * Gets a list of all activities ordered from oldest to newest.
+     * @return a list of activities
+     */
     public List<Activity> getActivities() {
         List<Activity> activitiesList = new ArrayList<>();
         try {
@@ -28,18 +38,35 @@ public class ActivityListService {
         return activitiesList;
     }
 
+    /**
+     * Gets a list of all activities ordered from newest to oldest.
+     * @return a list of activities
+     */
     public List<Activity> getActivitiesReversed() {
         List<Activity> activitiesList = getActivities();
         Collections.sort(activitiesList);
         return activitiesList;
     }
 
+    /**
+     * Gets an ObservableList of all activities ordered from newest to oldest
+     * @return an ObservableList of activities
+     * @see ObservableList
+     */
     public ObservableList<Activity> getActivitiesObservable() {
         ObservableList<Activity> activitiesOList = FXCollections.observableArrayList();
         activitiesOList.addAll(getActivitiesReversed());
         return activitiesOList;
     }
 
+    /**
+     * Gets a list activities that occurred on the specified date. Activities that took place partly on an another day
+     * are truncated to include only the portion that took place on the specified date. Possible ongoing activities are
+     * included and their duration is calculated to the current time of the end of the day, whichever is earlier.
+     * @param date of activities to get as ZonedDateTime
+     * @see ZonedDateTime
+     * @return a list of activities
+     */
     public List<Activity> getActivitiesOnDayOf(ZonedDateTime date) {
         List<Activity> activitiesList = new ArrayList<>();
 
