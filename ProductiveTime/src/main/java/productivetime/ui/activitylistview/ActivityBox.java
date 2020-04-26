@@ -9,8 +9,6 @@ import productivetime.domain.ActivityInsertService;
 import productivetime.ui.ListBox;
 import productivetime.ui.UIElement;
 
-import java.sql.SQLException;
-
 public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
     private Activity activity;
@@ -41,9 +39,7 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
         Label typeLabel = new Label(activity.getType());
 
-        typeLabel.setOnMouseClicked(mouseEvent -> {
-            setTypeField();
-        });
+        typeLabel.setOnMouseClicked(mouseEvent -> setTypeField());
 
         box.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
 

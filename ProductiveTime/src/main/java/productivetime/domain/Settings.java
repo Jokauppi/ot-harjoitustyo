@@ -1,7 +1,6 @@
 package productivetime.domain;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.ZoneId;
@@ -11,12 +10,17 @@ public class Settings {
 
     private static Settings settings = null;
     private static Properties properties;
-    private static String propertiesFile = "config.properties";
+    private static final String propertiesFile = "config.properties";
 
     private Settings() {
 
         properties = new Properties();
-        properties.setProperty("timezone", "Europe/Helsinki");
+        try {
+            loadProperties();
+        } catch (IOException ioException) {
+            setDefaults();
+            storeProperties();
+        }
 
     }
 
@@ -30,33 +34,31 @@ public class Settings {
         }
     }
 
-    private static void loadProperties() {
+    private static void setDefaults() {
+        properties.setProperty("timezone", "Europe/Helsinki");
+    }
 
-        properties = new Properties();
+    private static void loadProperties() throws IOException {
 
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        String propPath = rootPath + propertiesFile;
+        String propPath = propertiesFile;
 
+        System.out.println("Load");
         System.out.println(propPath);
 
-        try {
-            FileInputStream inputStream = new FileInputStream(propPath);
-            properties.load(inputStream);
-        } catch (FileNotFoundException e) {
-            storeProperties();
-            loadProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileInputStream inputStream = new FileInputStream(propPath);
+        properties.load(inputStream);
     }
 
     private static void storeProperties() {
-        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        String propPath = rootPath + propertiesFile;
+
+        String propPath = propertiesFile;
+
+        System.out.println("Store");
+        System.out.println(propPath);
 
         try {
             FileOutputStream outputStream = new FileOutputStream(propPath, false);
-            properties.store(outputStream, "");
+            properties.store(outputStream, "ProductiveTime configuration");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,7 +76,6 @@ public class Settings {
     }
 
     public static ZoneId getTimeZone() {
-        initSettings();
-        return ZoneId.of(properties.getProperty("timezone"));
+        return ZoneId.of(getSetting("timezone"));
     }
 }
