@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import productivetime.dao.SQLActivityDao;
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
+import productivetime.domain.Settings;
 
 import java.sql.SQLException;
 
@@ -22,7 +23,7 @@ public class MainView extends Application {
     public void init() {
 
         try {
-            SQLActivityDao activityDB = new SQLActivityDao("activity.db");
+            SQLActivityDao activityDB = new SQLActivityDao(Settings.getSetting("appdata") + Settings.getSetting("dbname"));
             this.activityInsertService = new ActivityInsertService(activityDB);
             this.activityListService = new ActivityListService(activityDB);
             dBCreationSuccessful = true;

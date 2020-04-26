@@ -1,4 +1,4 @@
-package productivetime;
+package productivetime.main;
 
 import productivetime.ui.MainView;
 

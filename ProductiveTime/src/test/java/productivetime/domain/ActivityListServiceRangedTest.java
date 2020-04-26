@@ -12,7 +12,7 @@ public class ActivityListServiceRangedTest {
 
     private static SQLActivityDao SQLActivityDao;
     private static ActivityListService activityListService;
-    private static final ZonedDateTime time = ZonedDateTime.of(2000, 2, 2, 21, 30, 0, 0, Settings.getTimeZone());
+    private static final ZonedDateTime time = ZonedDateTime.of(2000, 2, 2, 21, 30, 0, 0, TimeService.getTimeZone());
 
     @BeforeClass
     public static void beforeClass() throws Exception {

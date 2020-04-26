@@ -10,6 +10,11 @@ public class TimeService {
         timeZone = ZoneId.of(Settings.getSetting("timezone"));
     }
 
+    public static ZoneId getTimeZone() {
+        updateTimeZone();
+        return timeZone;
+    }
+
     public static long nowSeconds() {
         return Instant.now().getEpochSecond();
     }

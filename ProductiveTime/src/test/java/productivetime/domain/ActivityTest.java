@@ -56,7 +56,7 @@ public class ActivityTest {
     // Method with no parameters should always return the formatted string relative to the current date
     @Test
     public void getDateNoParameters() {
-        ZonedDateTime day = ZonedDateTime.now(Settings.getTimeZone());
+        ZonedDateTime day = TimeService.nowZoned();
         Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
         String expected = String.format("%02d:%02d", day.getHour(), day.getMinute());
         assertEquals(expected, activity.getStartFormatted());
@@ -65,7 +65,7 @@ public class ActivityTest {
     // Tests the returned string when the activity has been started on the same day as the method is called
     @Test
     public void getDateSameYearSameDay() {
-        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), Settings.getTimeZone());
+        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), TimeService.getTimeZone());
         Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
         assertEquals("02:02", activity.getStartFormatted(day));
     }
@@ -73,7 +73,7 @@ public class ActivityTest {
     // Tests the returned string when the activity has been started on the same year as the method is called but on a different date
     @Test
     public void getDateSameYearDifferentDay() {
-        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), Settings.getTimeZone());
+        ZonedDateTime day = ZonedDateTime.of(LocalDateTime.of(2000, 2, 2, 2, 2), TimeService.getTimeZone());
         Activity activity = new Activity(1, "test", day.toEpochSecond(), 120);
         assertEquals("02 Feb 02:02", activity.getStartFormatted(day.plusDays(1)));
     }

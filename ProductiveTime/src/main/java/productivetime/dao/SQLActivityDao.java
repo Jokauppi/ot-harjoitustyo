@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class SQLActivityDao implements Dao<Activity> {
 
-    private final String dbName;
+    private final String dbURL;
     private Connection connection;
     private PreparedStatement stmt;
     private Statement s;
@@ -24,11 +24,11 @@ public class SQLActivityDao implements Dao<Activity> {
     /**
      * Creates new database and initializes the database table to be used.
      *
-     * @param dbName Name of database to be used
+     * @param dbURL Name of database to be used
      * @throws SQLException if database table creation is unsuccessful.
      */
-    public SQLActivityDao(String dbName) throws SQLException {
-        this.dbName = dbName;
+    public SQLActivityDao(String dbURL) throws SQLException {
+        this.dbURL = dbURL;
         initializeDB();
     }
 
@@ -39,7 +39,7 @@ public class SQLActivityDao implements Dao<Activity> {
     }
 
     private void startConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);
+        connection = DriverManager.getConnection("jdbc:sqlite:" + dbURL);
         s = connection.createStatement();
     }
 
