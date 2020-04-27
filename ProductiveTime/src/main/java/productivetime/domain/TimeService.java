@@ -1,6 +1,7 @@
 package productivetime.domain;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class TimeService {
 
@@ -37,5 +38,12 @@ public class TimeService {
     public static ZonedDateTime startOfZoned(ZonedDateTime dateTime) {
         updateTimeZone();
         return dateTime.toLocalDate().atStartOfDay(timeZone);
+    }
+
+    public static String formatZoned(ZonedDateTime dateTime, String format) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+        return dateTime.format(formatter);
     }
 }

@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import productivetime.dao.SQLActivityDao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -23,6 +24,8 @@ public class ActivityListServiceTest {
         SQLActivityDao.create(new Activity("activity 1"), 100);
         SQLActivityDao.update(SQLActivityDao.readLast(), 200);
         SQLActivityDao.create(new Activity("activity 2"), 200);
+        SQLActivityDao.update(SQLActivityDao.readLast(), 300);
+        SQLActivityDao.create(new Activity("activity 2"), 300);
     }
 
     @AfterClass
@@ -39,7 +42,7 @@ public class ActivityListServiceTest {
     @Test
     public void getActivityListReversed() {
         List<Activity> activities = activityListService.getActivitiesReversed();
-        assertEquals(new Activity("activity 1"), activities.get(1));
+        assertEquals(new Activity("activity 1"), activities.get(2));
     }
 
     @Test
@@ -48,4 +51,16 @@ public class ActivityListServiceTest {
         assertEquals(new Activity("activity 2"), activities.get(0));
     }
 
+    @Test
+    public void getAllTypes() throws SQLException {
+        List<String> allTypes = activityListService.getAllTypes();
+        assertEquals("activity 1", allTypes.get(1));
+    }
+
+    @Test
+    public void getFrequentTypes() throws SQLException {
+        List<String> frequentTypes = activityListService.getFrequentTypes(1);
+        assertEquals("activity 2", frequentTypes.get(0));
+        assertEquals(1, frequentTypes.size());
+    }
 }

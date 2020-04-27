@@ -242,6 +242,23 @@ public class SQLActivityDao implements Dao<Activity> {
         return activityList;
     }
 
+    /**
+     * Gives a list of types of the stored activities, ordered from the most frequent type to the least frequent.
+     * @return a list of types.
+     * @throws SQLException if for example table doesn't exist or database is locked.
+     */
+    @Override
+    public List<String> listTypes() throws SQLException {
+        startConnection();
+        ResultSet types = s.executeQuery("SELECT type FROM Activities GROUP BY type ORDER BY COUNT(*) DESC");
+        ArrayList<String> typesList = new ArrayList<>();
+        while (types.next()) {
+            typesList.add(types.getString("type"));
+        }
+        closeConnection();
+        return typesList;
+    }
+
     private List<Activity> listFromResultSet(ResultSet rs) throws SQLException {
         List<Activity> activityList = new ArrayList<>();
         while (rs.next()) {

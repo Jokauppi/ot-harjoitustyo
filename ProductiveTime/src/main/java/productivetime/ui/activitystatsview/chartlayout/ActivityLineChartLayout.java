@@ -1,21 +1,27 @@
 package productivetime.ui.activitystatsview.chartlayout;
 
-import javafx.scene.chart.LineChart;
 import javafx.scene.layout.BorderPane;
+import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
-
-import java.time.ZonedDateTime;
+import productivetime.ui.activitystatsview.selector.ActivitySelector;
 
 public class ActivityLineChartLayout implements UIElement<BorderPane> {
 
-    private LineChart<Number, Number> activityChart;
+    private BorderPane chartLayout;
 
-    public ActivityLineChartLayout(LineChart<Number, Number> activityChart, ZonedDateTime startDate, ZonedDateTime endDate) {
-        this.activityChart = activityChart;
+    public ActivityLineChartLayout(ActivityListService activityListService) {
+
+        chartLayout = new BorderPane();
+
+        ActivitySelector activitySelector = new ActivitySelector(chartLayout, activityListService);
+
+        chartLayout.setBottom(activitySelector.getLayout());
+
+        activitySelector.updateLineChart();
     }
 
     @Override
     public BorderPane getLayout() {
-        return null;
+        return chartLayout;
     }
 }

@@ -16,6 +16,7 @@ public interface Dao<T> {
 
     List<T> list() throws SQLException;
     List<T> list(long beginning, long end) throws SQLException;
+    List<String> listTypes() throws SQLException;
 
     void clear() throws SQLException;
 }

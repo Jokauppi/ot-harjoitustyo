@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +12,7 @@ import javafx.scene.paint.Color;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chartlayout.ActivityBarChartLayout;
+import productivetime.ui.activitystatsview.chartlayout.ActivityLineChartLayout;
 
 public class ChartSelector implements UISelectorElement<HBox> {
 
@@ -48,7 +48,7 @@ public class ChartSelector implements UISelectorElement<HBox> {
         Button button = new Button("Activity view");
 
         button.setOnAction(actionEvent ->
-                setView(new Label("Activity Chart not implemented yet")));
+                setView(new ActivityLineChartLayout(activityListService).getLayout()));
 
         return button;
     }

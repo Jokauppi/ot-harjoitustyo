@@ -104,4 +104,15 @@ public class SQLActivityDaoTest {
         assertEquals(new Activity("activity 2"),activities.get(1));
     }
 
+    @Test
+    public void listTypes() throws SQLException {
+        sqlActivityDao.create(new Activity("activity 1"), 10);
+        sqlActivityDao.update(sqlActivityDao.readLast(), 20);
+        sqlActivityDao.create(new Activity("activity 2"), 20);
+        sqlActivityDao.update(sqlActivityDao.readLast(), 30);
+        sqlActivityDao.create(new Activity("activity 2"), 30);
+        sqlActivityDao.update(sqlActivityDao.readLast(), 40);
+        List<String> types = sqlActivityDao.listTypes();
+        assertEquals("activity 2", types.get(0));
+    }
 }

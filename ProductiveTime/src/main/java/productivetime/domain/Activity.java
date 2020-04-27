@@ -75,18 +75,13 @@ public class Activity implements Comparable<Activity> {
         ZonedDateTime activityDate = TimeService.zonedOfSeconds(this.start);
         if (now.getYear() == activityDate.getYear()) {
             if (now.getDayOfYear() == activityDate.getDayOfYear()) {
-                String datePattern = "HH:mm";
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-                return dateFormatter.format(activityDate);
+                return TimeService.formatZoned(activityDate, "HH:mm");
             } else {
-                String datePattern = "dd LLL HH:mm";
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-                return dateFormatter.format(activityDate);
+                return TimeService.formatZoned(activityDate, "dd LLL HH:mm");
             }
         } else {
-            String datePattern = "dd LLL uuuu HH:mm";
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
-            return dateFormatter.format(activityDate);
+            return TimeService.formatZoned(activityDate, "dd LLL uuuu HH:mm");
+
         }
     }
 

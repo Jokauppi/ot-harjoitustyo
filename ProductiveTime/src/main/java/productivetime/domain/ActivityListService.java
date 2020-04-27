@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import productivetime.dao.SQLActivityDao;
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Offers methods to get different lists of activities from the given database object.
@@ -106,11 +104,11 @@ public class ActivityListService {
 
         // If the last activity ends before the beginning of the range, an empty list is returned
         // This should happen when the method is called with a beginning that is later than the current moment
-        if (last.getStart() + last.getDuration() < beginning) {
+        if (last.getEnd() < beginning) {
             return new ArrayList<>();
         }
         // If the last activity goes partly above the range, the duration is shortened so that the activity ends at the end of the range
-        if (last.getStart() + last.getDuration() > end) {
+        if (last.getEnd() > end) {
             last.setDuration((int) (end - last.getStart()));
         }
 
@@ -126,4 +124,103 @@ public class ActivityListService {
         return activitiesList;
     }
 
+    private List<Activity> getActivitiesBetween(ZonedDateTime startDate, ZonedDateTime endDate) {
+        List<Activity> activitiesList = new ArrayList<>();
+
+        long beginning = startDate.toEpochSecond();
+        long end = endDate.toEpochSecond();
+
+        // List of activities partly or entirely in the range is fetched
+        try {
+            activitiesList = activityDB.list(beginning, end);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        // Possible ongoing activity is set a duration
+        if (!activitiesList.isEmpty()) {
+            return truncateFirstAndLastActivity(activitiesList, beginning, end);
+        }
+        return activitiesList;
+    }
+
+    /**
+     * Returns a list of the most frequently used types of activity ordered from most to least frequent.
+     * @return a list of types.
+     */
+    public List<String> getAllTypes() {
+
+        List<String> types;
+
+        try {
+            types = activityDB.listTypes();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return types;
+    }
+
+    /**
+     * Returns the requested amount of most frequently used types of activities ordered from most to least frequent.
+     * @param amount number of types to get.
+     * @return a list of types.
+     */
+    public List<String> getFrequentTypes(int amount) {
+
+        List<String> types = getAllTypes();
+
+        List<String> ntypes = new ArrayList<>();
+
+        for (int i = 0; i < (Math.min(amount, types.size())); i++) {
+            ntypes.add(types.get(i));
+        }
+
+        return ntypes;
+    }
+
+    /**
+     * Returns how many times an activity of a specified type has occurred on days in the specified range.
+     * @param type type of activity to be searched for
+     * @param beginning beginning time of range to be searched
+     * @param end end time of range to be searched
+     * @return a map with keys depicting dates and values depicting amount of activities of the given type on the day of the key.
+     * The key is the start of a date in seconds from Unix epoch.
+     */
+    public Map<Long, Integer> getAmountsOfTypeOnDaysBetween(String type, ZonedDateTime beginning, ZonedDateTime end) {
+        beginning = TimeService.startOfZoned(beginning);
+        end = TimeService.startOfZoned(end);
+        List<Activity> activities = getActivitiesBetween(beginning, end);
+
+        ArrayList<Activity> correctTypes = new ArrayList<>();
+
+        for (Activity activity : activities) {
+            if (activity.getType().equals(type)) {
+                correctTypes.add(activity);
+            }
+        }
+
+        HashMap<Long, Integer> amounts = new HashMap<>();
+
+        if (correctTypes.isEmpty()) return amounts;
+
+        ZonedDateTime date = beginning;
+        int i = 0;
+
+        while (i < correctTypes.size()) {
+            Activity activity = correctTypes.get(i);
+
+            amounts.put(date.toEpochSecond(), amounts.getOrDefault(date.toEpochSecond(), 0) + 1);
+
+            if (date.plusDays(1).toEpochSecond() < activity.getEnd()) {
+                date = date.plusDays(1);
+            } else {
+                i++;
+            }
+
+        }
+
+        return amounts;
+    }
 }

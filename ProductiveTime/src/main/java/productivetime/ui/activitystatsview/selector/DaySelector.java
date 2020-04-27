@@ -21,13 +21,11 @@ public class DaySelector implements UISelectorElement<HBox> {
     private ActivityListService activityListService;
     private BorderPane chartLayout;
     private HBox daySelector;
-    private ChartType type;
 
-    public DaySelector(BorderPane chartLayout, ActivityListService activityListService, ChartType type) {
+    public DaySelector(BorderPane chartLayout, ActivityListService activityListService) {
 
         this.activityListService = activityListService;
         this.chartLayout = chartLayout;
-        this.type = type;
 
         daySelector = new HBox();
 
@@ -36,14 +34,10 @@ public class DaySelector implements UISelectorElement<HBox> {
         daySelector.setPadding(new Insets(20, 20, 20, 20));
         daySelector.setBackground(new Background(new BackgroundFill(Color.rgb(250, 250, 250), null, null)));
 
-        if (type == ChartType.BAR) {
-            singleDaySelector();
-        } else if (type == ChartType.LINE) {
-            dayRangeSelector();
-        }
+        daySelector();
     }
 
-    private void singleDaySelector() {
+    private void daySelector() {
 
         DatePicker daySelect = new DatePicker(TimeService.nowZoned().toLocalDate());
         daySelect.setShowWeekNumbers(false);
@@ -59,10 +53,6 @@ public class DaySelector implements UISelectorElement<HBox> {
                 setView(new ActivityBarChart(activityListService, TimeService.nowZoned()).getLayout()));
 
         daySelector.getChildren().add(todayButton);
-    }
-
-    private void dayRangeSelector() {
-
     }
 
     @Override
