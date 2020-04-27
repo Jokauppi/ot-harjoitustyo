@@ -29,4 +29,7 @@
 |19.4.|Listanäkymän refaktorointia|1,5|
 |19.4.|Asetusnäkymän luonti|2|
 |20.4.|Parin bugin korjaaminen|0|
+|24.4|Javadocin kirjoittaminen|2|
+|25.4|Javadocin kirjoittaminen|3|
+|26.4|Konfiguraatioluokan toteuttaminen|4|
 | |**Yhteensä**|72|
