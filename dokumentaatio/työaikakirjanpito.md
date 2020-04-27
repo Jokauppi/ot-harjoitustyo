@@ -32,4 +32,4 @@
 |24.4|Javadocin kirjoittaminen|2|
 |25.4|Javadocin kirjoittaminen|3|
 |26.4|Konfiguraatioluokan toteuttaminen|4|
-| |**Yhteensä**|72|
+| |**Yhteensä**|81|
