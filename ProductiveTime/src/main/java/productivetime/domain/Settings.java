@@ -3,6 +3,9 @@ package productivetime.domain;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Class offers static methods to get to get configuration variables and set new values to them.
+ */
 public class Settings {
 
     private static Settings singleton = null;
@@ -70,11 +73,23 @@ public class Settings {
         }
     }
 
+    /**
+     * Gets the specified setting from the applications configuration files. If no configuration files are found, the
+     * needed files are created and populated first with default values.
+     * @param key name of setting to get.
+     * @return the string value associated with the key
+     */
     public static String getSetting(String key) {
         initSettings();
         return properties.getProperty(key);
     }
 
+    /**
+     * Sets a new value for the specified setting and stores it to the applications configuration files. If no configuration files are found, the
+     * needed files are created and populated first with default values.
+     * @param key name of setting to set.
+     * @param property new value for the specified setting.
+     */
     public static void setSetting(String key, String property) {
         initSettings();
         properties.setProperty(key, property);

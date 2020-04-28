@@ -13,10 +13,7 @@ import productivetime.domain.ActivityListService;
 import productivetime.domain.TimeService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chart.ActivityLineChart;
-
 import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ActivitySelector implements UISelectorElement<HBox> {
