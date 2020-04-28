@@ -6,7 +6,7 @@ Ohjelman rakenne noudattaa kerrosarkkitehtuuria, joka sisältää käyttöliitty
 pakkauksen *productivetime.ui*, sovelluslogiikasta vastaavan pakkauksen *productivetime.domain*, ja
 aktiviteettien tallennuksesta vastaavan pakkauksen *productivetime.dao*
 
-![Pakettikaavio](/Images/PackageDiagram.png)
+![Pakettikaavio](/Images/Architecture/PackageDiagram.png)
 
 ## Sovelluksen toiminta
 
@@ -31,7 +31,7 @@ Näkymät asetetaan BorderPaneen siihen myös asetetun valitsimen avulla, joka r
 
 Sovellus pääasiallisesti käsittelee aktiviteetteja Activity-tyyppisinä olioina.
 
-![Activity](/Images/Activity.png)
+![Activity](/Images/Architecture/Activity.png)
 
 Olioiden käsittelystä vastaavat ActivityInsertService ja ActivityListService. Sovelluslogiikan kannalta olennaisimpia metodeita ovat addActivity() ja getActivities(). Sovelluksen useiden näkymien johdosta sovelluslogiikassa on useita erilaisia listausmetodeita. Sovelluslogiikka tallentaa ja listaa aktiviteetteja SQLActivityDao-luokan avulla SQLite-tietokantaan.
 
@@ -39,14 +39,14 @@ Olioiden käsittelystä vastaavat ActivityInsertService ja ActivityListService. 
 
 Aktiviteetin lisäystä kuvaa seuraava sekvenssikaavio:
 
-![Aktiviteetin lisääminen](/Images/ActivityInsertion.png)
+![Aktiviteetin lisääminen](/Images/Architecture/ActivityInsertion.png)
 
 ### Luokkarakenne
 
 Sovelluksen keskeinen luokkarakenne ilmenee seuraavasta kaaviosta. Sovelluksen UI-pakkauksesta on sisällytetty kaavioon vain
 näkymänvaihdin *ViewSelector* ja keskeiset näkymät *ActivityInsertionLayout* ja *ActivityListLayout*.
 
-![Luokkakaavio](/Images/ClassDiagram.png)
+![Luokkakaavio](/Images/Architecture/ClassDiagram.png)
 
 ## Tiedon tallennus
 
