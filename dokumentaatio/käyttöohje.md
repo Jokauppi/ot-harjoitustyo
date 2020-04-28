@@ -12,24 +12,24 @@ Sovelluksen alalaidassa on valintanauha, jonka avulla voidaan vaihtaa sovellukse
 
 ## Aloitusnäkymä
 
-![HomeView](Images/UserManual/Home.png)
+![HomeView](/Images/UserManual/Home.png)
 
 Aloitusnäkymässä voidaan aloittaa uuden aktiviteetin aikaseuranta kirjoittamalla tekstikenttään aktiviteetin tyyppi ja klikkaamalla Add tai painamalla Enter. 
 
 ## Aktiviteettien listanäkymä
 
-![ListView](Images/UserManual/List.png)
+![ListView](/Images/UserManual/List.png)
 
 Aktiviteettien listanäkymässä voit tarkastella kaikkia kirjattuja aktiviteetteja. Jokaisella aktiviteetilla on oma palkkinsa ja ne on järjestetty uusimmasta vanhimpaan. Palkkiin on merkitty aktiviteetin tyyppi, sen aloitusaika ja kesto. Aktiviteetin tyyppiä klikkaamalla voit muuttaa aktiviteetin mimeä jälkikäteen.
 
 ## Aktiviteettien diagramminäkymä
 
-![StatsView](Images/UserManual/Stats.png)
+![StatsView](/Images/UserManual/Stats.png)
 
 Diagramminäkymässä voidaan tarkastella diagrammien avulla yksittäisten päivien aktiviteetteja tai tietyn tyyppisiin aktiviteetteihin käytettyä aikaa halutulla aikavälillä. Diagramminäkymää ja päivämääriä voidaan muuttaa niille tarkotetuista valintanuhoista. 
 
 ## Asetusnäkymä
 
-![SettingsView](Images/UserManual/Settings.png)
+![SettingsView](/Images/UserManual/Settings.png)
 
 Asetusnäkymässä voidaan muuttaa asetuspalkkien näyttämiä asetuksia. Asetukset tallentuvat automaattisesti niitä muutettaessa.
