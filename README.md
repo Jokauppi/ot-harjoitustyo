@@ -12,9 +12,11 @@ Viikko 6: [Toinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
-[Työaikakirjanpito](dokumentaatio/työaikakirjanpito.md)
+[Käyttöhjeet](dokumentaatio/käyttöohje.md)
 
 [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
+
+[Työaikakirjanpito](dokumentaatio/työaikakirjanpito.md)
 
 ## Komentorivin toiminnot
 
