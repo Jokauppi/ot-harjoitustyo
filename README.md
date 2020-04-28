@@ -2,6 +2,10 @@
 
 Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön kansiossa [**ProductiveTime**](ProductiveTime) ja laskaritehtävät kansiossa [**laskarit**](laskarit).
 
+## ProductiveTime
+
+⌛ ProductiveTime on ajanhallintaan avuksi tarkoitettu aktiviteettien aikaseurantasovellus eli ns. "time tracker".
+
 ## Releaset
 
 Viikko 5: [Ensimmäinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/tag/v0.9-beta)
