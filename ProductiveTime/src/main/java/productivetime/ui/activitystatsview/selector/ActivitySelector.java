@@ -80,7 +80,7 @@ public class ActivitySelector implements UISelectorElement<HBox> {
             ZonedDateTime start = TimeService.zonedOfLocalDate(startDatePicker.getValue());
             ZonedDateTime end = TimeService.zonedOfLocalDate(endDatePicker.getValue().plusDays(1));
             setView(new ActivityLineChart(activityListService,
-                    activitySelector.getValue(),start,end).getLayout());
+                    activitySelector.getValue(), start, end).getLayout());
         }
     }
 

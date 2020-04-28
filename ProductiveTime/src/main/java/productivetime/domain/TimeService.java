@@ -7,7 +7,7 @@ public class TimeService {
 
     private static ZoneId timeZone;
 
-    private static void updateTimeZone(){
+    private static void updateTimeZone() {
         timeZone = ZoneId.of(Settings.getSetting("timezone"));
     }
 

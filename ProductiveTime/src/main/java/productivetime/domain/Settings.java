@@ -7,7 +7,7 @@ public class Settings {
 
     private static Settings singleton = null;
     private static Properties properties;
-    private static final String propPath = ".ProductiveTime/config.properties";
+    private static final String PROP_PATH = ".ProductiveTime/config.properties";
 
     private Settings() {
 
@@ -53,14 +53,14 @@ public class Settings {
 
     private static void loadProperties() throws IOException {
 
-        FileInputStream inputStream = new FileInputStream(propPath);
+        FileInputStream inputStream = new FileInputStream(PROP_PATH);
         properties.load(inputStream);
     }
 
     private static void storeProperties() {
 
         try {
-            File f = new File(propPath);
+            File f = new File(PROP_PATH);
             f.getParentFile().mkdirs();
             f.createNewFile();
             FileOutputStream outputStream = new FileOutputStream(f, false);

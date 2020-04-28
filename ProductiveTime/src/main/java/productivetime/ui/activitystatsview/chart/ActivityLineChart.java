@@ -34,7 +34,7 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
         xAxis.setAutoRanging(false);
         xAxis.setLowerBound(start.toEpochSecond());
         xAxis.setUpperBound(end.toEpochSecond());
-        xAxis.setTickUnit(60*60*24);
+        xAxis.setTickUnit(60 * 60 * 24);
         xAxis.setTickLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Number number) {
@@ -56,10 +56,10 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
         yAxis.setTickLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Number number) {
-                if (number.intValue() < 60*60) {
-                    return number.intValue()/60 + " min";
+                if (number.intValue() < 60 * 60) {
+                    return number.intValue() / 60 + " min";
                 } else {
-                    return number.intValue()/60/60 + " h " + number.intValue()/60 % 60 + " min";
+                    return number.intValue() / 60 / 60 + " h " + number.intValue() / 60 % 60 + " min";
                 }
             }
 
