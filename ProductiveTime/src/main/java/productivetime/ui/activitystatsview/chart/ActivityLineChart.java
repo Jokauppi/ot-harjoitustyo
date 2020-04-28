@@ -7,7 +7,6 @@ import javafx.util.StringConverter;
 import productivetime.domain.ActivityListService;
 import productivetime.domain.TimeService;
 import productivetime.ui.UIElement;
-
 import java.time.ZonedDateTime;
 import java.util.Map;
 
@@ -20,12 +19,26 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
 
         this.activityListService = activityListService;
 
+        NumberAxis xAxis = getDayAxis(start, end);
+        NumberAxis yAxis = getDurationAxis();
+
+        activitychart = new LineChart<>(xAxis, yAxis);
+        activitychart.setLegendVisible(false);
+
+        activitychart.getData().add(getData(type, start, end));
+    }
+
+    private NumberAxis getDayAxis(ZonedDateTime start, ZonedDateTime end) {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Date");
-        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+        xAxis.setAutoRanging(false);
+        xAxis.setLowerBound(start.toEpochSecond());
+        xAxis.setUpperBound(end.toEpochSecond());
+        xAxis.setTickUnit(60*60*24);
+        xAxis.setTickLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Number number) {
-                return TimeService.formatZoned(TimeService.zonedOfSeconds( number.longValue()), "dd LLL");
+                return TimeService.formatZoned(TimeService.zonedOfSeconds(number.longValue()), "dd LLL");
             }
 
             @Override
@@ -34,23 +47,40 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
             }
         });
 
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount of activity");
-
-        activitychart = new LineChart<>(xAxis, yAxis);
-
-        activitychart.getData().addAll(getData(type, start, end));
+        return xAxis;
     }
 
-    public XYChart.Series getData(String type, ZonedDateTime start, ZonedDateTime end) {
+    private NumberAxis getDurationAxis() {
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Duration");
+        yAxis.setTickLabelFormatter(new StringConverter<>() {
+            @Override
+            public String toString(Number number) {
+                if (number.intValue() < 60*60) {
+                    return number.intValue()/60 + " min";
+                } else {
+                    return number.intValue()/60/60 + " h " + number.intValue()/60 % 60 + " min";
+                }
+            }
 
-        Map<Long, Integer> amounts = activityListService.getAmountsOfTypeOnDaysBetween(type, start, end);
+            @Override
+            public Number fromString(String s) {
+                return null;
+            }
+        });
 
-        XYChart.Series<Long, Integer> amountSeries = new XYChart.Series<>();
+        return yAxis;
+    }
+
+    private XYChart.Series<Number, Number> getData(String type, ZonedDateTime start, ZonedDateTime end) {
+
+        Map<Long, Integer> durations = activityListService.getDurationsOfTypeOnDaysBetween(type, start, end);
+
+        XYChart.Series<Number, Number> amountSeries = new XYChart.Series<>();
         amountSeries.setName("type");
 
-        for (long date : amounts.keySet()) {
-            amountSeries.getData().add(new XYChart.Data<>(date, amounts.get(date)));
+        for (long date : durations.keySet()) {
+            amountSeries.getData().add(new XYChart.Data<>(date, durations.get(date)));
         }
 
         return amountSeries;

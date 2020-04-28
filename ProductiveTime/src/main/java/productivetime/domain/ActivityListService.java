@@ -124,26 +124,6 @@ public class ActivityListService {
         return activitiesList;
     }
 
-    private List<Activity> getActivitiesBetween(ZonedDateTime startDate, ZonedDateTime endDate) {
-        List<Activity> activitiesList = new ArrayList<>();
-
-        long beginning = startDate.toEpochSecond();
-        long end = endDate.toEpochSecond();
-
-        // List of activities partly or entirely in the range is fetched
-        try {
-            activitiesList = activityDB.list(beginning, end);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-        // Possible ongoing activity is set a duration
-        if (!activitiesList.isEmpty()) {
-            return truncateFirstAndLastActivity(activitiesList, beginning, end);
-        }
-        return activitiesList;
-    }
-
     /**
      * Returns a list of the most frequently used types of activity ordered from most to least frequent.
      * @return a list of types.
@@ -181,46 +161,35 @@ public class ActivityListService {
     }
 
     /**
-     * Returns how many times an activity of a specified type has occurred on days in the specified range.
+     * Returns the duration of activities of the specified type on all days in the specified range.
      * @param type type of activity to be searched for
      * @param beginning beginning time of range to be searched
      * @param end end time of range to be searched
-     * @return a map with keys depicting dates and values depicting amount of activities of the given type on the day of the key.
+     * @return a map with keys depicting dates and values depicting duration of activities of the given type on the day of the key.
      * The key is the start of a date in seconds from Unix epoch.
      */
-    public Map<Long, Integer> getAmountsOfTypeOnDaysBetween(String type, ZonedDateTime beginning, ZonedDateTime end) {
-        beginning = TimeService.startOfZoned(beginning);
+    public Map<Long, Integer> getDurationsOfTypeOnDaysBetween(String type, ZonedDateTime beginning, ZonedDateTime end) {
+
+        ZonedDateTime date = TimeService.startOfZoned(beginning);
         end = TimeService.startOfZoned(end);
-        List<Activity> activities = getActivitiesBetween(beginning, end);
 
-        ArrayList<Activity> correctTypes = new ArrayList<>();
+        HashMap<Long, Integer> durations = new HashMap<>();
 
-        for (Activity activity : activities) {
-            if (activity.getType().equals(type)) {
-                correctTypes.add(activity);
-            }
-        }
+        while (date.compareTo(end) < 0) {
 
-        HashMap<Long, Integer> amounts = new HashMap<>();
+            List<Activity> activities = getActivitiesOnDayOf(date);
 
-        if (correctTypes.isEmpty()) return amounts;
+            durations.put(date.toEpochSecond(), 0);
 
-        ZonedDateTime date = beginning;
-        int i = 0;
-
-        while (i < correctTypes.size()) {
-            Activity activity = correctTypes.get(i);
-
-            amounts.put(date.toEpochSecond(), amounts.getOrDefault(date.toEpochSecond(), 0) + 1);
-
-            if (date.plusDays(1).toEpochSecond() < activity.getEnd()) {
-                date = date.plusDays(1);
-            } else {
-                i++;
+            for (Activity activity : activities) {
+                if (activity.getType().equals(type)) {
+                    durations.put(date.toEpochSecond(), durations.get(date.toEpochSecond()) + activity.getDuration());
+                }
             }
 
+            date = date.plusDays(1);
         }
 
-        return amounts;
+        return durations;
     }
 }
