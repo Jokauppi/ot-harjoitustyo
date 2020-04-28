@@ -34,4 +34,4 @@
 |26.4|Konfiguraatioluokan toteuttaminen|4|
 |27.4.|Aktiviteettikuvaajan toteuttaminen|3|
 |28.4.|Aktiviteettikuvaajan korjaaminen|3|
-| |**Yhteensä**|81|
+| |**Yhteensä**|87|
