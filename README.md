@@ -5,6 +5,7 @@ Tämä repositorio sisältää *Ohjelmistotekniikka*-kurssin harjoitustyön kans
 ## Releaset
 
 Viikko 5: [Ensimmäinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/tag/v0.9-beta)
+
 Viikko 6: [Toinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/tag/v0.9.1-beta)
 
 ## Dokumentaatio
