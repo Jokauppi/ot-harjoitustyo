@@ -18,7 +18,7 @@ Viikko 5: [Ensimmäinen release](https://github.com/Jokauppi/ot-harjoitustyo/rel
 
 Ohjelmiston voi käynnistää suorittamalla hakemistossa **ProductiveTime** komennon
 
-```mvn compile exec:java -Dexec.mainClass=productivetime.Main```
+```mvn compile exec:java -Dexec.mainClass=productivetime.main.Main```
 
 tai luomalla ja käynnistämällä .jar-tiedoston
 
