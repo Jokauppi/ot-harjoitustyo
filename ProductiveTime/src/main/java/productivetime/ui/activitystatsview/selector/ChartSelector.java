@@ -4,10 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UISelectorElement;
@@ -37,6 +34,9 @@ public class ChartSelector implements UISelectorElement<HBox> {
 
     private Button barChartButton() {
         Button button = new Button("Day view");
+        button.setBackground(new Background(new BackgroundFill(Color.rgb(220, 220, 220), new CornerRadii(30), null)));
+        button.setScaleX(1.3);
+        button.setScaleY(1.3);
 
         button.setOnAction(actionEvent ->
                 setView(new ActivityBarChartLayout(activityListService).getLayout()));
@@ -46,6 +46,9 @@ public class ChartSelector implements UISelectorElement<HBox> {
 
     private Button lineChartButton() {
         Button button = new Button("Activity view");
+        button.setBackground(new Background(new BackgroundFill(Color.rgb(220, 220, 220), new CornerRadii(30), null)));
+        button.setScaleX(1.3);
+        button.setScaleY(1.3);
 
         button.setOnAction(actionEvent ->
                 setView(new ActivityLineChartLayout(activityListService).getLayout()));

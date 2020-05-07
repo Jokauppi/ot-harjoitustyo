@@ -153,7 +153,7 @@ public class ActivityListService {
 
         List<String> ntypes = new ArrayList<>();
 
-        for (int i = 0; i < (Math.min(amount, types.size())); i++) {
+        for (int i = 0; i < Math.min(amount, types.size()); i++) {
             ntypes.add(types.get(i));
         }
 

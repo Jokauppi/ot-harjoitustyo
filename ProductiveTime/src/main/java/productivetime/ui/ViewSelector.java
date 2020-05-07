@@ -39,14 +39,14 @@ public class ViewSelector implements UISelectorElement<HBox> {
 
         viewSelector.getChildren().addAll(createButtons());
 
-        setView(new ActivityInsertionLayout(activityInsertService).getLayout());
+        setView(new ActivityInsertionLayout(activityInsertService, activityListService).getLayout());
     }
 
     private List<Button> createButtons() {
         Button activityButton = createButton("Activities");
         activityButton.setOnAction(actionEvent -> setView(new ActivityListLayout(activityListService, activityInsertService).getLayout()));
         Button homeButton = createButton("Home");
-        homeButton.setOnAction(actionEvent -> setView(new ActivityInsertionLayout(activityInsertService).getLayout()));
+        homeButton.setOnAction(actionEvent -> setView(new ActivityInsertionLayout(activityInsertService, activityListService).getLayout()));
         Button statsButton = createButton("Statistics");
         statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListService).getLayout()));
         Button settingsButton = createButton("Settings");

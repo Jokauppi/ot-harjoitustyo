@@ -250,7 +250,7 @@ public class SQLActivityDao implements Dao<Activity> {
     @Override
     public List<String> listTypes() throws SQLException {
         startConnection();
-        ResultSet types = s.executeQuery("SELECT type FROM Activities GROUP BY type ORDER BY COUNT(*) DESC");
+        ResultSet types = s.executeQuery("SELECT type, COUNT(*) maara FROM Activities GROUP BY type ORDER BY COUNT(*) DESC");
         ArrayList<String> typesList = new ArrayList<>();
         while (types.next()) {
             typesList.add(types.getString("type"));

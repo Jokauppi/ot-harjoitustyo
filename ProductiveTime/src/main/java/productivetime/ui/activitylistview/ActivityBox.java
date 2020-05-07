@@ -55,7 +55,8 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
         renameField.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
 
         renameField.setOnAction(actionEvent -> {
-            activity = activityInsertService.retypeActivity(activity, renameField.getText());
+            if (renameField.getText().trim().length() > 0 && renameField.getText().length() < 26)
+            activity = activityInsertService.retypeActivity(activity, renameField.getText().trim().toLowerCase());
             setTypeLabel();
         });
 
