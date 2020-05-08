@@ -15,7 +15,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 - Sovelluksen päänäkymässä ainoana pääasiallisena toimintona on kirjata uusi aktiviteetti **TEHTY**
     - Aktiviteetin alkamishetkeksi asetetaan aika kirjaushetkellä
     - Samalla edellinen aktiviteetti "lopetetaan" kirjaamalla sen kesto nykyiseen hetkeen
-- Käyttäjä näytetään pikavalintoina kymmenen käytetyintä aktiviteettia, jotta niitä ei aina tarvitse kirjoittaa uusiksi
+- Käyttäjä näytetään pikavalintoina kymmenen käytetyintä aktiviteettia, jotta niitä ei aina tarvitse kirjoittaa uusiksi **TEHTY**
 
 ### Aktiviteettinäkymä
 
