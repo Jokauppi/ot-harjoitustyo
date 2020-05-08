@@ -46,9 +46,8 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         Label logo = new Label("ProductiveTime");
 
         logo.setPadding(new Insets(0, 0, 20, 0));
-        logo.setFont(new Font(20));
-        logo.setScaleX(1.5);
-        logo.setScaleY(1.5);
+        logo.setScaleX(2.3);
+        logo.setScaleY(2.3);
 
         return logo;
     }
