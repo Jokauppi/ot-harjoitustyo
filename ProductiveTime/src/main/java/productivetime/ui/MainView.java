@@ -1,7 +1,6 @@
 package productivetime.ui;
 
 import javafx.application.Application;
-import javafx.css.Stylesheet;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -51,7 +50,7 @@ public class MainView extends Application {
         }
 
         Scene mainView = new Scene(mainLayout);
-        mainView.getStylesheets().add(getClass().getResource("/fonts.css").toExternalForm());
+        mainView.getStylesheets().add(getClass().getResource("/stylesheets/general.css").toExternalForm());
 
         primaryStage.setScene(mainView);
 

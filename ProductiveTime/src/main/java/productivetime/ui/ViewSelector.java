@@ -50,18 +50,13 @@ public class ViewSelector implements UISelectorElement<HBox> {
         Button statsButton = createButton("Statistics");
         statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListService).getLayout()));
         Button settingsButton = createButton("Settings");
-        settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout().getLayout()));
+        settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout(activityInsertService).getLayout()));
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton, settingsButton));
     }
 
     private Button createButton(String label) {
         Button button = new Button(label);
-
-        button.setBackground(new Background(new BackgroundFill(Color.rgb(220,220,220), new CornerRadii(30), null)));
-        button.setTextFill(Color.BLACK);
-        button.setScaleX(1.3);
-        button.setScaleY(1.3);
-
+        button.setId("grey_button");
         return button;
     }
 

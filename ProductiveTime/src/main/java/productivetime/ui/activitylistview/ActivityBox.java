@@ -27,8 +27,6 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
     public ActivityBox(String f1, String f2, String f3) {
 
-        super();
-
         box.setBackground(new Background(new BackgroundFill(Color.rgb(210, 210, 210), new CornerRadii(30), null)));
 
         setBox(new Label(f1), new Label(f2), new Label(f3));
@@ -55,8 +53,9 @@ public class ActivityBox extends ListBox implements UIElement<GridPane> {
         renameField.setBackground(new Background(new BackgroundFill(Color.rgb(225, 225, 225), new CornerRadii(30), null)));
 
         renameField.setOnAction(actionEvent -> {
-            if (renameField.getText().trim().length() > 0 && renameField.getText().length() < 26)
-            activity = activityInsertService.retypeActivity(activity, renameField.getText().trim().toLowerCase());
+            if (renameField.getText().trim().length() > 0 && renameField.getText().length() < 26) {
+                activity = activityInsertService.retypeActivity(activity, renameField.getText().trim().toLowerCase());
+            }
             setTypeLabel();
         });
 

@@ -52,4 +52,13 @@ public class ActivityInsertService {
         }
     }
 
+    public boolean clearActivities() {
+        try {
+            activityDB.clear();
+            return true;
+        } catch (SQLException sqlException) {
+            return false;
+        }
+
+    }
 }

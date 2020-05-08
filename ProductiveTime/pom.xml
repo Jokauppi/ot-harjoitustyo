@@ -116,7 +116,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*.properties</include>
-                    <include>*.css</include>
+                    <include>stylesheets/*.css</include>
                     <include>fonts/*.ttf</include>
                 </includes>
             </resource>

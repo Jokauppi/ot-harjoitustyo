@@ -72,11 +72,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private Button createActivityInsertButton(ComboBox<String> relatedField) {
         Button activityInsertionButton = new Button("Add");
-
-        activityInsertionButton.setBackground(new Background(new BackgroundFill(Color.rgb(66,133,255), new CornerRadii(30), null)));
-        activityInsertionButton.setTextFill(Color.WHITE);
-        activityInsertionButton.setScaleX(1.5);
-        activityInsertionButton.setScaleY(1.5);
+        activityInsertionButton.setId("blue_button");
 
         activityInsertionButton.setOnAction((actionEvent -> insertActivity(relatedField)));
 
