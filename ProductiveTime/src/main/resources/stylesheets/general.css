@@ -12,7 +12,7 @@
 }
 
 .combo-box-base {
-    -fx-background-color: #eeeeee;
+    -fx-background-color: white;
     -fx-background-radius: 30;
     -fx-border-color: transparent;
 }
@@ -53,18 +53,18 @@
 }
 
 #grey_button {
-    -fx-background-color: #dadada;
+    -fx-background-color: #eeeeee;
     -fx-background-radius: 30;
     -fx-text-fill: black;
     -fx-padding: 10;
 }
 
 #grey_button:hover {
-    -fx-background-color: #cccccc;
+    -fx-background-color: #dddddd;
 }
 
 #grey_button:pressed {
-    -fx-background-color: #bdbdbd;
+    -fx-background-color: #cccccc;
 }
 
 #blue_button {

@@ -1,22 +1,17 @@
 package productivetime.ui.activityinsertionview;
 
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
@@ -36,6 +31,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         insertionLayout.setSpacing(40);
         insertionLayout.setAlignment(Pos.CENTER);
         insertionLayout.setPadding(new Insets(20, 20, 20, 20));
+        insertionLayout.setBackground(new Background(new BackgroundFill(Color.rgb(243, 243, 243), null, null)));
 
         ComboBox<String> activityField = createActivityField();
 
@@ -60,7 +56,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         ComboBox<String> activityField = new ComboBox<>(FXCollections.observableArrayList(activityListService.getFrequentTypes(10)));
 
         activityField.setPromptText("Add activity");
-        activityField.setPrefWidth(400);
+        activityField.setPrefWidth(600);
         activityField.setPrefHeight(40);
         activityField.setEditable(true);
 
@@ -75,7 +71,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
     }
 
     private Button createActivityInsertButton(ComboBox<String> relatedField) {
-        Button activityInsertionButton = new Button("Add");
+        Button activityInsertionButton = new Button("   Add   ");
         activityInsertionButton.setId("blue_button");
 
         activityInsertionButton.setOnAction((actionEvent -> insertActivity(relatedField)));

@@ -35,7 +35,7 @@ public class ViewSelector implements UISelectorElement<HBox> {
         viewSelector.setSpacing(50);
         viewSelector.setAlignment(Pos.CENTER);
         viewSelector.setPadding(new Insets(20, 20, 20, 20));
-        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
+        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(250, 250, 250), null, null)));
 
         viewSelector.getChildren().addAll(createButtons());
 
