@@ -29,10 +29,16 @@
 |19.4.|Listanäkymän refaktorointia|1,5|
 |19.4.|Asetusnäkymän luonti|2|
 |20.4.|Parin bugin korjaaminen|0|
-|24.4|Javadocin kirjoittaminen|2|
-|25.4|Javadocin kirjoittaminen|3|
-|26.4|Konfiguraatioluokan toteuttaminen|4|
+|24.4.|Javadocin kirjoittaminen|2|
+|25.4.|Javadocin kirjoittaminen|3|
+|26.4.|Konfiguraatioluokan toteuttaminen|4|
 |27.4.|Aktiviteettikuvaajan toteuttaminen|3|
 |28.4.|Aktiviteettikuvaajan korjaaminen|3|
 |28.4.|Javadocin kirjoittaminen|1|
-| |**Yhteensä**|88|
+|7.5.|Pieniä muutoksia aktiviteettien syöttämiseen|1|
+|8.5.|CSS:n lisääminen sovellukseen|3|
+|8.5.|Tietokannan tyhjennysominaisuuden luonti|2|
+|9.5.|CSS:n muokkaaminen|1|
+|9.5.|Seurannan keskeytysominaisuus|2|
+|9.5.|Tiedostovalitsin CSV vientiä varten|1|
+| |**Yhteensä**|98|
