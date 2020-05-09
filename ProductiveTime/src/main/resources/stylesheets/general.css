@@ -11,12 +11,35 @@
     -fx-font-family: 'JetBrains Mono Regular';
 }
 
+.combo-box-base {
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 30;
+    -fx-border-color: transparent;
+}
+
 .combo-box-base .text-field {
     -fx-font-family: 'JetBrains Mono Regular';
+    -fx-background-color: transparent;
+}
+
+.combo-box-base .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 15;
 }
 
 .combo-box-base .list-view {
     -fx-font-family: 'JetBrains Mono Regular';
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+}
+
+.combo-box-base .list-cell {
+    -fx-background-color: transparent;
+}
+
+.combo-box-base .list-cell:hover {
+    -fx-text-fill: #cccccc;
 }
 
 .combo-box-base:focused {

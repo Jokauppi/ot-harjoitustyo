@@ -118,6 +118,7 @@
                     <include>*.properties</include>
                     <include>stylesheets/*.css</include>
                     <include>fonts/*.ttf</include>
+                    <include>*.png</include>
                 </includes>
             </resource>
         </resources>

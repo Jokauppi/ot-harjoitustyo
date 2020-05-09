@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
@@ -42,14 +44,16 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         insertionLayout.getChildren().add(createActivityInsertButton(activityField));
     }
 
-    private Label createLogo() {
-        Label logo = new Label("ProductiveTime");
+    private ImageView createLogo() {
 
-        logo.setPadding(new Insets(0, 0, 20, 0));
-        logo.setScaleX(2.3);
-        logo.setScaleY(2.3);
+        Image logo = new Image(getClass().getResourceAsStream("/PT_logo.png"));
 
-        return logo;
+        ImageView image = new ImageView(logo);
+        image.setPreserveRatio(true);
+        image.setFitWidth(400);
+        image.setSmooth(true);
+
+        return image;
     }
 
     private ComboBox<String> createActivityField() {
