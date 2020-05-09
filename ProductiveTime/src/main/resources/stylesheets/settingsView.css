@@ -1,14 +1,15 @@
 #red_button {
-    -fx-background-color: #c9443a;
+    -fx-background-color: transparent;
     -fx-background-radius: 30;
-    -fx-text-fill: white;
+    -fx-border-color: #c9443a;
+    -fx-border-radius: 30;
+    -fx-border-width: 1;
+    -fx-text-fill: #c9443a;
     -fx-padding: 10;
 }
 
 #red_button:hover {
-    -fx-background-color: transparent;
-    -fx-text-fill: #c9443a;
-    -fx-border-color: #c9443a;
-    -fx-border-radius: 30;
-    -fx-border-width: 1;
+    -fx-background-color: #c9443a;
+    -fx-text-fill: white;
 }
+

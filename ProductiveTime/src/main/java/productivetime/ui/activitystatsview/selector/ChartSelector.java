@@ -34,9 +34,7 @@ public class ChartSelector implements UISelectorElement<HBox> {
 
     private Button barChartButton() {
         Button button = new Button("Day view");
-        button.setBackground(new Background(new BackgroundFill(Color.rgb(220, 220, 220), new CornerRadii(30), null)));
-        button.setScaleX(1.3);
-        button.setScaleY(1.3);
+        button.setId("grey_button");
 
         button.setOnAction(actionEvent ->
                 setView(new ActivityBarChartLayout(activityListService).getLayout()));
@@ -46,9 +44,7 @@ public class ChartSelector implements UISelectorElement<HBox> {
 
     private Button lineChartButton() {
         Button button = new Button("Activity view");
-        button.setBackground(new Background(new BackgroundFill(Color.rgb(220, 220, 220), new CornerRadii(30), null)));
-        button.setScaleX(1.3);
-        button.setScaleY(1.3);
+        button.setId("grey_button");
 
         button.setOnAction(actionEvent ->
                 setView(new ActivityLineChartLayout(activityListService).getLayout()));

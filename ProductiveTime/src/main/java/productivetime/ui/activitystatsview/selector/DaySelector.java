@@ -48,6 +48,7 @@ public class DaySelector implements UISelectorElement<HBox> {
         daySelector.getChildren().add(daySelect);
 
         Button todayButton = new Button("Today");
+        todayButton.setId("grey_button");
 
         todayButton.setOnAction(actionEvent ->
                 setView(new ActivityBarChart(activityListService, TimeService.nowZoned()).getLayout()));

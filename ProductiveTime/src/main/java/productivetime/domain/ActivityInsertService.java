@@ -28,7 +28,7 @@ public class ActivityInsertService {
         long now = TimeService.nowSeconds();
         try {
             Activity last = activityDB.readLast();
-            if (last != null) {
+            if (last != null && last.isOngoing()) {
                 activityDB.update(last, now);
             }
             Activity next = new Activity(type);
@@ -52,6 +52,27 @@ public class ActivityInsertService {
         }
     }
 
+    /**
+     * Stops tracking of the most recent activity.
+     * @return true if pausing is successful, otherwise false.
+     */
+    public boolean pauseTracking() {
+        long now = TimeService.nowSeconds();
+        try {
+            Activity last = activityDB.readLast();
+            if (last != null) {
+                activityDB.update(last, now);
+            }
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Clears all activities from storage.
+     * @return true if clearing is successful, otherwise false.
+     */
     public boolean clearActivities() {
         try {
             activityDB.clear();

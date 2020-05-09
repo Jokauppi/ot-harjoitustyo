@@ -30,17 +30,35 @@
 }
 
 #grey_button {
-    -fx-background-color: #dcdcdc;
+    -fx-background-color: #dadada;
     -fx-background-radius: 30;
     -fx-text-fill: black;
-    -fx-scale-x: 1.3;
-    -fx-scale-y: 1.3;
+    -fx-padding: 10;
+}
+
+#grey_button:hover {
+    -fx-background-color: #cccccc;
+}
+
+#grey_button:pressed {
+    -fx-background-color: #bdbdbd;
 }
 
 #blue_button {
     -fx-background-color: #4285ff;
     -fx-background-radius: 30;
     -fx-text-fill: white;
+    -fx-border-color: #4285ff;
+    -fx-border-radius: 30;
     -fx-scale-x: 1.3;
     -fx-scale-y: 1.3;
+}
+
+#blue_button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4285ff;
+}
+
+#blue_button:pressed {
+    -fx-background-color: #88bcfc;
 }

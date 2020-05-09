@@ -50,7 +50,7 @@ public class ViewSelector implements UISelectorElement<HBox> {
         Button statsButton = createButton("Statistics");
         statsButton.setOnAction(actionEvent -> setView(new ActivityStatsLayout(activityListService).getLayout()));
         Button settingsButton = createButton("Settings");
-        settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout(activityInsertService).getLayout()));
+        settingsButton.setOnAction(actionEvent -> setView(new SettingsListLayout(activityInsertService, activityListService).getLayout()));
         return new ArrayList<>(Arrays.asList(activityButton, homeButton, statsButton, settingsButton));
     }
 

@@ -192,4 +192,17 @@ public class ActivityListService {
 
         return durations;
     }
+
+    /**
+     * Returns whether the most recent activity is being tracked.
+     * @return true if the last activity is still being tracked. Otherwise false.
+     */
+    public boolean isTrackingOn() {
+        try {
+            Activity last = activityDB.readLast();
+            return last.isOngoing();
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 }
