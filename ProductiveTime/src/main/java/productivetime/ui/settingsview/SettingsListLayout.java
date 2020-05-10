@@ -4,11 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
+import productivetime.domain.CSVExport;
 import productivetime.ui.ListLayout;
 
 import java.io.File;
@@ -43,7 +44,7 @@ public class SettingsListLayout extends ListLayout {
 
     private SettingButtonBox getExportButton() {
 
-        return new SettingButtonBox("Export activities as .csv") {
+        return new SettingButtonBox("Export activities as CSV") {
             @Override
             void setButtonProperties() {
                 button.setText("Export");
@@ -52,14 +53,19 @@ public class SettingsListLayout extends ListLayout {
                 button.setOnAction(actionEvent -> {
                     List<Activity> activities = activityListService.getActivities();
 
-                    DirectoryChooser directoryChooser = new DirectoryChooser();
-                    Stage stage = new Stage();
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setInitialFileName("activities.csv");
+                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"));
 
-                    File file = directoryChooser.showDialog(stage);
+                    Stage stage = new Stage();
+                    File file = fileChooser.showSaveDialog(stage);
+
                     if (file != null) {
-                        System.out.println(file.getPath());
-                    } else {
-                        System.out.println("no file");
+                        if (CSVExport.writeActivitiesToCSV(activities, file)) {
+                            button.setText("Saved");
+                        } else {
+                            button.setText("Error");
+                        }
                     }
                 });
             }
@@ -78,14 +84,14 @@ public class SettingsListLayout extends ListLayout {
 
                     button.setOnAction(actionEvent -> {
                         if (activityInsertService.pauseTracking()) {
-                            button.setText("Paused");
+                            button.setText("Paused (Add a new activity to resume)");
                         } else {
                             button.setText("Error");
                         }
                     });
 
                 } else {
-                    button.setText("Paused");
+                    button.setText("Paused (Add a new activity to resume)");
                 }
             }
         };

@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
@@ -35,7 +34,8 @@ public class ViewSelector implements UISelectorElement<HBox> {
         viewSelector.setSpacing(50);
         viewSelector.setAlignment(Pos.CENTER);
         viewSelector.setPadding(new Insets(20, 20, 20, 20));
-        viewSelector.setBackground(new Background(new BackgroundFill(Color.rgb(250, 250, 250), null, null)));
+        viewSelector.setStyle("-fx-background-color: #fbfbfb");
+        viewSelector.setStyle("-fx-border-color: #cccccc");
 
         viewSelector.getChildren().addAll(createButtons());
 

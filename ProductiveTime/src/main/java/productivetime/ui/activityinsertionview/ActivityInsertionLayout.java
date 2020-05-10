@@ -46,7 +46,7 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
 
         ImageView image = new ImageView(logo);
         image.setPreserveRatio(true);
-        image.setFitWidth(400);
+        image.setFitWidth(500);
         image.setSmooth(true);
 
         return image;
