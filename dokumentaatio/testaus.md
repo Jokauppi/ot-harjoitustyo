@@ -36,9 +36,9 @@ CSVExport-luokka oli hyvin myöhäinen lisäys sovellukseen, joten testaamiseen 
 
 ### Testauskattavuus
 
-Sovelluksen testien rivikattavuus on % ja haarautumakattavuus %. Testaamatta on jäänyt muutamia sovelluksen toiminnan kannalta vähäpäitöisempiä metodeita ja metodien haaroja, joissa SQLite ei toimi oikein ja heittää poikkeuksen.
+Sovelluksen testien rivikattavuus on 86% ja haarautumakattavuus 84%. Testaamatta on jäänyt muutamia sovelluksen toiminnan kannalta vähäpäitöisempiä metodeita ja metodien haaroja, joissa SQLite ei toimi oikein ja heittää poikkeuksen.
 
-[!IMAGE]()
+![Testaus](/Images/TestCoverage.png)
 
 ## Järjestelmätestaus
 
