@@ -39,7 +39,7 @@ public class DaySelector implements UISelectorElement<HBox> {
         daySelector.setSpacing(50);
         daySelector.setAlignment(Pos.CENTER);
         daySelector.setPadding(new Insets(20, 20, 20, 20));
-        daySelector.setBackground(new Background(new BackgroundFill(Color.rgb(250, 250, 250), null, null)));
+        daySelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
 
         daySelector();
     }

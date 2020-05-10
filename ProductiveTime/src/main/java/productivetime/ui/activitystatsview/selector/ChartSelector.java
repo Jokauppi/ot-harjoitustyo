@@ -29,7 +29,8 @@ public class ChartSelector implements UISelectorElement<HBox> {
         chartSelector.setSpacing(50);
         chartSelector.setAlignment(Pos.CENTER);
         chartSelector.setPadding(new Insets(20, 20, 20, 20));
-        chartSelector.setBackground(new Background(new BackgroundFill(Color.rgb(240, 240, 240), null, null)));
+        chartSelector.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
+        chartSelector.setStyle("-fx-border-color: #cccccc");
 
         chartSelector.getChildren().add(lineChartButton());
         chartSelector.getChildren().add(barChartButton());

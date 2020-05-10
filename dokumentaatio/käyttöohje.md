@@ -4,7 +4,7 @@ ProductiveTime on ajanhallinnan avuksi tarkoitettu aktiviteettien aikaseurantaoh
 
 ## Käynnistys
 
-Ohjelma voidaan käynnistää komennolla ```java -jar Productivetime-[version].jar```. Ohjelmaa varten ei tarvitse luoda erillisiä konfiguraatiotiedostoja.
+Ohjelma voidaan käynnistää komennolla ```java -jar Productivetime-[version].jar```. Ohjelma luo omat konfiguraatiotiedostonsa kotikansion .ProductiveTime-kansioon.
 
 ## Näkymän valinta
 

@@ -36,6 +36,7 @@
 
 .combo-box-base .list-cell {
     -fx-background-color: transparent;
+    -fx-text-fill: black;
 }
 
 .combo-box-base .list-cell:hover {
@@ -53,7 +54,7 @@
 }
 
 #grey_button {
-    -fx-background-color: #eeeeee;
+    -fx-background-color: #ececec;
     -fx-background-radius: 30;
     -fx-text-fill: black;
     -fx-padding: 10;

@@ -40,7 +40,7 @@ public class ActivitySelector implements UISelectorElement<HBox> {
         selectorPanel.setSpacing(50);
         selectorPanel.setAlignment(Pos.CENTER);
         selectorPanel.setPadding(new Insets(20, 20, 20, 20));
-        selectorPanel.setBackground(new Background(new BackgroundFill(Color.rgb(250, 250, 250), null, null)));
+        selectorPanel.setBackground(new Background(new BackgroundFill(Color.rgb(245, 245, 245), null, null)));
 
         activitySelector = activitySelector();
         activitySelector.setOnAction(actionEvent -> updateLineChart());

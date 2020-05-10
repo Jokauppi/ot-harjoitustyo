@@ -25,7 +25,7 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
         XYChart.Series<Number, Number> data = getData(type, start, end);
 
         if (data != null) {
-            NumberAxis xAxis = getDayAxis(start, end.plusDays(-1));
+            NumberAxis xAxis = getDayAxis(start, end);
             NumberAxis yAxis = getDurationAxis();
 
             activitychart = new LineChart<>(xAxis, yAxis);
