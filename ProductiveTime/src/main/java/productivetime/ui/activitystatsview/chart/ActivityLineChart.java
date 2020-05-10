@@ -10,6 +10,9 @@ import productivetime.ui.UIElement;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
+/**
+ * Constructs a chart to show duration of a given activity on days of the given time frame.
+ */
 public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
 
     private LineChart<Number, Number> activitychart;

@@ -11,6 +11,9 @@ import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chartlayout.ActivityBarChartLayout;
 import productivetime.ui.activitystatsview.chartlayout.ActivityLineChartLayout;
 
+/**
+ * Constructs a selector component to change between different chart layouts.
+ */
 public class ChartSelector implements UISelectorElement<HBox> {
 
     private ActivityListService activityListService;
@@ -28,8 +31,8 @@ public class ChartSelector implements UISelectorElement<HBox> {
         chartSelector.setPadding(new Insets(20, 20, 20, 20));
         chartSelector.setBackground(new Background(new BackgroundFill(Color.rgb(240, 240, 240), null, null)));
 
-        chartSelector.getChildren().add(barChartButton());
         chartSelector.getChildren().add(lineChartButton());
+        chartSelector.getChildren().add(barChartButton());
     }
 
     private Button barChartButton() {

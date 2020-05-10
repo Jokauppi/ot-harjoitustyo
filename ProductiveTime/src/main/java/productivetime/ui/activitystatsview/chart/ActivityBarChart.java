@@ -4,6 +4,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
+
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
@@ -12,6 +13,9 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Constructs a chart to show all activities on a timeline on a given day.
+ */
 public class ActivityBarChart implements UIElement<StackedBarChart<Number, String>> {
 
     private StackedBarChart<Number, String> chart;

@@ -5,6 +5,10 @@ import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
 import productivetime.ui.activitystatsview.selector.ActivitySelector;
 
+/**
+ * Constructs a base for the ActivityLineChart to be viewed in.
+ * @see productivetime.ui.activitystatsview.chart.ActivityLineChart
+ */
 public class ActivityLineChartLayout implements UIElement<BorderPane> {
 
     private BorderPane chartLayout;

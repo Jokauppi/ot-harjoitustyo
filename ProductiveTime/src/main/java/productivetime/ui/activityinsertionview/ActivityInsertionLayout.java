@@ -16,6 +16,9 @@ import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
 
+/**
+ * Constructs the activity insertion layout to track ne activities.
+ */
 public class ActivityInsertionLayout implements UIElement<VBox> {
 
     private VBox insertionLayout;

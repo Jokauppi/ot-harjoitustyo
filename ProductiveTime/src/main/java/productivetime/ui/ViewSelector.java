@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
+
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.activityinsertionview.ActivityInsertionLayout;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Constructs a selector element to change between different views in the application.
+ */
 public class ViewSelector implements UISelectorElement<HBox> {
 
     private HBox viewSelector;

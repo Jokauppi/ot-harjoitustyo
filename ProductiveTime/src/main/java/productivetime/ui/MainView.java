@@ -13,6 +13,9 @@ import productivetime.domain.Settings;
 
 import java.sql.SQLException;
 
+/**
+ * Class creates the needed services for the ProductiveTime application and constructs the base of the applications user interface.
+ */
 public class MainView extends Application {
 
     private ActivityInsertService activityInsertService;

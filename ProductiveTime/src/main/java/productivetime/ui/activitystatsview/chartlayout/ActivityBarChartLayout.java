@@ -7,6 +7,10 @@ import productivetime.ui.UIElement;
 import productivetime.ui.activitystatsview.selector.DaySelector;
 import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
+/**
+ * Constructs a base for the ActivityBarChart to be viewed in.
+ * @see productivetime.ui.activitystatsview.chart.ActivityBarChart
+ */
 public class ActivityBarChartLayout implements UIElement<BorderPane> {
 
     private BorderPane chartLayout;

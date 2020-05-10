@@ -5,6 +5,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * A basic parent class for all list-based UI layouts.
+ */
 public class ListLayout implements UIElement<ScrollPane> {
 
     private ScrollPane scrollPane;

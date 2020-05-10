@@ -4,8 +4,12 @@ import javafx.scene.layout.BorderPane;
 import productivetime.domain.ActivityListService;
 import productivetime.ui.UIElement;
 import productivetime.ui.activitystatsview.chartlayout.ActivityBarChartLayout;
+import productivetime.ui.activitystatsview.chartlayout.ActivityLineChartLayout;
 import productivetime.ui.activitystatsview.selector.ChartSelector;
 
+/**
+ * Constructs the base layout for different selector and chart layouts.
+ */
 public class ActivityStatsLayout implements UIElement<BorderPane> {
 
     private BorderPane statsViewLayout;
@@ -16,9 +20,9 @@ public class ActivityStatsLayout implements UIElement<BorderPane> {
 
         statsViewLayout.setBottom(new ChartSelector(statsViewLayout, activityListService).getLayout());
 
-        ActivityBarChartLayout initialActivityBarChart = new ActivityBarChartLayout(activityListService);
+        ActivityLineChartLayout initialActivityLineChartLayout = new ActivityLineChartLayout(activityListService);
 
-        statsViewLayout.setCenter(initialActivityBarChart.getLayout());
+        statsViewLayout.setCenter(initialActivityLineChartLayout.getLayout());
     }
 
     @Override

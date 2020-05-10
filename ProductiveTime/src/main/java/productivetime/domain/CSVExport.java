@@ -7,6 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class offers a method to write activities to a CSV-file.
+ */
 public class CSVExport {
 
     /**

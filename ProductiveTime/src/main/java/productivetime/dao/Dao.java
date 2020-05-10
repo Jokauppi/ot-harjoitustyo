@@ -3,6 +3,10 @@ package productivetime.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Data Access Object -interface that details the methods needed by the application.
+ * @param <T>
+ */
 public interface Dao<T> {
     void create(T object, long time) throws SQLException;
 

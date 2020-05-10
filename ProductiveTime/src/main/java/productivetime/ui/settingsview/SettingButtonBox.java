@@ -4,6 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import productivetime.ui.ListBox;
 
+/**
+ * Constructs a button box with customisable action.
+ */
 public abstract class SettingButtonBox extends ListBox {
 
     protected Button button;

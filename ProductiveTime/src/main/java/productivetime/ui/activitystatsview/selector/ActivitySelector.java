@@ -16,6 +16,10 @@ import productivetime.ui.activitystatsview.chart.ActivityLineChart;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * Constructs a selector component to select a time range and a type of activity to be shown in an ActivityLineChartLayout.
+ * @see ActivityLineChart
+ */
 public class ActivitySelector implements UISelectorElement<HBox> {
 
     private ActivityListService activityListService;

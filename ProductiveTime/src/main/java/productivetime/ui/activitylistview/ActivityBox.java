@@ -9,6 +9,9 @@ import productivetime.domain.ActivityInsertService;
 import productivetime.ui.ListBox;
 import productivetime.ui.UIElement;
 
+/**
+ * Constructs a box to display a single activity.
+ */
 public class ActivityBox extends ListBox implements UIElement<GridPane> {
 
     private Activity activity;

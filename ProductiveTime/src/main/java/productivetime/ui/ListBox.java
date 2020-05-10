@@ -6,6 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+/**
+ * A basic parent class for all content boxes placed in a ListLayout-object.
+ * @see ListLayout
+ */
 public class ListBox implements UIElement<GridPane> {
 
     protected GridPane box;

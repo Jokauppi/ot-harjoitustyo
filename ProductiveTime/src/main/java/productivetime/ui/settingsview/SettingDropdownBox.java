@@ -6,6 +6,9 @@ import javafx.scene.control.Label;
 import productivetime.domain.Settings;
 import productivetime.ui.ListBox;
 
+/**
+ * Constructs a dropdown box to choose the value of a given application setting.
+ */
 public class SettingDropdownBox extends ListBox {
 
     public SettingDropdownBox(String desc, String setting, ObservableList<String> values) {

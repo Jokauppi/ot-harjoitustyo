@@ -11,11 +11,16 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+
 import productivetime.domain.ActivityListService;
 import productivetime.domain.TimeService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
+/**
+ * Constructs a selector component to select a day to be shown in an ActivityBarChartLayout.
+ * @see ActivityBarChart
+ */
 public class DaySelector implements UISelectorElement<HBox> {
 
     private ActivityListService activityListService;

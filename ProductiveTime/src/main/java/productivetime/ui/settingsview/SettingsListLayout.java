@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import productivetime.domain.Activity;
 import productivetime.domain.ActivityInsertService;
 import productivetime.domain.ActivityListService;
@@ -18,6 +19,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Constructs a list view to display different application settings.
+ */
 public class SettingsListLayout extends ListLayout {
 
     private ActivityInsertService activityInsertService;

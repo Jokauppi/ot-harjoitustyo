@@ -9,7 +9,9 @@ import productivetime.ui.UIElement;
 
 import java.util.List;
 
-
+/**
+ * Constructs the activity list layout to view all tracked activities.
+ */
 public class ActivityListLayout extends ListLayout implements UIElement<ScrollPane> {
 
     public ActivityListLayout(ActivityListService activityListService, ActivityInsertService activityInsertService) {
