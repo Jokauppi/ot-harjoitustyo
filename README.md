@@ -20,6 +20,8 @@ Viikko 6: [Toinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/
 
 [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](dokumentaatio/työaikakirjanpito.md)
 
 ## Komentorivin toiminnot
