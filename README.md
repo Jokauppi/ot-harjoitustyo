@@ -12,6 +12,8 @@ Viikko 5: [Ensimmäinen release](https://github.com/Jokauppi/ot-harjoitustyo/rel
 
 Viikko 6: [Toinen release](https://github.com/Jokauppi/ot-harjoitustyo/releases/tag/v0.9.1-beta)
 
+Viikko 7: [Loppupalautus](https://github.com/Jokauppi/ot-harjoitustyo/releases/tag/v1.0)
+
 ## Dokumentaatio
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
