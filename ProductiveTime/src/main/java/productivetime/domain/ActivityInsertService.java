@@ -23,8 +23,9 @@ public class ActivityInsertService {
      * Stores a new activity with a start time equal to the current time.
      *
      * @param type type of activity to be added
+     * @return true if action is successful, otherwise false.
      */
-    public void addActivity(String type) {
+    public boolean addActivity(String type) {
         long now = TimeService.nowSeconds();
         try {
             Activity last = activityDB.readLast();
@@ -33,8 +34,9 @@ public class ActivityInsertService {
             }
             Activity next = new Activity(type);
             activityDB.create(next, now);
+            return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            return false;
         }
     }
 

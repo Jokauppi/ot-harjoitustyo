@@ -3,6 +3,7 @@ package productivetime.domain;
 import org.junit.*;
 import productivetime.dao.SQLActivityDao;
 
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -15,30 +16,38 @@ public class ActivityListServiceRangedTest {
     private static final ZonedDateTime time = ZonedDateTime.of(2000, 2, 2, 21, 30, 0, 0, TimeService.getTimeZone());
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
 
-        SQLActivityDao = new SQLActivityDao("test.db");
-        activityListService = new ActivityListService(SQLActivityDao);
+        try {
+            SQLActivityDao = new SQLActivityDao("test.db");
+            activityListService = new ActivityListService(SQLActivityDao);
 
-        SQLActivityDao.clear();
+            SQLActivityDao.clear();
 
-        ZonedDateTime itime = time;
-        SQLActivityDao.create(new Activity("test0"), TimeService.startOfZoned(itime).toEpochSecond()-3600);
-        for (int i = 1; i < 4; i++) {
+            ZonedDateTime itime = time;
+            SQLActivityDao.create(new Activity("test0"), TimeService.startOfZoned(itime).toEpochSecond()-3600);
+            for (int i = 1; i < 4; i++) {
+                SQLActivityDao.update(SQLActivityDao.readLast(), itime.toEpochSecond());
+                SQLActivityDao.create(new Activity("test" + i), itime.toEpochSecond());
+                itime = itime.plusHours(1);
+            }
+            itime = itime.plusDays(2);
             SQLActivityDao.update(SQLActivityDao.readLast(), itime.toEpochSecond());
-            SQLActivityDao.create(new Activity("test" + i), itime.toEpochSecond());
-            itime = itime.plusHours(1);
+            SQLActivityDao.create(new Activity("test4"), itime.toEpochSecond());
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
-        itime = itime.plusDays(2);
-        SQLActivityDao.update(SQLActivityDao.readLast(), itime.toEpochSecond());
-        SQLActivityDao.create(new Activity("test4"), itime.toEpochSecond());
 
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
 
-        SQLActivityDao.clear();
+        try {
+            SQLActivityDao.clear();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     @Test

@@ -92,8 +92,11 @@ public class ActivityInsertionLayout implements UIElement<VBox> {
         if (type.length() > 25) {
             insertionField.setPromptText("Type must be under 25 characters");
         } else if (type.length() > 0) {
-            activityInsertService.addActivity(type);
-            insertionField.setPromptText("Activity added");
+            if (activityInsertService.addActivity(type)) {
+                insertionField.setPromptText("Activity added");
+            } else {
+                insertionField.setPromptText("Error, please restart application");
+            }
         }
 
         insertionField.setValue("");

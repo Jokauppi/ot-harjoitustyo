@@ -15,10 +15,8 @@ public class Settings {
     private Settings() {
 
         properties = new Properties();
-        try {
-            loadProperties();
-        } catch (IOException ignored) {
-        }
+
+        loadProperties();
         setDefaults();
         storeProperties();
 
@@ -43,21 +41,24 @@ public class Settings {
 
         try {
             defaults.load(defaultsStream);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+
+            for (String propertyKey : defaults.stringPropertyNames()) {
+                if (properties.getProperty(propertyKey) == null) {
+                    properties.setProperty(propertyKey, defaults.getProperty(propertyKey));
+                }
+            }
+        } catch (IOException ignored) {
         }
 
-        for (String propertyKey : defaults.stringPropertyNames()) {
-            if (properties.getProperty(propertyKey) == null) {
-                properties.setProperty(propertyKey, defaults.getProperty(propertyKey));
-            }
-        }
     }
 
-    private static void loadProperties() throws IOException {
+    private static void loadProperties() {
 
-        FileInputStream inputStream = new FileInputStream(PROP_PATH);
-        properties.load(inputStream);
+        try {
+            FileInputStream inputStream = new FileInputStream(PROP_PATH);
+            properties.load(inputStream);
+        } catch (IOException ignored) {
+        }
     }
 
     private static void storeProperties() {
@@ -68,8 +69,7 @@ public class Settings {
             f.createNewFile();
             FileOutputStream outputStream = new FileOutputStream(f, false);
             properties.store(outputStream, "ProductiveTime configuration");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 

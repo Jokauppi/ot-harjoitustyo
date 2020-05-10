@@ -17,11 +17,22 @@ public class SettingDropdownBox extends ListBox {
 
         ComboBox<String> chooseBox = new ComboBox<>(values);
 
-        chooseBox.setValue(Settings.getSetting(setting));
+        String currentSetting = Settings.getSetting(setting);
+
         chooseBox.setEditable(false);
         chooseBox.setStyle("-fx-background-color: #eeeeee");
 
-        chooseBox.setOnAction(actionEvent -> Settings.setSetting(setting, chooseBox.getValue()));
+        if (currentSetting != null) {
+
+            chooseBox.setValue(currentSetting);
+
+            chooseBox.setOnAction(actionEvent -> Settings.setSetting(setting, chooseBox.getValue()));
+
+        } else {
+
+            chooseBox.setValue("Error");
+
+        }
 
         setBox(description, chooseBox);
 

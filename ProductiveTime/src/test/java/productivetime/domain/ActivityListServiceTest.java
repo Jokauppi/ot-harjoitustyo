@@ -50,15 +50,17 @@ public class ActivityListServiceTest {
     }
 
     @Test
-    public void getAllTypes() throws SQLException {
+    public void getAllTypes() {
         List<String> allTypes = activityListService.getAllTypes();
         assertEquals("activity 1", allTypes.get(1));
     }
 
     @Test
-    public void getFrequentTypes() throws SQLException {
+    public void getFrequentTypes() {
         List<String> frequentTypes = activityListService.getFrequentTypes(1);
         assertEquals("activity 2", frequentTypes.get(0));
         assertEquals(1, frequentTypes.size());
     }
+
+
 }

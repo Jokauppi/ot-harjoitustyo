@@ -12,7 +12,14 @@ public class TimeService {
     private static ZoneId timeZone;
 
     private static void updateTimeZone() {
-        timeZone = ZoneId.of(Settings.getSetting("timezone"));
+        String timeZoneName = Settings.getSetting("timezone");
+        if (timeZoneName != null) {
+            timeZone = ZoneId.of(timeZoneName);
+        } else {
+            if (timeZone == null){
+                timeZone = ZoneId.ofOffset("UTC", ZoneOffset.UTC);
+            }
+        }
     }
 
     /**

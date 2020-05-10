@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import productivetime.dao.SQLActivityDao;
 import java.sql.SQLException;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -31,8 +30,7 @@ public class ActivityListService {
         List<Activity> activitiesList = new ArrayList<>();
         try {
             activitiesList = activityDB.list();
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (SQLException ignored) {
         }
         return activitiesList;
     }
@@ -75,22 +73,21 @@ public class ActivityListService {
         // List of activities partly or entirely in the range is fetched
         try {
             activitiesList = activityDB.list(beginning, end);
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (SQLException ignored) {
         }
 
-        //if the first activity doesn't start at the start of the given day an empty "No Data" activity is added at the start to fill the chart properly;
-        if (!activitiesList.isEmpty() && activitiesList.get(0).getStart() > beginning) {
-            ArrayList<Activity> replacingList = new ArrayList<>();
-            replacingList.add(new Activity(0, "No Data", beginning, (int) (activitiesList.get(0).getStart() - beginning)));
-            replacingList.addAll(activitiesList);
-            activitiesList = replacingList;
-        }
-
-        // The first and last activities of the list are resized to include only the parts that are inside the range
         if (!activitiesList.isEmpty()) {
+            //if the first activity doesn't start at the start of the given day an empty "No Data" activity is added at the start to fill the chart properly;
+            if (activitiesList.get(0).getStart() > beginning) {
+                ArrayList<Activity> replacingList = new ArrayList<>();
+                replacingList.add(new Activity(0, "No Data", beginning, (int) (activitiesList.get(0).getStart() - beginning)));
+                replacingList.addAll(activitiesList);
+                activitiesList = replacingList;
+            }
+            // The first and last activities of the list are resized to include only the parts that are inside the range
             return truncateFirstAndLastActivity(activitiesList, beginning, end);
         }
+
         return activitiesList;
     }
 
@@ -136,7 +133,6 @@ public class ActivityListService {
         try {
             types = activityDB.listTypes();
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
             return new ArrayList<>();
         }
 
@@ -180,11 +176,13 @@ public class ActivityListService {
 
             List<Activity> activities = getActivitiesOnDayOf(date);
 
-            durations.put(date.toEpochSecond(), 0);
+            if (!activities.isEmpty()) {
+                durations.put(date.toEpochSecond(), 0);
 
-            for (Activity activity : activities) {
-                if (activity.getType().equals(type)) {
-                    durations.put(date.toEpochSecond(), durations.get(date.toEpochSecond()) + activity.getDuration());
+                for (Activity activity : activities) {
+                    if (activity.getType().equals(type)) {
+                        durations.put(date.toEpochSecond(), durations.get(date.toEpochSecond()) + activity.getDuration());
+                    }
                 }
             }
 
@@ -196,7 +194,7 @@ public class ActivityListService {
 
     /**
      * Returns whether the most recent activity is being tracked.
-     * @return true if the last activity is still being tracked. Otherwise false.
+     * @return true if the last activity is being tracked. Otherwise false.
      */
     public boolean isTrackingOn() {
         try {

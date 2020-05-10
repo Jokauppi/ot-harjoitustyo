@@ -22,13 +22,18 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
 
         this.activityListService = activityListService;
 
-        NumberAxis xAxis = getDayAxis(start, end.plusDays(-1));
-        NumberAxis yAxis = getDurationAxis();
+        XYChart.Series<Number, Number> data = getData(type, start, end);
 
-        activitychart = new LineChart<>(xAxis, yAxis);
-        activitychart.setLegendVisible(false);
+        if (data != null) {
+            NumberAxis xAxis = getDayAxis(start, end.plusDays(-1));
+            NumberAxis yAxis = getDurationAxis();
 
-        activitychart.getData().add(getData(type, start, end));
+            activitychart = new LineChart<>(xAxis, yAxis);
+            activitychart.setLegendVisible(false);
+
+            activitychart.getData().add(data);
+        }
+
     }
 
     private NumberAxis getDayAxis(ZonedDateTime start, ZonedDateTime end) {
@@ -78,6 +83,10 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
     private XYChart.Series<Number, Number> getData(String type, ZonedDateTime start, ZonedDateTime end) {
 
         Map<Long, Integer> durations = activityListService.getDurationsOfTypeOnDaysBetween(type, start, end);
+
+        if (durations.keySet().isEmpty()) {
+            return null;
+        }
 
         XYChart.Series<Number, Number> amountSeries = new XYChart.Series<>();
         amountSeries.setName("type");

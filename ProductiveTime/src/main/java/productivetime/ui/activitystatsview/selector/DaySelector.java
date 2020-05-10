@@ -17,6 +17,8 @@ import productivetime.domain.TimeService;
 import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chart.ActivityBarChart;
 
+import java.util.Objects;
+
 /**
  * Constructs a selector component to select a day to be shown in an ActivityBarChartLayout.
  * @see ActivityBarChart
@@ -68,10 +70,6 @@ public class DaySelector implements UISelectorElement<HBox> {
 
     @Override
     public void setView(Node node) {
-        if (node == null) {
-            chartLayout.setCenter(new Label("No Data"));
-        } else {
-            chartLayout.setCenter(node);
-        }
+        chartLayout.setCenter(Objects.requireNonNullElseGet(node, () -> new Label("No Data")));
     }
 }

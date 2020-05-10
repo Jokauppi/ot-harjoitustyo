@@ -5,9 +5,7 @@ import productivetime.dao.SQLActivityDao;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 

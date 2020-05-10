@@ -15,6 +15,7 @@ import productivetime.ui.UISelectorElement;
 import productivetime.ui.activitystatsview.chart.ActivityLineChart;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Constructs a selector component to select a time range and a type of activity to be shown in an ActivityLineChartLayout.
@@ -92,10 +93,6 @@ public class ActivitySelector implements UISelectorElement<HBox> {
 
     @Override
     public void setView(Node node) {
-        if (node == null) {
-            chartLayout.setCenter(new Label("No Data"));
-        } else {
-            chartLayout.setCenter(node);
-        }
+        chartLayout.setCenter(Objects.requireNonNullElseGet(node, () -> new Label("No Data")));
     }
 }
