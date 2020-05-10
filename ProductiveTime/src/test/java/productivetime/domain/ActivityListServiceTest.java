@@ -1,9 +1,7 @@
 package productivetime.domain;
 
 import javafx.collections.ObservableList;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import productivetime.dao.SQLActivityDao;
 
 import java.sql.SQLException;
@@ -16,8 +14,8 @@ public class ActivityListServiceTest {
     private static SQLActivityDao SQLActivityDao;
     private static ActivityListService activityListService;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         SQLActivityDao = new SQLActivityDao("test.db");
         SQLActivityDao.clear();
         activityListService = new ActivityListService(SQLActivityDao);
@@ -28,8 +26,8 @@ public class ActivityListServiceTest {
         SQLActivityDao.create(new Activity("activity 2"), 300);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         SQLActivityDao.clear();
     }
 

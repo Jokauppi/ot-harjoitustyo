@@ -3,6 +3,7 @@ package productivetime.ui.settingsview;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -54,27 +55,28 @@ public class SettingsListLayout extends ListLayout {
                 button.setText("Export");
                 button.setId("grey_button");
 
-                button.setOnAction(actionEvent -> {
-                    List<Activity> activities = activityListService.getActivities();
-
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setInitialFileName("activities.csv");
-                    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"));
-
-                    Stage stage = new Stage();
-                    File file = fileChooser.showSaveDialog(stage);
-
-                    if (file != null) {
-                        if (CSVExport.writeActivitiesToCSV(activities, file)) {
-                            button.setText("Saved");
-                        } else {
-                            button.setText("Error");
-                        }
-                    }
-                });
+                button.setOnAction(actionEvent -> exportActivities(button));
             }
         };
 
+    }
+
+    private void exportActivities(Button button) {
+        List<Activity> activities = activityListService.getActivities();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("activities.csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv"));
+
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            if (CSVExport.writeActivitiesToCSV(activities, file)) {
+                button.setText("Saved");
+            } else {
+                button.setText("Error");
+            }
+        }
     }
 
     private SettingButtonBox getTrackingPauseButton() {

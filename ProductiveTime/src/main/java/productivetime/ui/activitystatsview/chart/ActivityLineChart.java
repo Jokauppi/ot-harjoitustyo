@@ -22,7 +22,7 @@ public class ActivityLineChart implements UIElement<LineChart<Number, Number>> {
 
         this.activityListService = activityListService;
 
-        NumberAxis xAxis = getDayAxis(start, end);
+        NumberAxis xAxis = getDayAxis(start, end.plusDays(-1));
         NumberAxis yAxis = getDurationAxis();
 
         activitychart = new LineChart<>(xAxis, yAxis);
