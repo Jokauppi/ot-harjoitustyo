@@ -2,9 +2,9 @@
 
 ## Rakenne
 
-Ohjelman rakenne noudattaa kerrosarkkitehtuuria, joka sisältää käyttöliittymän luovan
+Ohjelma on rakennettu kerrosarkkitehtuuria noudattaen, sillä se sisältää käyttöliittymän luovan
 pakkauksen *productivetime.ui*, sovelluslogiikasta vastaavan pakkauksen *productivetime.domain*, ja
-aktiviteettien tallennuksesta vastaavan pakkauksen *productivetime.dao*
+aktiviteettien tallennuksesta vastaavan pakkauksen *productivetime.dao* Lisäksi käyttöliittymäpakkaus sisältää muita pienempiä pakkauksia, joihin on jaettu eri näkymiin liittyviä luokkia. 
 
 ![Pakettikaavio](/Images/Architecture/PackageDiagram.png)
 
@@ -25,15 +25,15 @@ Käyttöliittymä koostuu neljästä eri näkymästä:
 
 Näkymät on toteutettu projektiin luodun [UIElement](https://github.com/Jokauppi/ot-harjoitustyo/blob/master/ProductiveTime/src/main/java/productivetime/ui/UIElement.java)-rajapinnan toteuttavina luokkina, jotka rakentavat näkymän käyttäen apunaan muita pakkaustensa UIElement-luokkia ja sovelluslogiiikkaa. Ylempi luokka pyytää rakennetun näkymän UIElement-luokilta getterin avulla.
 
-Näkymät asetetaan BorderPaneen siihen myös asetetun valitsimen avulla, joka rakentaa näkymää vaihdettaessa näkymän aina uudestaan.
+Näkymät asetetaan BorderPaneen sen alalaitaan asetetun, [UISelectorElement](https://github.com/Jokauppi/ot-harjoitustyo/blob/master/ProductiveTime/src/main/java/productivetime/ui/UISelectorElement.java)-rajapinnan toteuttavan valitsimen avulla, joka rakentaa näkymää vaihdettaessa näkymän aina uudestaan.
 
 ## Sovelluslogiikka
 
-Sovellus pääasiallisesti käsittelee aktiviteetteja Activity-tyyppisinä olioina.
+Sovellus pääasiallisesti käsittelee aktiviteetteja Activity-tyyppisinä olioina. Activity-olioilla on useita metodeita, joka antavat tietoa aktiviteetista halutussa muodossa esimerkiksi aktiviteetin keston ajaksi muotoiltuna merkkijonona.
 
 ![Activity](/Images/Architecture/Activity.png)
 
-Olioiden käsittelystä vastaavat ActivityInsertService ja ActivityListService. Sovelluslogiikan kannalta olennaisimpia metodeita ovat addActivity() ja getActivities(). Sovelluksen useiden näkymien johdosta sovelluslogiikassa on useita erilaisia listausmetodeita. Sovelluslogiikka tallentaa ja listaa aktiviteetteja SQLActivityDao-luokan avulla SQLite-tietokantaan.
+Olioiden käsittelystä vastaavat ActivityInsertService ja ActivityListService. Sovelluslogiikan kannalta olennaisimpia metodeita ovat addActivity() ja getActivities(). Sovelluksen useiden näkymien johdosta sovelluslogiikassa on useita erilaisia listausmetodeita. Sovelluslogiikka tallentaa ja listaa aktiviteetteja SQLActivityDao-luokan avulla SQLite-tietokantaan. Service- ja tietokantaoliot luodaan sovellusta käynnistettäessä ja Service-olioita injektoidaan eteenpäin niitä tarvitseville luokille.
 
 ### Olennaiset toiminnot
 
@@ -53,3 +53,5 @@ näkymänvaihdin *ViewSelector* ja keskeiset näkymät *ActivityInsertionLayout*
 Sovellus käyttää aktiviteettien pysyväistallennukseen Data Access Object -mallin toteuttavaa tietokantaluokkaa SQLActivityDao. SQL-kielenä luokka käyttää SQLiteä.
 
 Sovelluksen konfiguraatiotiedot tallennetaan tietokoneen kotikansioon luotavaan .ProductiveTime-kansioon config.properties-tiedostona. Myös Tietokanta tallennetaan tähän kansioon.
+
+Sovelluksen asetuksista on myös mahdollista viedä tietokantaan tallennetut tiedot csv-tiedostoon. Tallentamiseen käytetään OpenCSV-kirjastoa. Tallentaminen suoritetaan kokonaan sovelluslogiikan luokassa, sillä luokalla ei ole projektin DAO-rajapinnan vaatimia metodeita vaan ainoastaan tallennus.

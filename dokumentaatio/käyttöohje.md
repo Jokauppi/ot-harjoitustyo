@@ -20,7 +20,7 @@ Aloitusnäkymässä voidaan aloittaa uuden aktiviteetin aikaseuranta kirjoittama
 
 ![ListView](/Images/UserManual/List.png)
 
-Aktiviteettien listanäkymässä voit tarkastella kaikkia kirjattuja aktiviteetteja. Jokaisella aktiviteetilla on oma palkkinsa ja ne on järjestetty uusimmasta vanhimpaan. Palkkiin on merkitty aktiviteetin tyyppi, sen aloitusaika ja kesto. Aktiviteetin tyyppiä klikkaamalla voit muuttaa aktiviteetin mimeä jälkikäteen.
+Aktiviteettien listanäkymässä voit tarkastella kaikkia kirjattuja aktiviteetteja. Jokaisella aktiviteetilla on oma palkkinsa ja ne on järjestetty uusimmasta vanhimpaan. Palkkiin on merkitty aktiviteetin tyyppi, sen aloitusaika ja kesto. Aktiviteetin tyyppiä klikkaamalla voit muuttaa aktiviteetin tyyppiä jälkikäteen.
 
 ## Aktiviteettien diagramminäkymä
 
@@ -32,4 +32,4 @@ Diagramminäkymässä voidaan tarkastella diagrammien avulla yksittäisten päiv
 
 ![SettingsView](/Images/UserManual/Settings.png)
 
-Asetusnäkymässä voidaan muuttaa asetuspalkkien näyttämiä asetuksia. Asetukset tallentuvat automaattisesti niitä muutettaessa.
+Asetusnäkymässä voidaan muuttaa sovelluksen käyttämää aikavyöhykettä, viedä tallennetut aktiviteetit käyttäjän valitsemaan kansioon .csv-tiedostona, keskeyttää viimeisimmän aktiviteetin seuranta tai tyhjentää tietokanta. Asetukset tallentuvat automaattisesti niitä muutettaessa.

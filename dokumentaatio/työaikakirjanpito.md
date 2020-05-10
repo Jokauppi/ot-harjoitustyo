@@ -12,7 +12,7 @@
 |31.3.|Käyttöliittymän yhdistäminen sovelluslogiikkaan|3|
 |4.4.|checkstylen lisääminen|0,5
 |5.4.|Testien kirjoittaminen, pieni refaktorointi|1|
-|6.4.|Aikojen näyttäminen järjevässä muodossa|5|
+|6.4.|Aikojen näyttäminen järkevässä muodossa|5|
 |6.4.|Testien kirjoittaminen|1|
 |7.4.|Luokkakaavion luominen|2|
 |7.4.|Statistiikkanäkymän luominen|5|
@@ -41,4 +41,8 @@
 |9.5.|CSS:n muokkaaminen|1|
 |9.5.|Seurannan keskeytysominaisuus|2|
 |9.5.|Tiedostovalitsin CSV vientiä varten|1|
-| |**Yhteensä**|98|
+|10.5.|CSV viennin toteutus|1|
+|10.5.|Javadoc-kuvaukset kaikille luokille ja pakkauksille|1|
+|10.5.|Testien kirjoittaminen|3|
+|10.5.|Virheviestien selkeyttäminen|2|
+| |**Yhteensä**|105|

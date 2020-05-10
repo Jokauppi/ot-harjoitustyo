@@ -86,9 +86,4 @@
         <property name='max' value='500' />
     </module>
 
-    <module name="SuppressionFilter">
-        <property name="file" value="skipped_files.xml" />
-    </module>
-
-
 </module>

@@ -16,7 +16,7 @@ public class TimeService {
         if (timeZoneName != null) {
             timeZone = ZoneId.of(timeZoneName);
         } else {
-            if (timeZone == null){
+            if (timeZone == null) {
                 timeZone = ZoneId.ofOffset("UTC", ZoneOffset.UTC);
             }
         }

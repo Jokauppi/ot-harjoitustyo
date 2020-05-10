@@ -24,7 +24,7 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
   
 ### Tilastonäkymä
 
-- Kolmannessa näkymässä on mahdollista nähdä kaavioita ajankäytöstä
+- Kolmannessa näkymässä on mahdollista nähdä kaavioita ajankäytöstä **TEHTY**
     - Yhtenä kaaviotyyppinä voisi olla eri aktiviteetteihin käytetty aika yhtenä tämänhetkisenä päivänä tai valitun aikavälin päivinä pylväsdiagrammina. **TEHTY**
     - Toisena kaaviotyyppinä voisi olla valittuihin aktiviteetteihin päivässä käytetty aika ajan saatossa viivadiagrammina. **TEHTY**
     
@@ -33,9 +33,9 @@ Sovelluksella on vain yksi käyttäjätyyppi, joka on *normaali käyttäjä*.
 - Ohjelmistossa olisi myös mahdollista muuttaa joitain asetuksia kuten
     - aikavyöhyke **TEHTY**
     - ~~listanäkymässä näytettävien sarakkeiden näyttäminen (kesto ja alku- sekä loppumisaika)~~ 
-    - tietokannan tyhjentäminen
+    - tietokannan tyhjentäminen **TEHTY**
     - ~~aikaformaatin muuttaminen~~
-    - aikaseurannan väliaikainen kekeyttäminen
+    - aikaseurannan väliaikainen kekeyttäminen **TEHTY**
     
 ## Käyttöliittymä
 
@@ -48,6 +48,6 @@ Konsepti käyttöliittymästä:
 Perustoiminnallisuuksien lisäksi voitaisiin ajan salliessa lisätä mahdollisuus
 
 - ~~jakaa aktiviteetti kahteen eri tyyppiä olevaan  osaan, mikäli aktiviteetin aikana onkin tehty myös jotain muuta.~~ Mahdollista toteuttaa, ei kuitenkaan sovi kunnolla käyttöliittymään 
-- kirjoittaa aktiviteeteille lisätietoja ja antaa niille omat väritunnisteet.
-- viedä kerätty data esimerkiksi .csv-tiedostona
-- liittää aktiviteetteihin tunnisteita eli tageja
+- kirjoittaa aktiviteeteille lisätietoja ja antaa niille omat väritunnisteet. **idea hylätty ajan puuttessa**
+- viedä kerätty data esimerkiksi .csv-tiedostona **TEHTY**
+- liittää aktiviteetteihin tunnisteita eli tageja. **idea hylätty ajan puuttessa**
